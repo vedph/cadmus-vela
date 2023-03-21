@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadmus.Vela.Parts", "Cadmus.Vela.Parts\Cadmus.Vela.Parts.csproj", "{A1BA5995-FB0C-4D50-8692-DA86B3486EAB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadmus.Seed.Vela.Parts", "Cadmus.Seed.Vela.Parts\Cadmus.Seed.Vela.Parts.csproj", "{B3D906CC-E00D-43ED-9DF4-CBD28DBB42D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadmus.Vela.Services", "Cadmus.Vela.Services\Cadmus.Vela.Services.csproj", "{5A259E51-E5B4-4C95-85AD-6D4CD87AD25C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadmus.Vela.Parts.Test", "Cadmus.Vela.Parts.Test\Cadmus.Vela.Parts.Test.csproj", "{0364101E-4F23-4CBF-80AE-E06BF6EBBDF9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cadmus.Seed.Vela.Parts.Test", "Cadmus.Seed.Vela.Parts.Test\Cadmus.Seed.Vela.Parts.Test.csproj", "{BC4CA290-84FE-437A-920D-60A1041F30A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7A9B15C4-EF94-4B59-BB81-3B4A5CF3B5F5}"
+	ProjectSection(SolutionItems) = preProject
+		Pack.bat = Pack.bat
+		Push.bat = Push.bat
+		PushLocal.bat = PushLocal.bat
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A1BA5995-FB0C-4D50-8692-DA86B3486EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1BA5995-FB0C-4D50-8692-DA86B3486EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1BA5995-FB0C-4D50-8692-DA86B3486EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1BA5995-FB0C-4D50-8692-DA86B3486EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D906CC-E00D-43ED-9DF4-CBD28DBB42D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D906CC-E00D-43ED-9DF4-CBD28DBB42D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D906CC-E00D-43ED-9DF4-CBD28DBB42D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D906CC-E00D-43ED-9DF4-CBD28DBB42D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A259E51-E5B4-4C95-85AD-6D4CD87AD25C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A259E51-E5B4-4C95-85AD-6D4CD87AD25C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A259E51-E5B4-4C95-85AD-6D4CD87AD25C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A259E51-E5B4-4C95-85AD-6D4CD87AD25C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0364101E-4F23-4CBF-80AE-E06BF6EBBDF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0364101E-4F23-4CBF-80AE-E06BF6EBBDF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0364101E-4F23-4CBF-80AE-E06BF6EBBDF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0364101E-4F23-4CBF-80AE-E06BF6EBBDF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC4CA290-84FE-437A-920D-60A1041F30A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC4CA290-84FE-437A-920D-60A1041F30A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC4CA290-84FE-437A-920D-60A1041F30A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC4CA290-84FE-437A-920D-60A1041F30A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98EDF0EC-EF27-4B29-8AFF-66D7BA23C7FF}
+	EndGlobalSection
+EndGlobal
