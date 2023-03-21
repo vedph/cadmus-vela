@@ -18,9 +18,9 @@ namespace Cadmus.Seed.Vela.Parts;
 [Tag("seed.it.vedph.graffiti.summary")]
 public sealed class GrfSummaryPartSeeder : PartSeederBase
 {
-    static private ProperName GetPlace(Faker faker)
+    static private AssertedProperName GetPlace(Faker faker)
     {
-        ProperName name = new()
+        AssertedProperName name = new()
         {
             Language = "ita",
         };
