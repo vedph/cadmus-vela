@@ -8,6 +8,7 @@ using Cadmus.Philology.Parts;
 using System;
 using Cadmus.Vela.Parts;
 using Cadmus.Epigraphy.Parts;
+using Cadmus.Geo.Parts;
 
 namespace Cadmus.Vela.Services;
 
@@ -15,7 +16,7 @@ namespace Cadmus.Vela.Services;
 /// Cadmus __PRJ__ repository provider.
 /// </summary>
 /// <seealso cref="IRepositoryProvider" />
-public sealed class VelaRepositoryProvider
+public sealed class VelaRepositoryProvider : IRepositoryProvider
 {
     private readonly IPartTypeProvider _partTypeProvider;
 
@@ -40,6 +41,8 @@ public sealed class VelaRepositoryProvider
             typeof(ApparatusLayerFragment).GetTypeInfo().Assembly,
             // Cadmus.Epigraphy.Parts
             typeof(EpiSupportPart).GetTypeInfo().Assembly,
+            // Cadmus.Geo.Parts
+            typeof(AssertedLocationsPart).GetTypeInfo().Assembly,
             // Cadmus.Vela.Parts
             typeof(GrfSummaryPart).GetTypeInfo().Assembly,
         });

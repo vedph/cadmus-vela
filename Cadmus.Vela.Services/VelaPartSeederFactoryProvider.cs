@@ -2,6 +2,7 @@
 using Cadmus.Seed;
 using Cadmus.Seed.Epigraphy.Parts;
 using Cadmus.Seed.General.Parts;
+using Cadmus.Seed.Geo.Parts;
 using Cadmus.Seed.Philology.Parts;
 using Cadmus.Seed.Vela.Parts;
 using Fusi.Microsoft.Extensions.Configuration.InMemoryJson;
@@ -28,6 +29,8 @@ public sealed class VelaPartSeederFactoryProvider : IPartSeederFactoryProvider
             typeof(ApparatusLayerFragmentSeeder).Assembly,
             // Cadmus.Seed.Epigraphy.Parts
             typeof(EpiLigaturesLayerFragmentSeeder).Assembly,
+            // Cadmus.Seed.Geo.Parts
+            typeof(AssertedLocationsPartSeeder).Assembly,
             // Cadmus.Seed.Vela.Parts
             typeof(GrfSummaryPartSeeder).GetTypeInfo().Assembly,
         };
