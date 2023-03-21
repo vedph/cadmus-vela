@@ -30,6 +30,11 @@ public sealed class GrfFigurativePart : PartBase
     public List<string> Features { get; set; }
 
     /// <summary>
+    /// Gets or sets an optional note.
+    /// </summary>
+    public string? Note { get; set; }
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="GrfFigurativePart"/> class.
     /// </summary>
     public GrfFigurativePart()
