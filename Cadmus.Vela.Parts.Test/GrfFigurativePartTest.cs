@@ -52,7 +52,7 @@ public sealed class GrfFigurativePartTest
     }
 
     [Fact]
-    public void GetDataPins_Tag_1()
+    public void GetDataPins_Ok()
     {
         GrfFigurativePart part = GetEmptyPart();
         part.FrameType = "frame";

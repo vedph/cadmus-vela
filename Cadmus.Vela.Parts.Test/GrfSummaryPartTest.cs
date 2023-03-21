@@ -55,7 +55,7 @@ public sealed class GrfSummaryPartTest
     }
 
     [Fact]
-    public void GetDataPins_Tag_1()
+    public void GetDataPins_Ok()
     {
         GrfSummaryPart part = GetEmptyPart();
         part.Place = new AssertedProperName

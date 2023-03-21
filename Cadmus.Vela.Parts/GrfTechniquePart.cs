@@ -50,7 +50,7 @@ public sealed class GrfTechniquePart : PartBase
         DataPinBuilder builder = new();
 
         if (Techniques?.Count > 0) builder.AddValues("technique", Techniques);
-        if (Tools?.Count > 0) builder.AddValues("tools", Tools);
+        if (Tools?.Count > 0) builder.AddValues("tool", Tools);
 
         return builder.Build(this);
     }
