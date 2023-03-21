@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace Cadmus.Seed.Vela.Parts;
 
 /// <summary>
-/// Seeder for GrfSummary part.
+/// Seeder for <see cref="GrfSummaryPart"/>.
 /// Tag: <c>seed.it.vedph.graffiti.summary</c>.
 /// </summary>
 /// <seealso cref="PartSeederBase" />
@@ -80,7 +80,7 @@ public sealed class GrfSummaryPartSeeder : PartSeederBase
                 })
            .RuleFor(p => p.Date,
                 f => HistoricalDate.Parse($"{f.Random.Number(1500, 1900)} AD"))
-           .RuleFor(p => p.Features, f => new List<string>
+           .RuleFor(p => p.Features, f => new List<string> 
            {
                f.PickRandom("text", "digit")
            })
@@ -98,6 +98,7 @@ public sealed class GrfSummaryPartSeeder : PartSeederBase
                }
            })
            .Generate();
+
         SetPartMetadata(part, roleId, item);
 
         return part;
