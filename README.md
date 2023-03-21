@@ -96,9 +96,9 @@ Essential information about a graffiti. This corresponds to the data core which 
 (1) location
 
 - `place`\* (🧱 `AssertedProperName`):
-  - `language` (`string`, thesaurus: `name-languages`)
+  - `language` (`string`, thesaurus: `grf-place-languages`)
   - `tag` (`string`)
-  - `pieces` (`ProperNamePiece[]`, thesaurus: `name-piece-types`):
+  - `pieces` (`ProperNamePiece[]`, thesaurus: `grf-place-piece-types`):
     - `type`\* (`string`)
     - `value`\* (`string`)
   - `assertion` (`Assertion`):
@@ -170,12 +170,12 @@ Techniques and tools.
 
 Writing description.
 
-- `languages`\* (`string[]`, thesaurus: `grf-writing-languages`, usually ISO 639-3)
 - `system`\* (`string`, thesaurus: `grf-writing-systems`, usually ISO 15924 lowercase)
+- `languages`\* (`string[]`, thesaurus: `grf-writing-languages`, usually ISO 639-3)
 - `type`\* (`string`, thesaurus: `grf-writing-types`)
 - `counts` (`DecoratedCount`[]):
-  - `id`\* (`string`, thesaurus: `decorated-count-ids`)
-  - `tag` (`string`, thesaurus: `decorated-count-tags`)
+  - `id`\* (`string`, thesaurus: `grf-writing-count-ids`)
+  - `tag` (`string`, thesaurus: `grf-writing-count-tags`)
   - `value`\* (`number`)
   - `note` (`string`)
 - `features` (`string[]`, thesaurus, `grf-writing-features`)
