@@ -1,0 +1,60 @@
+{
+  "facets": [
+    {
+      "typeId": "it.vedph.graffiti.summary",
+      "name": "summary",
+      "description": "Summary.",
+      "colorKey": "31AB54",
+      "groupKey": "graffiti",
+      "sortKey": "a"
+    },
+    {
+      "typeId": "it.vedph.graffiti.technique",
+      "name": "technique",
+      "description": "Technique.",
+      "colorKey": "21AB54",
+      "groupKey": "graffiti",
+      "sortKey": "b"
+    },
+    {
+      "typeId": "it.vedph.graffiti.writing",
+      "name": "writing",
+      "description": "Writing.",
+      "colorKey": "51AB54",
+      "groupKey": "graffiti",
+      "sortKey": "c"
+    },
+    {
+      "typeId": "it.vedph.graffiti.figurative",
+      "name": "figurative",
+      "description": "Figurative.",
+      "colorKey": "01AB54",
+      "groupKey": "graffiti",
+      "sortKey": "d"
+    }
+  ],
+  "seed": {
+    "options": {
+      "seed": 1,
+      "baseTextPartTypeId": "it.vedph.token-text",
+      "users": [ "zeus" ],
+      "partRoles": [],
+      "fragmentRoles": []
+    },
+    "partSeeders": [
+      {
+        "id": "seed.it.vedph.graffiti.summary"
+      },
+      {
+        "id": "seed.it.vedph.graffiti.technique"
+      },
+      {
+        "id": "seed.it.vedph.graffiti.writing"
+      },
+      {
+        "id": "seed.it.vedph.graffiti.figurative"
+      }
+    ],
+    "fragmentSeeders": []
+  }
+}
