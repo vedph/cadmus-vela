@@ -47,7 +47,7 @@ public sealed class GrfTechniquePart : PartBase
     /// <returns>The pins.</returns>
     public override IEnumerable<DataPin> GetDataPins(IItem? item = null)
     {
-        DataPinBuilder builder = new(new StandardDataPinTextFilter());
+        DataPinBuilder builder = new();
 
         if (Techniques?.Count > 0) builder.AddValues("technique", Techniques);
         if (Tools?.Count > 0) builder.AddValues("tools", Tools);

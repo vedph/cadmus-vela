@@ -186,9 +186,10 @@ Writing description.
 
 Figurative description.
 
-- `frame` (`string`, thesaurus: `grf-fig-frame-types`)
+- `frameType` (`string`, thesaurus: `grf-fig-frame-types`)
 - `type` (`string`, thesaurus: `grf-fig-types`)
 - `features` (`string[]`, thesaurus: `grf-fig-features`)
+- `note` (`string`, 5000)
 
 ### Other Parts
 

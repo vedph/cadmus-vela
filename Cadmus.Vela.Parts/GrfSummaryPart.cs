@@ -111,7 +111,7 @@ public sealed class GrfSummaryPart : PartBase
     /// <returns>The pins.</returns>
     public override IEnumerable<DataPin> GetDataPins(IItem? item = null)
     {
-        DataPinBuilder builder = new(new StandardDataPinTextFilter());
+        DataPinBuilder builder = new(DataPinHelper.DefaultFilter);
 
         if (Place != null)
         {
