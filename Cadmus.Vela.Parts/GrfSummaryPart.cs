@@ -204,9 +204,22 @@ public sealed class GrfSummaryPart : PartBase
     {
         StringBuilder sb = new();
 
-        sb.Append("[__NAME__]");
+        sb.Append("[GrfSummary]");
 
-        // TODO: append summary data...
+        if (Place != null) sb.Append(Place.GetFullName());
+
+        if (!string.IsNullOrEmpty(SupportType))
+        {
+            if (sb.Length > 0) sb.Append(": ");
+            sb.Append(SupportType);
+        }
+        if (Indoor) sb.Append('*');
+
+        if (Size != null)
+        {
+            if (sb.Length > 0) sb.Append(' ');
+            sb.Append(Size);
+        }
 
         return sb.ToString();
     }

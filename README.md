@@ -164,6 +164,7 @@ Techniques and tools.
 
 - `techniques`\* (`string[]`, thesaurus: `grf-techniques`)
 - `tools`\* (`string[]`, thesaurus: `grf-tools`)
+- `note` (`string`, 5000)
 
 ### GrfWritingPart
 
