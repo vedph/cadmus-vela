@@ -9,87 +9,9 @@ Currently the only item is the graffiti item, with the parts listed below.
 
 ## Data Model
 
-### Old Proposals
-
-The discussed proposal included two parts for summary and more details on support, as follows; but this had a number of modeling issues, which are marked by ⚠️ here:
-
-(A) GrfSummaryPart (Old)
-
-(1) location
-
-- `place` (🧱 `ProperName`):
-  - `language` (`string`)
-  - `tag` (`string`)
-  - `pieces` (`ProperNamePiece[]`):
-    - `type`\* (`string`)
-    - `value`\* (`string`)
-- `supportType` (`string`, thesaurus: `grf-support-types`) ⚠️
-- `originalFn` (`string`, thesaurus: `grf-support-functions`)
-- `currentFn` (`string`, thesaurus: `grf-support-functions`)
-- `indoor` (`boolean`) ⚠️
-
-(2) material
-
-- `material`\* (`string`, thesaurus: `grf-support-materials`) ⚠️
-- `description` (`string`, 5000)
-
-(3) identification
-
-- `size` (🧱 `PhysicalSize`):
-  - `tag` (`string`, thesaurus: `physical-size-tags`)
-  - `w` (`PhysicalDimension`):
-    - `value`\* (`number`)
-    - `unit`\* (`string`, thesaurus: `physical-size-units`)
-    - `tag` (`string`, thesaurus: `physical-size-dim-tags`)
-  - `h` (`PhysicalDimension`)
-  - `d` (`PhysicalDimension`)
-  - `note` (`string`)
-- `date` (🧱 `HistoricalDate`)
-  - `a` (`Datation`):
-    - `value` (`int`)
-    - `isCentury` (`bool`)
-    - `isSpan` (`bool`)
-    - `isApproximate` (`bool`)
-    - `isDubious` (`bool`)
-    - `day` (`short`)
-    - `month` (`short`)
-    - `hint` (`string`)
-  - `b` (`Datation`)
-- `features` (thesaurus: `grf-features`)
-- `figDescription` (`string`, 5000)
-- `frameDescription` (`string`, 5000)
-- `text` (`string`, 5000) ⚠️
-- `lastSeen`\* (`date`)
-
-(B) GrfSupportPart (Old)
-
-Material support. This is the original model:
-
-- `material`\* (`string`, thesaurus: `grf-support-materials`) ⚠️
-- `originalFn` (`string`, thesaurus: `grf-support-functions`) ⚠️
-- `currentFn` (`string`, thesaurus: `grf-support-functions`)
-- `objectType` (`string`, thesaurus: `grf-support-object-types`)
-- `supportType` (`string`, thesaurus: `grf-support-types`) ⚠️
-- `indoor` (`boolean`) ⚠️
-- `states` (`GrfSupportState[]`):
-  - `type`\* (`string`, thesaurus: `grf-support-states`)
-  - `date`\* (`date`)
-  - `note` (`string`, 5000)
-
-As you can see, this would have a lot of overlaps (⚠️) with `GrfSummaryPart`. The same is true for `text`, which repeats the same datum designed to be stored in text (because text is the basis for layers).
-
-To **avoid duplication**, the solution is:
-
-- including the _additional properties_ of this part in the summary part; when the summary data come from external sources or is first filled, these additional properties can just be ignored.
-- remove `text` from summary, so that it remains only where it belongs, i.e. in the text part.
-
-Once the properties of `GrfSupportPart` have been merged into the summary model, this part becomes meaningless and is thus removed.
-
-This of course does not affect any import procedure: it just means that when importing core data from external sources, the text will be stored in _text_, and the rest will be stored in _summary_.
-
-So, with these adjustments the models are as follow.
-
 ### GrfSummaryPart
+
+- 🔑 ID: `it.vedph.graffiti.summary`
 
 Essential information about a graffiti. This corresponds to the data core which might also be derived from external sources.
 
@@ -160,6 +82,8 @@ This section contains all the additional properties in comparison with the summa
 
 ### GrfTechniquePart
 
+- 🔑 ID: `it.vedph.graffiti.technique`
+
 Techniques and tools.
 
 - `techniques`\* (`string[]`, thesaurus: `grf-techniques`)
@@ -167,6 +91,8 @@ Techniques and tools.
 - `note` (`string`, 5000)
 
 ### GrfWritingPart
+
+- 🔑 ID: `it.vedph.graffiti.writing`
 
 Writing description.
 
@@ -183,6 +109,8 @@ Writing description.
 - `metres` (`string[]`, thesaurus: `grf-writing-metres`)
 
 ### GrfFigurativePart
+
+- 🔑 ID: `it.vedph.graffiti.figurative`
 
 Figurative description.
 
@@ -233,6 +161,8 @@ Figurative description.
   - chronology layer
 
 ## Original Spreadsheet
+
+TODO update
 
 The original schema was just a flat spreadsheet table, where some columns are grouped under so-called header columns, filled with color and without data, whose purpose is making all the following columns belonging to the same group. Often this is used to represent boolean features in a mutually exclusive relationship. Of course, this is just a hack due to the flat nature of the spreadsheet model.
 
