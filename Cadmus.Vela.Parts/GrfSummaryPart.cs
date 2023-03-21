@@ -30,6 +30,12 @@ public sealed class GrfSummaryPart : PartBase
     public string? SupportType { get; set; }
 
     /// <summary>
+    /// Gets or sets the type of the object containing the support (usually from
+    /// <c>grf-support-object-types</c>).
+    /// </summary>
+    public string? ObjectType { get; set; }
+
+    /// <summary>
     /// Gets or sets the support's original function (usually from
     /// <c>grf-support-functions).</c>.
     /// </summary>
@@ -119,6 +125,7 @@ public sealed class GrfSummaryPart : PartBase
         }
 
         builder.AddValue("support-type", SupportType);
+        builder.AddValue("object-type", ObjectType);
         builder.AddValue("original-fn", OriginalFn);
         builder.AddValue("current-fn", CurrentFn);
         builder.AddValue("indoor", Indoor);
@@ -138,8 +145,10 @@ public sealed class GrfSummaryPart : PartBase
         builder.AddValue("yr-last-seen",
             LastSeen.Year.ToString(CultureInfo.InvariantCulture));
 
-        if (States?.Count > 0) builder.AddValues("state",
-            States.Select(s => s.Type!));
+        if (States?.Count > 0)
+        {
+            builder.AddValues("state", States.Select(s => s.Type!));
+        }
 
         return builder.Build(this);
     }
@@ -159,6 +168,9 @@ public sealed class GrfSummaryPart : PartBase
             new DataPinDefinition(DataPinValueType.String,
                 "support-type",
                 "The graffiti's support type."),
+            new DataPinDefinition(DataPinValueType.String,
+                "object-type",
+                "The graffiti's object type."),
             new DataPinDefinition(DataPinValueType.String,
                 "original-fn",
                 "The original function of the graffiti's support."),
