@@ -52,6 +52,7 @@ public sealed class GrfSummaryPartSeeder : PartSeederBase
         if (item == null) throw new ArgumentNullException(nameof(item));
 
         string[] fnn = new[] { "street", "house" };
+        DateTime lastSeen = new Faker().Date.Past();
 
         GrfSummaryPart part = new Faker<GrfSummaryPart>()
            .RuleFor(p => p.Place, f => GetPlace(f))
@@ -85,7 +86,18 @@ public sealed class GrfSummaryPartSeeder : PartSeederBase
            })
            .RuleFor(p => p.FigDescription, f => f.Lorem.Sentence())
            .RuleFor(p => p.FrameDescription, f => f.Lorem.Sentence())
-           .RuleFor(p => p.LastSeen, f => f.Date.Past()).Generate();
+           .RuleFor(p => p.LastSeen, lastSeen)
+           .RuleFor(p => p.States, f => new List<GrfSupportState>
+           {
+               new GrfSupportState
+               {
+                   Type = "s" + f.Random.Number(0, 3),
+                   Date = lastSeen,
+                   Reporter = f.Name.FullName(),
+                   Note = f.Lorem.Sentence()
+               }
+           })
+           .Generate();
         SetPartMetadata(part, roleId, item);
 
         return part;
