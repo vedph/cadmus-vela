@@ -115,7 +115,7 @@ Writing description.
 Figurative description.
 
 - `frameType` (`string`, thesaurus: `grf-fig-frame-types`)
-- `type` (`string`, thesaurus: `grf-fig-types`)
+- `type` (`string`, thesaurus: `grf-fig-types`, hierarchical)
 - `features` (`string[]`, thesaurus: `grf-fig-features`)
 - `note` (`string`, 5000)
 
