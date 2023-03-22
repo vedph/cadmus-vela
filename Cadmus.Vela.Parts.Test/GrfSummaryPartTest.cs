@@ -58,7 +58,7 @@ public sealed class GrfSummaryPartTest
     public void GetDataPins_Ok()
     {
         GrfSummaryPart part = GetEmptyPart();
-        part.Place = new AssertedProperName
+        part.Place = new ProperName
         {
             Language = "ita",
         };

@@ -21,7 +21,7 @@ public sealed class GrfSummaryPart : PartBase
     /// <summary>
     /// Gets or sets the place name.
     /// </summary>
-    public AssertedProperName? Place { get; set; }
+    public ProperName? Place { get; set; }
 
     /// <summary>
     /// Gets or sets the type of the support (usually from

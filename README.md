@@ -17,21 +17,12 @@ Essential information about a graffiti. This corresponds to the data core which 
 
 (1) location
 
-- `place`\* (🧱 `AssertedProperName`):
+- `place`\* (🧱 `ProperName`):
   - `language` (`string`, thesaurus: `grf-place-languages`)
   - `tag` (`string`)
   - `pieces` (`ProperNamePiece[]`, thesaurus: `grf-place-piece-types`):
     - `type`\* (`string`)
     - `value`\* (`string`)
-  - `assertion` (`Assertion`):
-    - `tag` (`string`, thesaurus: `assertion-tags`)
-    - `rank` (`short`)
-    - `references` (`DocReference[]`):
-      - `type` (`string`, thesaurus: `doc-reference-types`)
-      - `tag` (`string`, thesaurus: `doc-reference-tags`)
-      - `citation` (`string`)
-      - `note` (`string`)
-    - `note` (`string`)
 - `supportType`\* (`string`, thesaurus: `grf-support-types`)
 - `objectType` (`string`, thesaurus: `grf-support-object-types`)
 - `originalFn` (`string`, thesaurus: `grf-support-functions`)
