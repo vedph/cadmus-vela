@@ -35,7 +35,7 @@ public sealed class GrfStatesPart : PartBase
     /// these keys: <c>type</c>=type.</returns>
     public override IEnumerable<DataPin> GetDataPins(IItem? item = null)
     {
-        DataPinBuilder builder = new(new StandardDataPinTextFilter());
+        DataPinBuilder builder = new();
 
         builder.Set("tot", States?.Count ?? 0, false);
 

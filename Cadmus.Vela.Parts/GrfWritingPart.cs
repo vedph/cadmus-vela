@@ -118,7 +118,7 @@ public sealed class GrfWritingPart : PartBase
 
         builder.AddValue("system", System);
         builder.AddValues("language", Languages);
-        builder.AddValue("type", Type);
+        builder.AddValue("script", Script);
 
         if (Counts?.Count > 0)
         {
@@ -126,9 +126,19 @@ public sealed class GrfWritingPart : PartBase
                 builder.AddValue($"c-{count.Id}", count.Value);
         }
 
-        if (Features?.Count > 0) builder.AddValues("feature", Features);
+        if (ScriptFeatures?.Count > 0)
+        {
+            builder.AddValues("script-feature", ScriptFeatures);
+        }
+        if (LetterFeatures?.Count > 0)
+        {
+            builder.AddValues("letter-feature", LetterFeatures);
+        }
 
-        builder.AddValue("poetic", HasPoetry);
+        builder.AddValue("ruling", HasRuling);
+        builder.AddValue("rubrics", HasRubrics);
+        builder.AddValue("poetry", HasPoetry);
+        builder.AddValue("prose", HasPoetry);
         builder.AddValues("metre", Metres);
 
         return builder.Build(this);
@@ -150,17 +160,26 @@ public sealed class GrfWritingPart : PartBase
                 "The language(s) used in the text.",
                 "M"),
              new DataPinDefinition(DataPinValueType.String,
-                "type",
-                "The writing type."),
+                "script",
+                "The script type."),
              new DataPinDefinition(DataPinValueType.Integer,
                 "c-...",
-                "The counts. Each count type has its name."),
+                "The counts. Each count type has its name.",
+                "M"),
              new DataPinDefinition(DataPinValueType.String,
-                "feature",
-                "The writing feature(s) present."),
+                "script-feature",
+                "The script feature(s) present.",
+                "M"),
+             new DataPinDefinition(DataPinValueType.String,
+                "letter-feature",
+                "The letter feature(s) present.",
+                "M"),
              new DataPinDefinition(DataPinValueType.Boolean,
-                "poetic",
+                "poetry",
                 "True if contains poetic text."),
+             new DataPinDefinition(DataPinValueType.Boolean,
+                "prose",
+                "True if contains prose text."),
              new DataPinDefinition(DataPinValueType.String,
                 "metre",
                 "The metre(s) used in the poetic text.",
@@ -178,7 +197,7 @@ public sealed class GrfWritingPart : PartBase
     {
         StringBuilder sb = new();
 
-        sb.Append("[EpiWriting] ").Append(System).Append(' ').Append(Type);
+        sb.Append("[EpiWriting] ").Append(System).Append(' ').Append(Script);
         if (Languages?.Count > 0)
             sb.Append(": ").AppendJoin(", ", Languages);
 

@@ -13,33 +13,22 @@ namespace Cadmus.Vela.Parts;
 public sealed class GrfFigurativePart : PartBase
 {
     /// <summary>
-    /// Gets or sets the frame type (usually from <c>grf-fig-frame-types</c>.
-    /// </summary>
-    public string? FrameType { get; set; }
-
-    /// <summary>
     /// Gets or sets the figurative type (usually from a hierarchic
-    /// <c>grf-fig-types</c>).
+    /// <c>grf-figurative-types</c>).
     /// </summary>
-    public string? Type { get; set; }
+    public List<string> Types { get; set; }
 
     /// <summary>
-    /// Gets or sets the main figurative features (usually from
-    /// <c>grf-fig-features</c>).
+    /// Gets or sets the figurative description.
     /// </summary>
-    public List<string> Features { get; set; }
-
-    /// <summary>
-    /// Gets or sets an optional note.
-    /// </summary>
-    public string? Note { get; set; }
+    public string? Description { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GrfFigurativePart"/> class.
     /// </summary>
     public GrfFigurativePart()
     {
-        Features = new List<string>();
+        Types = new List<string>();
     }
 
     /// <summary>
@@ -53,9 +42,7 @@ public sealed class GrfFigurativePart : PartBase
     {
         DataPinBuilder builder = new();
 
-        builder.AddValue("frame-type", FrameType);
-        builder.AddValue("type", Type);
-        if (Features?.Count > 0) builder.AddValues("feature", Features);
+        builder.AddValues("type", Types);
 
         return builder.Build(this);
     }
@@ -69,15 +56,9 @@ public sealed class GrfFigurativePart : PartBase
         return new List<DataPinDefinition>(new[]
         {
              new DataPinDefinition(DataPinValueType.String,
-                "frame-type",
-                "The frame type."),
-             new DataPinDefinition(DataPinValueType.String,
                 "type",
-                "The main figurative type."),
-             new DataPinDefinition(DataPinValueType.String,
-                "feature",
-                "The main figurative feature(s).",
-                "M")
+                "The figurative type(s).",
+                "M"),
         });
     }
 
@@ -93,19 +74,10 @@ public sealed class GrfFigurativePart : PartBase
 
         sb.Append("[GrfFigurative]");
 
-        if (!string.IsNullOrEmpty(FrameType))
-            sb.Append('[').Append(FrameType).Append(']');
-
-        if (!string.IsNullOrEmpty(Type))
+        if (Types?.Count > 0)
         {
-            if (sb.Length > 0) sb.Append(' ');
-            sb.Append(Type);
-        }
-
-        if (Features?.Count > 0)
-        {
-            if (sb.Length > 0) sb.Append(' ');
-            sb.Append('(').Append(Features.Count).Append(')');
+            sb.Append(": ");
+            sb.AppendJoin(", ", Types);
         }
 
         return sb.ToString();

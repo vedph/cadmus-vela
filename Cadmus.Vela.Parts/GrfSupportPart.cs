@@ -36,7 +36,7 @@ public sealed class GrfSupportPart : PartBase
     /// <returns>The pins.</returns>
     public override IEnumerable<DataPin> GetDataPins(IItem? item = null)
     {
-        DataPinBuilder builder = new(DataPinHelper.DefaultFilter);
+        DataPinBuilder builder = new();
 
         builder.AddValue("type", Type);
         builder.AddValue("material", Material);
