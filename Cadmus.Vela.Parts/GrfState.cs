@@ -5,7 +5,7 @@ namespace Cadmus.Vela.Parts;
 /// <summary>
 /// A recorded state for the graffiti.
 /// </summary>
-public class GrfSupportState
+public class GrfState
 {
     /// <summary>
     /// Gets or sets the state type (usually from <c>grf-support-states</c>).

@@ -26,9 +26,26 @@ public sealed class GrfWritingPart : PartBase
     public List<string> Languages { get; set; }
 
     /// <summary>
-    /// Gets or sets the writing type (usually from <c>grf-writing-types</c>).
+    /// Gets or sets the script type (e.g. gothic, merchant, etc.; usually from
+    /// <c>grf-writing-scripts</c>).
     /// </summary>
-    public string? Type { get; set; }
+    public string? Script { get; set; }
+
+    /// <summary>
+    /// Gets or sets the casing (e.g. prevailing uppercase, prevailing lowercase,
+    /// etc; usually from <c>grf-writing-casing</c>).
+    /// </summary>
+    public string? Casing { get; set; }
+
+    /// <summary>
+    /// Gets or sets script features (usually from <c>grf-writing-script-features</c>).
+    /// </summary>
+    public List<string> ScriptFeatures { get; set; }
+
+    /// <summary>
+    /// Gets or sets letter features (usually from <c>grf-writing-letter-features</c>).
+    /// </summary>
+    public List<string> LetterFeatures { get; set; }
 
     /// <summary>
     /// Gets or sets a set of specific counts, like e.g. rows, columns,
@@ -39,15 +56,36 @@ public sealed class GrfWritingPart : PartBase
     public List<DecoratedCount> Counts { get; set; }
 
     /// <summary>
-    /// Gets or sets writing features (usually from <c>grf-writing-features</c>).
+    /// Gets or sets a value indicating whether this graffiti has ruling.
     /// </summary>
-    public List<string> Features { get; set; }
+    public bool HasRuling { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether this inscription contains
-    /// some poetic text.
+    /// Gets or sets the ruling description.
+    /// </summary>
+    public string? Ruling { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this graffiti has rubrics.
+    /// </summary>
+    public bool HasRubrics { get; set; }
+
+    /// <summary>
+    /// Gets or sets the rubrics description.
+    /// </summary>
+    public string? Rubrics { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this graffiti has some poetic
+    /// text.
     /// </summary>
     public bool HasPoetry { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this graffiti has some prose
+    /// text.
+    /// </summary>
+    public bool HasProse { get; set; }
 
     /// <summary>
     /// Gets or sets the metre(s) used in the poetic text if any (usually
@@ -62,7 +100,8 @@ public sealed class GrfWritingPart : PartBase
     {
         Languages = new List<string>();
         Counts = new List<DecoratedCount>();
-        Features = new List<string>();
+        ScriptFeatures = new List<string>();
+        LetterFeatures = new List<string>();
         Metres = new List<string>();
     }
 

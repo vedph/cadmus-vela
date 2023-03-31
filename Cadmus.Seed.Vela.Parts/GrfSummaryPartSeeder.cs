@@ -87,9 +87,9 @@ public sealed class GrfSummaryPartSeeder : PartSeederBase
            .RuleFor(p => p.FigDescription, f => f.Lorem.Sentence())
            .RuleFor(p => p.FrameDescription, f => f.Lorem.Sentence())
            .RuleFor(p => p.LastSeen, lastSeen)
-           .RuleFor(p => p.States, f => new List<GrfSupportState>
+           .RuleFor(p => p.States, f => new List<GrfState>
            {
-               new GrfSupportState
+               new GrfState
                {
                    Type = "s" + f.Random.Number(0, 3),
                    Date = lastSeen,

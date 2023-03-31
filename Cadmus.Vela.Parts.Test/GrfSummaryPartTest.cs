@@ -85,7 +85,7 @@ public sealed class GrfSummaryPartTest
         part.Features.Add("fa");
         part.Features.Add("fb");
         part.LastSeen = new DateTime(2020, 1, 1);
-        part.States.Add(new GrfSupportState
+        part.States.Add(new GrfState
         {
             Type = "s1"
         });

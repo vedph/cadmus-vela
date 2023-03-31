@@ -2,182 +2,191 @@
 
 Core models for Cadmus VeLA.
 
-- [Cadmus VeLA API](https://github.com/vedph/cadmus-vela-api)
-- [Cadmus VeLA app](https://github.com/vedph/cadmus-vela-app)
+- 🔗 [Cadmus VeLA API](https://github.com/vedph/cadmus-vela-api)
+- 🔗 [Cadmus VeLA app](https://github.com/vedph/cadmus-vela-app)
 
-Currently the only item is the graffiti item, with the parts listed below.
+- [Cadmus VeLA Core](#cadmus-vela-core)
+  - [Data Model](#data-model)
+    - [VeLA Parts](#vela-parts)
+      - [GrfLocalizationPart](#grflocalizationpart)
+      - [GrfSupportPart](#grfsupportpart)
+      - [GrfFramePart](#grfframepart)
+      - [GrfStatesPart](#grfstatespart)
+      - [GrfWritingPart](#grfwritingpart)
+      - [GrfFigurativePart](#grffigurativepart)
+      - [GrfTechniquePart](#grftechniquepart)
+    - [Items](#items)
+  - [Original Spreadsheet](#original-spreadsheet)
 
 ## Data Model
 
-### GrfSummaryPart
+Currently the core data model for VeLA includes 7 specialized parts and 13 general parts. In what follows, each part's model is represented with a list of properties. For each property its data type (string, boolean, etc.) and eventual thesaurus are specified in brackets; arrays are represented with suffix `[]` after the data type, so e.g. `string[]` means a list of strings. Some of the properties in turn are objects with other properties. The required properties are marked with an asterisk.
 
-- 🔑 ID: `it.vedph.graffiti.summary`
+### VeLA Parts
 
-Essential information about a graffiti. This corresponds to the data core which might also be derived from external sources.
+#### GrfLocalizationPart
 
-(1) location
+- 🔑 ID: `it.vedph.graffiti.localization`
+
+Graffiti localization.
 
 - `place`\* (🧱 `ProperName`):
-  - `language` (`string`, thesaurus: `grf-place-languages`)
+  - `language` (`string`, 📚 thesaurus: `grf-place-languages`)
   - `tag` (`string`)
-  - `pieces` (`ProperNamePiece[]`, thesaurus: `grf-place-piece-types`):
+  - `pieces` (`ProperNamePiece[]`, 📚 thesaurus: `grf-place-piece-types`, providing 3 levels: area, sestriere, location):
     - `type`\* (`string`)
     - `value`\* (`string`)
-- `supportType`\* (`string`, thesaurus: `grf-support-types`)
-- `objectType` (`string`, thesaurus: `grf-support-object-types`)
-- `originalFn` (`string`, thesaurus: `grf-support-functions`)
-- `currentFn`\* (`string`, thesaurus: `grf-support-functions`)
+- `objectType`\* (`string`, 📚 thesaurus: `grf-support-object-types`)
+- `function`\* (`string`, 📚 thesaurus: `grf-support-functions`)
+- `note` (`string` 5000): note about original function.
 - `indoor`\* (`boolean`)
 
-(2) material
+#### GrfSupportPart
 
-- `material`\* (`string`, thesaurus: `grf-support-materials`)
-- `description`\* (`string`, 5000)
+- 🔑 ID: `it.vedph.graffiti.support`
 
-(3) identification
+Material support.
+
+- `supportType`\* (`string`, 📚 thesaurus: `grf-support-types`)
+- `material`\* (`string`, 📚 thesaurus: `grf-support-materials`)
+- `note` (`string`, 5000)
+
+#### GrfFramePart
+
+- 🔑 ID: `it.vedph.graffiti.frame`
+
+Frame, size and figure.
 
 - `size`\* (🧱 `PhysicalSize`):
-  - `tag` (`string`, thesaurus: `physical-size-tags`)
+  - `tag` (`string`, 📚 thesaurus: `physical-size-tags`)
   - `w` (`PhysicalDimension`):
     - `value`\* (`number`)
-    - `unit`\* (`string`, thesaurus: `physical-size-units`)
-    - `tag` (`string`, thesaurus: `physical-size-dim-tags`)
+    - `unit`\* (`string`, 📚 thesaurus: `physical-size-units`)
+    - `tag` (`string`, 📚 thesaurus: `physical-size-dim-tags`)
   - `h` (`PhysicalDimension`)
   - `d` (`PhysicalDimension`)
   - `note` (`string`)
-- `date`\* (🧱 `HistoricalDate`)
-  - `a` (`Datation`):
-    - `value` (`int`)
-    - `isCentury` (`bool`)
-    - `isSpan` (`bool`)
-    - `isApproximate` (`bool`)
-    - `isDubious` (`bool`)
-    - `day` (`short`)
-    - `month` (`short`)
-    - `hint` (`string`)
-  - `b` (`Datation`)
-- `features` (`string[]`; thesaurus: `grf-features`)
-- `figDescription` (`string`, 5000)
-- `frameDescription` (`string`, 5000)
-- `lastSeen`\* (`date`, usually UTC)
+- `figure` (`string`, 5000)
+- `frame` (`string`, 5000)
 
-(4) additional
+#### GrfStatesPart
 
-This section contains all the additional properties in comparison with the summary core.
+- 🔑 ID: `it.vedph.graffiti.states`
 
-- `states` (`GrfSupportState[]`):
-  - `type`\* (`string`, thesaurus: `grf-support-states`)
-  - `date`\* (`date`, usually UTC)
-  - `reporter`\* (`string`, 100)
+State(s) reported for the graffiti.
+
+- `states`\* (`GrfState[]`):
+  - `type`\* (`string`, 📚 thesaurus: `grf-states`)
+  - `date`\* (`date`)
+  - `reporter`\* (`string`)
   - `note` (`string`, 5000)
 
-### GrfTechniquePart
-
-- 🔑 ID: `it.vedph.graffiti.technique`
-
-Techniques and tools.
-
-- `techniques`\* (`string[]`, thesaurus: `grf-techniques`)
-- `tools`\* (`string[]`, thesaurus: `grf-tools`)
-- `note` (`string`, 5000)
-
-### GrfWritingPart
+#### GrfWritingPart
 
 - 🔑 ID: `it.vedph.graffiti.writing`
 
 Writing description.
 
-- `system`\* (`string`, thesaurus: `grf-writing-systems`, usually ISO 15924 lowercase)
-- `languages`\* (`string[]`, thesaurus: `grf-writing-languages`, usually ISO 639-3)
-- `type`\* (`string`, thesaurus: `grf-writing-types`)
+- `system`\* (`string`, 📚 thesaurus: `grf-writing-systems`, usually ISO 15924 lowercase): writing system. This is required because there are cases where writing system and languages are not the same, e.g. you write Greek text with Latin letters.
+- `languages`\* (`string[]`, 📚 thesaurus: `grf-writing-languages`, usually ISO 639-3)
+- `script`\* (`string`, 📚 thesaurus: `grf-writing-scripts`): paleographic script (e.g. gothic, merchant, etc.).
+- `casing`\* (`string`, 📚 thesaurus: `grf-writing-casing`)
+- `scriptFeatures` (`string[]`; 📚 thesaurus: `grf-writing-script-features`)
+- `letterFeatures` (`string[]`; 📚 thesaurus: `grf-writing-letter-features`)
 - `counts` (`DecoratedCount`[]):
-  - `id`\* (`string`, thesaurus: `grf-writing-count-ids`)
-  - `tag` (`string`, thesaurus: `grf-writing-count-tags`)
+  - `id`\* (`string`, 📚 thesaurus: `grf-writing-count-ids`)
+  - `tag` (`string`, 📚 thesaurus: `grf-writing-count-tags`)
   - `value`\* (`number`)
   - `note` (`string`)
-- `features` (`string[]`, thesaurus, `grf-writing-features`)
+- `hasRuling` (`boolean`)
+- `ruling` (`string`, 5000)
+- `hasRubrics` (`boolean`)
+- `rubrics` (`string`, 5000)
+- `hasProse` (`boolean`)
 - `hasPoetry` (`boolean`)
-- `metres` (`string[]`, thesaurus: `grf-writing-metres`)
+- `metres` (`string[]`, 📚 thesaurus: `grf-writing-metres`)
 
-### GrfFigurativePart
+#### GrfFigurativePart
 
 - 🔑 ID: `it.vedph.graffiti.figurative`
 
 Figurative description.
 
-- `frameType` (`string`, thesaurus: `grf-fig-frame-types`)
-- `type` (`string`, thesaurus: `grf-fig-types`, hierarchical)
-- `features` (`string[]`, thesaurus: `grf-fig-features`)
+- `types`\* (`string[]`; 📚 thesaurus: `grf-figurative-types`).
+- `description` (`string`, 5000)
+
+#### GrfTechniquePart
+
+- 🔑 ID: `it.vedph.graffiti.technique`
+
+Techniques and tools.
+
+- `techniques`\* (`string[]`, 📚 thesaurus: `grf-techniques`)
+- `tools`\* (`string[]`, 📚 thesaurus: `grf-tools`)
 - `note` (`string`, 5000)
 
-### Other Parts
+### Items
 
-- metadata
-- categories
-- keywords
-- comment
-- note
-- bibliography
-- doc references
-- external IDs
-- text
-- comment layer
-- chronology layer
+Currently the only item is the graffiti item, with parts conventionally grouped in these labelled sections:
 
-### Graffiti Item Layout
+- _summary_:
+  - [GrfLocalizationPart](#grflocalizationpart)
+  - [GrfSupportPart](#grfsupportpart)
+  - [GrfFramePart](#grfframepart)
+  - [GrfStatesPart](#grfstatespart)
+  - NotePart with role `text`: this is the first draft of the text as copied on the spot.
+  - NotePart with role `date`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
 
-- graffiti group:
-  - summary
-  - technique
-  - writing
-  - figurative
+- _details_:
+  - [GrfWritingPart](#grfwritingpart)
+  - [GrfTechniquePart](#grftechniquepart)
+  - HistoricalDatePart: this provides a structured datation model which is machine-actionable.
+  - CategoriesPart with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
+  - CategoriesPart with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
 
-- general group:
-  - metadata
-  - categories
-  - keywords
+- _text_:
+  - TextPart: the edited text, susceptible of annotations via layers.
+  - CommentsLayerPart
+  - ChronologyLayerPart
+  - LigaturesLayerPart
 
-- comment group:
-  - comment
-  - note
+- _comment_:
+  - CommentPart
+  - NotePart
 
-- references group:
-  - bibliography
-  - doc references
-  - external IDs
+- _classification_:
+  - MetadataPart
+  - IndexKeywordsPart
 
-- text group:
-  - text
-  - comment layer
-  - chronology layer
+- _references_:
+  - BibliographyPart
+  - DocReferencesPart
+  - ExternalIdsPart
 
 ## Original Spreadsheet
 
-TODO update
-
 The original schema was just a flat spreadsheet table, where some columns are grouped under so-called header columns, filled with color and without data, whose purpose is making all the following columns belonging to the same group. Often this is used to represent boolean features in a mutually exclusive relationship. Of course, this is just a hack due to the flat nature of the spreadsheet model.
 
-- A = ID (e.g. `CASTELLO_01-0001`): this can just be the item's **title** and eventually an EID in **metadata part**.
+- A = ID (e.g. `CASTELLO_01-0001`)
 - B = image, I found it always empty. At any rate, once we have an ID, the image resources can be accessed via some transformation of it.
-- C-E = area, sestriere, denominazione: **toponyms part** hierarchy. 📚
-- F-K = funzione originaria, funzione attuale, tipologia struttura, interno/esterno, supporto, materiale: **epigraphic support part** (📚 `epi-support-materials`, `epi-support-functions`, `epi-support-object-types`, `epi-support-types`).
-- L = "datati" (boolean): eventually in **metadata part**.
-- M-O = terminus post, terminus ante, cronologia: **datation part**.
-- **writing part**: script features (📚 `epi-writing-script-features`):
+- C-E = area, sestriere, denominazione.
+- F-K = funzione originaria, funzione attuale, tipologia struttura, interno/esterno, supporto, materiale.
+- L = "datati" (boolean)
+- M-O = terminus post, terminus ante, cronologia
   - P figurativi
   - Q testo
   - R numero
   - S cornice
-- T tipo figurativo: **support part**: figurative type (📚 `epi-writing-fig-types`).
-- U tipo cornice: **writing part**: figurative features (📚 `epi-writing-fig-features`).
-- V misure: **support part**: size.
-- W numero righe: **writing part**: counts (📚 `decorated-count-ids`, `decorated-count-tags`).
-- X alfabeto: **writing part**: system.
-- Y lingua: **writing part**: languages.
-- Z lingua ISO 639/3: as above.
+- T tipo figurativo
+- U tipo cornice
+- V misure
+- W numero righe
+- X alfabeto
+- Y lingua
+- Z lingua ISO 639/3
 - AA codice glottologico (?)
 - AB tipologia grafica (?)
-- AC tecnica esecuzione (header column): **writing part**: technique (📚 `epi-writing-techniques`):
+- AC tecnica esecuzione (header column)
   - AD presenza di disegno
   - AE presenza di preparazione del supporto
   - AF graffio
@@ -186,7 +195,7 @@ The original schema was just a flat spreadsheet table, where some columns are gr
   - AI disegno
   - AJ punzonatura
   - AK a rilievo
-- AL strumento di esecuzione (header column): **writing part**: tool (📚 `epi-writing-tools`):
+- AL strumento di esecuzione (header column)
   - AM chiodo
   - AN gradina
   - AO scalpello
@@ -200,23 +209,23 @@ The original schema was just a flat spreadsheet table, where some columns are gr
   - AW vernice
   - AX lama (affilatura)
   - AY tipo di lama
-- AZ caratteristiche grafiche (header column): **writing part**: script features (📚 `epi-writing-script-features`):
+- AZ caratteristiche grafiche (header column)
   - BA maiuscolo/minuscolo
   - BB sistema interpuntivo
-  - BC nessi e legamenti (note: you might also provide more details with the **ligatures layer** with 📚 `epi-ligature-types`).
+  - BC nessi e legamenti
   - BD abbreviazioni
-- BE monogrammi, lettere singole, etcc. (header column): **writing part**: script features (📚 `epi-writing-script-features`):
+- BE monogrammi, lettere singole, etcc. (header column)
   - BF monogrammi
   - BG lettera singola
   - BH lettere non interpretabili
   - BI disegno non interpretabile
-- BJ tipologia di argomento (header column): columns BK-CG: **categories part** (📚 `categories`).
-- CH categorie figurative (header column): **writing part**: columns CH-CY: figurative type and features (📚 `epi-writing-fig-types`, `epi-writing-fig-features`).
+- BJ tipologia di argomento (header column): columns BK-CG
+- CH categorie figurative (header column)
 - CZ (header column): edizione e commento:
-  - DA edizione: **bibliography part** (📚 `bibliography-author-roles`, `bibliography-languages`, `bibliography-types`).
-  - DB codice iconclass: in **writing part**: figurative type/features (in IDs).
-  - DC commento: **comment part**.
-  - DD osservazioni sullo stato di conservazione: **support part**.
-  - DE bibliografia: **bibliography part**.
-  - DF data primo rilievo: **metadata part**, or add to support part, depending on how typical we can estimate this property.
-  - DG data ultima ricognizione: **support part**.
+  - DA edizione
+  - DB codice iconclass
+  - DC commento
+  - DD osservazioni sullo stato di conservazione
+  - DE bibliografia
+  - DF data primo rilievo
+  - DG data ultima ricognizione
