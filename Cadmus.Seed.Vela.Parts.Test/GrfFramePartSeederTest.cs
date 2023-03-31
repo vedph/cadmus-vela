@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Cadmus.Seed.Vela.Parts.Test;
 
-public sealed class GrfSummaryPartSeederTest
+public sealed class GrfFramePartSeederTest
 {
     private static readonly PartSeederFactory _factory =
         TestHelper.GetFactory();
@@ -19,23 +19,23 @@ public sealed class GrfSummaryPartSeederTest
     [Fact]
     public void TypeHasTagAttribute()
     {
-        Type t = typeof(GrfSummaryPartSeeder);
+        Type t = typeof(GrfFramePartSeeder);
         TagAttribute? attr = t.GetTypeInfo().GetCustomAttribute<TagAttribute>();
         Assert.NotNull(attr);
-        Assert.Equal("seed.it.vedph.graffiti.summary", attr!.Tag);
+        Assert.Equal("seed.it.vedph.graffiti.frame", attr!.Tag);
     }
 
     [Fact]
     public void Seed_Ok()
     {
-        GrfSummaryPartSeeder seeder = new();
+        GrfFramePartSeeder seeder = new();
         seeder.SetSeedOptions(_seedOptions);
 
         IPart? part = seeder.GetPart(_item, null, _factory);
 
         Assert.NotNull(part);
 
-        GrfSummaryPart? p = part as GrfSummaryPart;
+        GrfFramePart? p = part as GrfFramePart;
         Assert.NotNull(p);
 
         TestHelper.AssertPartMetadata(p!);
