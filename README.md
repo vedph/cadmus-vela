@@ -47,7 +47,7 @@ Graffiti localization.
 
 Material support.
 
-- `supportType`\* (`string`, 📚 thesaurus: `grf-support-types`)
+- `type`\* (`string`, 📚 thesaurus: `grf-support-types`)
 - `material`\* (`string`, 📚 thesaurus: `grf-support-materials`)
 - `note` (`string`, 5000)
 

@@ -42,18 +42,32 @@ public sealed class GrfWritingPartSeeder : PartSeederBase
     {
         if (item == null) throw new ArgumentNullException(nameof(item));
 
+        Faker faker = new();
+        bool ruling = faker.Random.Bool();
+        bool rubrics = faker.Random.Bool();
+
         GrfWritingPart part = new Faker<GrfWritingPart>()
             .RuleFor(p => p.System, f => f.PickRandom("latn", "grek"))
             .RuleFor(p => p.Languages, f => new List<string>
             {
                 f.PickRandom("lat", "grc")
             })
-            .RuleFor(p => p.Type, f => f.PickRandom("upper", "lower"))
-            .RuleFor(p => p.Counts, f => GetCounts(f))
-            .RuleFor(p => p.Features, f => new List<string>
+            .RuleFor(p => p.Script, f => f.PickRandom("gothic", "merchant"))
+            .RuleFor(p => p.Casing, f => f.PickRandom("upper", "lower"))
+            .RuleFor(p => p.ScriptFeatures, f => new List<string>
             {
-                f.PickRandom("text", "digit")
+                f.PickRandom("punctuation", "ligature")
             })
+            .RuleFor(p => p.LetterFeatures, f => new List<string>
+            {
+                f.PickRandom("monogram", "sigla")
+            })
+            .RuleFor(p => p.Counts, f => GetCounts(f))
+            .RuleFor(p => p.HasRuling, ruling)
+            .RuleFor(p => p.Ruling, f => ruling ? f.Lorem.Sentence() : null)
+            .RuleFor(p => p.HasRubrics, rubrics)
+            .RuleFor(p => p.Rubrics, f => rubrics ? f.Lorem.Sentence() : null)
+            .RuleFor(p => p.HasProse, f => f.Random.Bool(0.75f))
             .RuleFor(p => p.HasPoetry, f => f.Random.Bool(0.25f))
             .RuleFor(p => p.Metres, f => new List<string>
             {

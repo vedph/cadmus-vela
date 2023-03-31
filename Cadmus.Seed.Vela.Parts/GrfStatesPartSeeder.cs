@@ -8,12 +8,12 @@ using System.Collections.Generic;
 namespace Cadmus.Seed.Vela.Parts;
 
 /// <summary>
-/// Seeder for <see cref="GrfFigurativePart"/>.
-/// Tag: <c>seed.it.vedph.graffiti.figurative</c>.
+/// Seeder for <see cref="GrfStatesPart"/>.
+/// Tag: <c>seed.it.vedph.graffiti.states</c>.
 /// </summary>
 /// <seealso cref="PartSeederBase" />
-[Tag("seed.it.vedph.graffiti.figurative")]
-public sealed class GrfFigurativePartSeeder : PartSeederBase
+[Tag("seed.it.vedph.graffiti.states")]
+public sealed class GrfStatesPartSeeder : PartSeederBase
 {
     /// <summary>
     /// Creates and seeds a new part.
@@ -29,13 +29,18 @@ public sealed class GrfFigurativePartSeeder : PartSeederBase
     {
         if (item == null) throw new ArgumentNullException(nameof(item));
 
-        GrfFigurativePart part = new Faker<GrfFigurativePart>()
-            .RuleFor(p => p.Types, f => new List<string>
-            {
-                f.PickRandom("ani", "obj")
-            })
-            .RuleFor(p => p.Description, f => f.Lorem.Sentence())
-            .Generate();
+        GrfStatesPart part = new Faker<GrfStatesPart>()
+           .RuleFor(p => p.States, f => new List<GrfState>
+           {
+               new GrfState
+               {
+                   Type = "s" + f.Random.Number(0, 3),
+                   Date = f.Date.Past(3),
+                   Reporter = f.Name.FullName(),
+                   Note = f.Lorem.Sentence()
+               }
+           })
+           .Generate();
 
         SetPartMetadata(part, roleId, item);
 

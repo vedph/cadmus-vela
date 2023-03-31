@@ -1,19 +1,19 @@
 ﻿using Bogus;
 using Cadmus.Core;
+using Cadmus.Mat.Bricks;
 using Cadmus.Vela.Parts;
 using Fusi.Tools.Configuration;
 using System;
-using System.Collections.Generic;
 
 namespace Cadmus.Seed.Vela.Parts;
 
 /// <summary>
-/// Seeder for <see cref="GrfFigurativePart"/>.
-/// Tag: <c>seed.it.vedph.graffiti.figurative</c>.
+/// Seeder for <see cref="GrfFramePart"/>.
+/// Tag: <c>seed.it.vedph.graffiti.frame</c>.
 /// </summary>
 /// <seealso cref="PartSeederBase" />
-[Tag("seed.it.vedph.graffiti.figurative")]
-public sealed class GrfFigurativePartSeeder : PartSeederBase
+[Tag("seed.it.vedph.graffiti.frame")]
+public sealed class GrfFramePartSeeder : PartSeederBase
 {
     /// <summary>
     /// Creates and seeds a new part.
@@ -29,13 +29,24 @@ public sealed class GrfFigurativePartSeeder : PartSeederBase
     {
         if (item == null) throw new ArgumentNullException(nameof(item));
 
-        GrfFigurativePart part = new Faker<GrfFigurativePart>()
-            .RuleFor(p => p.Types, f => new List<string>
-            {
-                f.PickRandom("ani", "obj")
-            })
-            .RuleFor(p => p.Description, f => f.Lorem.Sentence())
-            .Generate();
+        GrfFramePart part = new Faker<GrfFramePart>()
+           .RuleFor(p => p.Figure, f => f.Lorem.Sentence())
+           .RuleFor(p => p.Frame, f => f.Lorem.Sentence())
+           .RuleFor(p => p.Size,
+                f => new PhysicalSize
+                {
+                    W = new PhysicalDimension
+                    {
+                        Value = f.Random.Number(5, 30),
+                        Unit = "cm"
+                    },
+                    H = new PhysicalDimension
+                    {
+                        Value = f.Random.Number(5, 30),
+                        Unit = "cm"
+                    }
+                })
+           .Generate();
 
         SetPartMetadata(part, roleId, item);
 
