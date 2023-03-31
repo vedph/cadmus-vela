@@ -32,7 +32,7 @@ public sealed class VelaPartSeederFactoryProvider : IPartSeederFactoryProvider
             // Cadmus.Seed.Geo.Parts
             typeof(AssertedLocationsPartSeeder).Assembly,
             // Cadmus.Seed.Vela.Parts
-            typeof(GrfSummaryPartSeeder).GetTypeInfo().Assembly,
+            typeof(GrfLocalizationPartSeeder).GetTypeInfo().Assembly,
         };
         TagAttributeToTypeMap map = new();
         map.Add(seedAssemblies);

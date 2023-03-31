@@ -44,7 +44,7 @@ public sealed class VelaRepositoryProvider : IRepositoryProvider
             // Cadmus.Geo.Parts
             typeof(AssertedLocationsPart).GetTypeInfo().Assembly,
             // Cadmus.Vela.Parts
-            typeof(GrfSummaryPart).GetTypeInfo().Assembly,
+            typeof(GrfLocalizationPart).GetTypeInfo().Assembly,
         });
 
         _partTypeProvider = new StandardPartTypeProvider(map);

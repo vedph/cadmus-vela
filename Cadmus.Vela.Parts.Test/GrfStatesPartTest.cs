@@ -1,17 +1,17 @@
-﻿using System;
-using Xunit;
-using Cadmus.Core;
+﻿using Cadmus.Core;
+using Cadmus.Seed.Vela.Parts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cadmus.Seed.Vela.Parts;
+using Xunit;
 
 namespace Cadmus.Vela.Parts.Test;
 
-public sealed class GrfFigurativePartTest
+public sealed class GrfStatesPartTest
 {
-    private static GrfFigurativePart GetPart()
+    private static GrfStatesPart GetPart()
     {
-        GrfFigurativePartSeeder seeder = new();
+        GrfStatesPartSeeder seeder = new();
         IItem item = new Item
         {
             FacetId = "default",
@@ -21,12 +21,12 @@ public sealed class GrfFigurativePartTest
             Title = "Test Item",
             SortKey = ""
         };
-        return (GrfFigurativePart)seeder.GetPart(item, null, null)!;
+        return (GrfStatesPart)seeder.GetPart(item, null, null)!;
     }
 
-    private static GrfFigurativePart GetEmptyPart()
+    private static GrfStatesPart GetEmptyPart()
     {
-        return new GrfFigurativePart
+        return new GrfStatesPart
         {
             ItemId = Guid.NewGuid().ToString(),
             RoleId = "some-role",
@@ -38,10 +38,10 @@ public sealed class GrfFigurativePartTest
     [Fact]
     public void Part_Is_Serializable()
     {
-        GrfFigurativePart part = GetPart();
+        GrfStatesPart part = GetPart();
 
         string json = TestHelper.SerializePart(part);
-        GrfFigurativePart part2 = TestHelper.DeserializePart<GrfFigurativePart>(json)!;
+        GrfStatesPart part2 = TestHelper.DeserializePart<GrfStatesPart>(json)!;
 
         Assert.Equal(part.Id, part2.Id);
         Assert.Equal(part.TypeId, part2.TypeId);
@@ -54,19 +54,27 @@ public sealed class GrfFigurativePartTest
     [Fact]
     public void GetDataPins_Ok()
     {
-        GrfFigurativePart part = GetEmptyPart();
-        part.Types = new List<string> { "animal", "man" };
+        GrfStatesPart part = GetEmptyPart();
+        for (int n = 1; n <= 3; n++)
+        {
+            part.States.Add(new GrfState
+            {
+                Type = "s" + n
+            });
+        }
 
         List<DataPin> pins = part.GetDataPins(null).ToList();
-        Assert.Equal(2, pins.Count);
+        Assert.Equal(4, pins.Count);
 
-        // type
-        DataPin? pin = pins.Find(p => p.Name == "type" && p.Value == "animal");
+        DataPin? pin = pins.Find(p => p.Name == "tot-count" && p.Value == "3");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 
-        pin = pins.Find(p => p.Name == "type" && p.Value == "man");
-        Assert.NotNull(pin);
-        TestHelper.AssertPinIds(part, pin!);
+        for (int n = 1; n <= 3; n++)
+        {
+            pin = pins.Find(p => p.Name == "type" && p.Value == "s" + n);
+            Assert.NotNull(pin);
+            TestHelper.AssertPinIds(part, pin!);
+        }
     }
 }

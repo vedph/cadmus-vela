@@ -39,7 +39,7 @@ static internal class TestHelper
             // Cadmus.Core
             typeof(StandardItemSortKeyBuilder).Assembly,
             // Cadmus.Vela.Parts
-            typeof(GrfSummaryPart).Assembly
+            typeof(GrfLocalizationPart).Assembly
         });
 
         return new HostBuilder().ConfigureServices((hostContext, services) =>
@@ -47,7 +47,7 @@ static internal class TestHelper
             PartSeederFactory.ConfigureServices(services,
                 new StandardPartTypeProvider(map),
                     // Cadmus.Seed.Vela.Parts
-                    typeof(GrfSummaryPartSeeder).Assembly);
+                    typeof(GrfLocalizationPartSeeder).Assembly);
         })
         // extension method from Fusi library
         .AddInMemoryJson(config)

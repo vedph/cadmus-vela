@@ -7,11 +7,11 @@ using Cadmus.Seed.Vela.Parts;
 
 namespace Cadmus.Vela.Parts.Test;
 
-public sealed class GrfFigurativePartTest
+public sealed class GrfSupportPartTest
 {
-    private static GrfFigurativePart GetPart()
+    private static GrfSupportPart GetPart()
     {
-        GrfFigurativePartSeeder seeder = new();
+        GrfSupportPartSeeder seeder = new();
         IItem item = new Item
         {
             FacetId = "default",
@@ -21,12 +21,12 @@ public sealed class GrfFigurativePartTest
             Title = "Test Item",
             SortKey = ""
         };
-        return (GrfFigurativePart)seeder.GetPart(item, null, null)!;
+        return (GrfSupportPart)seeder.GetPart(item, null, null)!;
     }
 
-    private static GrfFigurativePart GetEmptyPart()
+    private static GrfSupportPart GetEmptyPart()
     {
-        return new GrfFigurativePart
+        return new GrfSupportPart
         {
             ItemId = Guid.NewGuid().ToString(),
             RoleId = "some-role",
@@ -38,10 +38,10 @@ public sealed class GrfFigurativePartTest
     [Fact]
     public void Part_Is_Serializable()
     {
-        GrfFigurativePart part = GetPart();
+        GrfSupportPart part = GetPart();
 
         string json = TestHelper.SerializePart(part);
-        GrfFigurativePart part2 = TestHelper.DeserializePart<GrfFigurativePart>(json)!;
+        GrfSupportPart part2 = TestHelper.DeserializePart<GrfSupportPart>(json)!;
 
         Assert.Equal(part.Id, part2.Id);
         Assert.Equal(part.TypeId, part2.TypeId);
@@ -54,18 +54,18 @@ public sealed class GrfFigurativePartTest
     [Fact]
     public void GetDataPins_Ok()
     {
-        GrfFigurativePart part = GetEmptyPart();
-        part.Types = new List<string> { "animal", "man" };
+        GrfSupportPart part = GetEmptyPart();
+        part.Type = "t";
+        part.Material = "m";
 
         List<DataPin> pins = part.GetDataPins(null).ToList();
         Assert.Equal(2, pins.Count);
 
-        // type
-        DataPin? pin = pins.Find(p => p.Name == "type" && p.Value == "animal");
+        DataPin? pin = pins.Find(p => p.Name == "type" && p.Value == "t");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 
-        pin = pins.Find(p => p.Name == "type" && p.Value == "man");
+        pin = pins.Find(p => p.Name == "material" && p.Value == "m");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
     }

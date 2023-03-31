@@ -4,14 +4,15 @@ using Cadmus.Core;
 using System.Collections.Generic;
 using System.Linq;
 using Cadmus.Seed.Vela.Parts;
+using Cadmus.Mat.Bricks;
 
 namespace Cadmus.Vela.Parts.Test;
 
-public sealed class GrfFigurativePartTest
+public sealed class GrfFramePartTest
 {
-    private static GrfFigurativePart GetPart()
+    private static GrfFramePart GetPart()
     {
-        GrfFigurativePartSeeder seeder = new();
+        GrfFramePartSeeder seeder = new();
         IItem item = new Item
         {
             FacetId = "default",
@@ -21,12 +22,12 @@ public sealed class GrfFigurativePartTest
             Title = "Test Item",
             SortKey = ""
         };
-        return (GrfFigurativePart)seeder.GetPart(item, null, null)!;
+        return (GrfFramePart)seeder.GetPart(item, null, null)!;
     }
 
-    private static GrfFigurativePart GetEmptyPart()
+    private static GrfFramePart GetEmptyPart()
     {
-        return new GrfFigurativePart
+        return new GrfFramePart
         {
             ItemId = Guid.NewGuid().ToString(),
             RoleId = "some-role",
@@ -38,10 +39,10 @@ public sealed class GrfFigurativePartTest
     [Fact]
     public void Part_Is_Serializable()
     {
-        GrfFigurativePart part = GetPart();
+        GrfFramePart part = GetPart();
 
         string json = TestHelper.SerializePart(part);
-        GrfFigurativePart part2 = TestHelper.DeserializePart<GrfFigurativePart>(json)!;
+        GrfFramePart part2 = TestHelper.DeserializePart<GrfFramePart>(json)!;
 
         Assert.Equal(part.Id, part2.Id);
         Assert.Equal(part.TypeId, part2.TypeId);
@@ -52,20 +53,31 @@ public sealed class GrfFigurativePartTest
     }
 
     [Fact]
-    public void GetDataPins_Ok()
+    public void GetDataPins_Tag_1()
     {
-        GrfFigurativePart part = GetEmptyPart();
-        part.Types = new List<string> { "animal", "man" };
+        GrfFramePart part = GetEmptyPart();
+        part.Size = new PhysicalSize
+        {
+            W = new PhysicalDimension
+            {
+                Value = 10,
+                Unit = "cm"
+            },
+            H = new PhysicalDimension
+            {
+                Value = 5,
+                Unit = "mm"
+            },
+        };
 
         List<DataPin> pins = part.GetDataPins(null).ToList();
         Assert.Equal(2, pins.Count);
 
-        // type
-        DataPin? pin = pins.Find(p => p.Name == "type" && p.Value == "animal");
+        DataPin? pin = pins.Find(p => p.Name == "w" && p.Value == "10");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 
-        pin = pins.Find(p => p.Name == "type" && p.Value == "man");
+        pin = pins.Find(p => p.Name == "h" && p.Value == "0.5");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
     }

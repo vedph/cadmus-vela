@@ -56,26 +56,27 @@ public sealed class GrfWritingPartTest
     public void GetDataPins_Ok()
     {
         GrfWritingPart part = GetEmptyPart();
-        part.System = "sys";
+        part.System = "latn";
         part.Languages.Add("grc");
         part.Languages.Add("lat");
-        part.Type = "t";
+        part.Script = "gothic";
         part.Counts.Add(new DecoratedCount
         {
             Id = "row",
             Value = 12
         });
-        part.Features.Add("fa");
-        part.Features.Add("fb");
+        part.ScriptFeatures.Add("sf");
+        part.LetterFeatures.Add("lf");
         part.HasPoetry = true;
+        part.HasProse = true;
         part.Metres.Add("7s");
         part.Metres.Add("8s");
 
         List<DataPin> pins = part.GetDataPins(null).ToList();
-        Assert.Equal(10, pins.Count);
+        Assert.Equal(13, pins.Count);
 
         // system
-        DataPin? pin = pins.Find(p => p.Name == "system" && p.Value == "sys");
+        DataPin? pin = pins.Find(p => p.Name == "system" && p.Value == "latn");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 
@@ -88,8 +89,8 @@ public sealed class GrfWritingPartTest
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 
-        // type
-        pin = pins.Find(p => p.Name == "type" && p.Value == "t");
+        // script
+        pin = pins.Find(p => p.Name == "script" && p.Value == "gothic");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
         // c-row
@@ -97,17 +98,32 @@ public sealed class GrfWritingPartTest
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 
-        // feature
-        pin = pins.Find(p => p.Name == "feature" && p.Value == "fa");
+        // ruling
+        pin = pins.Find(p => p.Name == "ruling" && p.Value == "0");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 
-        pin = pins.Find(p => p.Name == "feature" && p.Value == "fb");
+        // rubrics
+        pin = pins.Find(p => p.Name == "rubrics" && p.Value == "0");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 
-        // poetic
-        pin = pins.Find(p => p.Name == "poetic" && p.Value == "1");
+        // features
+        pin = pins.Find(p => p.Name == "script-feature" && p.Value == "sf");
+        Assert.NotNull(pin);
+        TestHelper.AssertPinIds(part, pin!);
+
+        pin = pins.Find(p => p.Name == "letter-feature" && p.Value == "lf");
+        Assert.NotNull(pin);
+        TestHelper.AssertPinIds(part, pin!);
+
+        // poetry
+        pin = pins.Find(p => p.Name == "poetry" && p.Value == "1");
+        Assert.NotNull(pin);
+        TestHelper.AssertPinIds(part, pin!);
+
+        // prose
+        pin = pins.Find(p => p.Name == "prose" && p.Value == "1");
         Assert.NotNull(pin);
         TestHelper.AssertPinIds(part, pin!);
 

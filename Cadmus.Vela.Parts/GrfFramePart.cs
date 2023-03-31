@@ -28,6 +28,15 @@ public sealed class GrfFramePart : PartBase
     /// </summary>
     public PhysicalSize? Size { get; set; }
 
+    private static float GetCm(PhysicalDimension d)
+    {
+        return d.Unit switch
+        {
+            "mm" => d.Value / 10,
+            _ => d.Value,
+        };
+    }
+
     /// <summary>
     /// Get all the key=value pairs (pins) exposed by the implementor.
     /// </summary>
@@ -41,8 +50,8 @@ public sealed class GrfFramePart : PartBase
 
         if (Size != null)
         {
-            if (Size.W != null) builder.AddValue("w", Size.W.Value);
-            if (Size.H != null) builder.AddValue("h", Size.H.Value);
+            if (Size.W != null) builder.AddValue("w", GetCm(Size.W));
+            if (Size.H != null) builder.AddValue("h", GetCm(Size.H));
         }
 
         return builder.Build(this);
@@ -58,10 +67,10 @@ public sealed class GrfFramePart : PartBase
         {
             new DataPinDefinition(DataPinValueType.Decimal,
                 "w",
-                "The graffiti's width."),
+                "The graffiti's width (cm)."),
             new DataPinDefinition(DataPinValueType.Decimal,
                 "h",
-                "The graffiti's height."),
+                "The graffiti's height (cm)."),
         });
     }
 
