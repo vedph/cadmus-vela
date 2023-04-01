@@ -51,6 +51,15 @@ Material support.
 - `material`\* (`string`, 📚 thesaurus: `grf-support-materials`)
 - `note` (`string`, 5000)
 
+### GrfFigurativePart
+
+- 🔑 ID: `it.vedph.graffiti.figurative`
+
+Figurative part description.
+
+- `types` (`string[]`, 📚 thesaurus: `grf-figurative-types`)
+- `description` (`string`, 5000)
+
 #### GrfFramePart
 
 - 🔑 ID: `it.vedph.graffiti.frame`
@@ -106,15 +115,6 @@ Writing description.
 - `hasPoetry` (`boolean`)
 - `metres` (`string[]`, 📚 thesaurus: `grf-writing-metres`)
 
-#### GrfFigurativePart
-
-- 🔑 ID: `it.vedph.graffiti.figurative`
-
-Figurative description.
-
-- `types`\* (`string[]`; 📚 thesaurus: `grf-figurative-types`).
-- `description` (`string`, 5000)
-
 #### GrfTechniquePart
 
 - 🔑 ID: `it.vedph.graffiti.technique`
@@ -140,6 +140,7 @@ Currently the only item is the graffiti item, with parts conventionally grouped 
 - _details_:
   - [GrfWritingPart](#grfwritingpart)
   - [GrfTechniquePart](#grftechniquepart)
+  - [GrfFigurativePart](#grffigurativepart)
   - HistoricalDatePart: this provides a structured datation model which is machine-actionable.
   - CategoriesPart with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
   - CategoriesPart with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
