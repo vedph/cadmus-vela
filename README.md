@@ -230,3 +230,9 @@ The original schema was just a flat spreadsheet table, where some columns are gr
   - DE bibliografia
   - DF data primo rilievo
   - DG data ultima ricognizione
+
+## History
+
+### 1.0.1
+
+- 2023-06-28: updated packages.
