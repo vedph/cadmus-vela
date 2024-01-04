@@ -28,7 +28,7 @@ public sealed class GrfFigurativePart : PartBase
     /// </summary>
     public GrfFigurativePart()
     {
-        Types = new List<string>();
+        Types = [];
     }
 
     /// <summary>

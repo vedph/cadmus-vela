@@ -34,8 +34,8 @@ public sealed class GrfTechniquePart : PartBase
     /// </summary>
     public GrfTechniquePart()
     {
-        Techniques = new List<string>();
-        Tools = new List<string>();
+        Techniques = [];
+        Tools = [];
     }
 
     /// <summary>

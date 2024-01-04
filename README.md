@@ -233,6 +233,10 @@ The original schema was just a flat spreadsheet table, where some columns are gr
 
 ## History
 
+### 2.0.1
+
+- 2024-01-04: updated packages.
+
 ### 2.0.0
 
 - 2023-11-27: ⚠️ Upgraded to .NET 8.

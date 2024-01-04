@@ -26,7 +26,7 @@ public sealed class GrfSupportPartSeeder : PartSeederBase
     public override IPart? GetPart(IItem item, string? roleId,
         PartSeederFactory? factory)
     {
-        if (item == null) throw new ArgumentNullException(nameof(item));
+        ArgumentNullException.ThrowIfNull(item);
 
         GrfSupportPart part = new Faker<GrfSupportPart>()
            .RuleFor(p => p.Type, f => f.PickRandom("wall", "door"))

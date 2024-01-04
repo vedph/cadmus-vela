@@ -21,8 +21,8 @@ public sealed class VelaPartSeederFactoryProvider : IPartSeederFactoryProvider
     private static IHost GetHost(string config)
     {
         // build the tags to types map for parts/fragments
-        Assembly[] seedAssemblies = new[]
-        {
+        Assembly[] seedAssemblies =
+        [
             // Cadmus.Seed.General.Parts
             typeof(NotePartSeeder).Assembly,
             // Cadmus.Seed.Philology.Parts
@@ -33,7 +33,7 @@ public sealed class VelaPartSeederFactoryProvider : IPartSeederFactoryProvider
             typeof(AssertedLocationsPartSeeder).Assembly,
             // Cadmus.Seed.Vela.Parts
             typeof(GrfLocalizationPartSeeder).GetTypeInfo().Assembly,
-        };
+        ];
         TagAttributeToTypeMap map = new();
         map.Add(seedAssemblies);
 
@@ -57,7 +57,7 @@ public sealed class VelaPartSeederFactoryProvider : IPartSeederFactoryProvider
     /// <exception cref="ArgumentNullException">profile</exception>
     public PartSeederFactory GetFactory(string profile)
     {
-        if (profile == null) throw new ArgumentNullException(nameof(profile));
+        ArgumentNullException.ThrowIfNull(profile);
 
         return new PartSeederFactory(GetHost(profile));
     }

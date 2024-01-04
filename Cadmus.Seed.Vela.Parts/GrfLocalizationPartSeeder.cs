@@ -46,7 +46,7 @@ public sealed class GrfLocalizationPartSeeder : PartSeederBase
     public override IPart? GetPart(IItem item, string? roleId,
         PartSeederFactory? factory)
     {
-        if (item == null) throw new ArgumentNullException(nameof(item));
+        ArgumentNullException.ThrowIfNull(item);
 
         GrfLocalizationPart part = new Faker<GrfLocalizationPart>()
            .RuleFor(p => p.Place, GetPlace)

@@ -18,14 +18,14 @@ public sealed class GrfWritingPartSeeder : PartSeederBase
 {
     private static List<DecoratedCount> GetCounts(Faker f)
     {
-        return new List<DecoratedCount>
-        {
+        return
+        [
             new DecoratedCount
             {
                 Id = "row",
                 Value = f.Random.Number(1, 50)
             }
-        };
+        ];
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public sealed class GrfWritingPartSeeder : PartSeederBase
     public override IPart? GetPart(IItem item, string? roleId,
         PartSeederFactory? factory)
     {
-        if (item == null) throw new ArgumentNullException(nameof(item));
+        ArgumentNullException.ThrowIfNull(item);
 
         Faker faker = new();
         bool ruling = faker.Random.Bool();
@@ -62,7 +62,7 @@ public sealed class GrfWritingPartSeeder : PartSeederBase
             {
                 f.PickRandom("monogram", "sigla")
             })
-            .RuleFor(p => p.Counts, f => GetCounts(f))
+            .RuleFor(p => p.Counts, GetCounts)
             .RuleFor(p => p.HasRuling, ruling)
             .RuleFor(p => p.Ruling, f => ruling ? f.Lorem.Sentence() : null)
             .RuleFor(p => p.HasRubrics, rubrics)

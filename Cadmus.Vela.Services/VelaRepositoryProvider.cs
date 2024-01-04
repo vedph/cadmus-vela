@@ -33,8 +33,8 @@ public sealed class VelaRepositoryProvider : IRepositoryProvider
     {
         ConnectionString = "";
         TagAttributeToTypeMap map = new();
-        map.Add(new[]
-        {
+        map.Add(
+        [
             // Cadmus.General.Parts
             typeof(NotePart).GetTypeInfo().Assembly,
             // Cadmus.Philology.Parts
@@ -45,7 +45,7 @@ public sealed class VelaRepositoryProvider : IRepositoryProvider
             typeof(AssertedLocationsPart).GetTypeInfo().Assembly,
             // Cadmus.Vela.Parts
             typeof(GrfLocalizationPart).GetTypeInfo().Assembly,
-        });
+        ]);
 
         _partTypeProvider = new StandardPartTypeProvider(map);
     }

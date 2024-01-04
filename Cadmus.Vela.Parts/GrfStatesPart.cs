@@ -22,7 +22,7 @@ public sealed class GrfStatesPart : PartBase
     /// </summary>
     public GrfStatesPart()
     {
-        States = new List<GrfState>();
+        States = [];
     }
 
     /// <summary>

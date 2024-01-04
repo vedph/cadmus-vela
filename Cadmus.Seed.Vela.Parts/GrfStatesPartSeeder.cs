@@ -27,12 +27,12 @@ public sealed class GrfStatesPartSeeder : PartSeederBase
     public override IPart? GetPart(IItem item, string? roleId,
         PartSeederFactory? factory)
     {
-        if (item == null) throw new ArgumentNullException(nameof(item));
+        ArgumentNullException.ThrowIfNull(item);
 
         GrfStatesPart part = new Faker<GrfStatesPart>()
            .RuleFor(p => p.States, f => new List<GrfState>
            {
-               new GrfState
+               new()
                {
                    Type = "s" + f.Random.Number(0, 3),
                    Date = f.Date.Past(3),

@@ -27,7 +27,7 @@ public sealed class GrfFigurativePartSeeder : PartSeederBase
     public override IPart? GetPart(IItem item, string? roleId,
         PartSeederFactory? factory)
     {
-        if (item == null) throw new ArgumentNullException(nameof(item));
+        ArgumentNullException.ThrowIfNull(item);
 
         GrfFigurativePart part = new Faker<GrfFigurativePart>()
             .RuleFor(p => p.Types, f => new List<string>

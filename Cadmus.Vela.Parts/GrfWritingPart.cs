@@ -98,11 +98,11 @@ public sealed class GrfWritingPart : PartBase
     /// </summary>
     public GrfWritingPart()
     {
-        Languages = new List<string>();
-        Counts = new List<DecoratedCount>();
-        ScriptFeatures = new List<string>();
-        LetterFeatures = new List<string>();
-        Metres = new List<string>();
+        Languages = [];
+        Counts = [];
+        ScriptFeatures = [];
+        LetterFeatures = [];
+        Metres = [];
     }
 
     /// <summary>
