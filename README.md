@@ -127,42 +127,42 @@ Techniques and tools.
 
 ### Items
 
-Currently the only item is the graffiti item, with parts conventionally grouped in these labelled sections:
+Currently the only item is the _graffiti_ item, with parts conventionally grouped in these labelled sections:
 
-- _summary_:
+- _summary_ ("sintesi"):
   - [GrfLocalizationPart](#grflocalizationpart)
   - [GrfSupportPart](#grfsupportpart)
   - [GrfFramePart](#grfframepart)
   - [GrfStatesPart](#grfstatespart)
-  - NotePart with role `text`: this is the first draft of the text as copied on the spot.
-  - NotePart with role `date`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
+  - `NotePart` with role `text`: this is the first draft of the text as copied on the spot.
+  - `NotePart` with role `date`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
 
-- _details_:
+- _details_ ("dettagli"):
   - [GrfWritingPart](#grfwritingpart)
   - [GrfTechniquePart](#grftechniquepart)
   - [GrfFigurativePart](#grffigurativepart)
-  - HistoricalDatePart: this provides a structured datation model which is machine-actionable.
-  - CategoriesPart with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
-  - CategoriesPart with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
+  - `HistoricalDatePart`: this provides a structured datation model which is machine-actionable.
+  - `CategoriesPart` with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
+  - `CategoriesPart` with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
 
-- _text_:
-  - TextPart: the edited text, susceptible of annotations via layers.
-  - CommentsLayerPart
-  - ChronologyLayerPart
-  - LigaturesLayerPart
+- _text_ ("testo"):
+  - `TextPart`: the edited text, susceptible of annotations via layers.
+  - `CommentsLayerPart` (📚 `comment-categories`)
+  - `ChronologyLayerPart`
+  - `LigaturesLayerPart` (📚 `epi-ligature-types`)
 
-- _comment_:
-  - CommentPart
-  - NotePart
+- _comment_ ("commento"):
+  - `CommentPart` (📚 `comment-categories`)
+  - `NotePart`
 
-- _classification_:
-  - MetadataPart
-  - IndexKeywordsPart
+- _classification_ ("classificazione"):
+  - `MetadataPart`
+  - `IndexKeywordsPart` (📚 `languages`)
 
-- _references_:
-  - BibliographyPart
-  - DocReferencesPart
-  - ExternalIdsPart
+- _references_ ("riferimenti"):
+  - `BibliographyPart` (📚 `bibliography-author-roles`, `bibliography-languages`, `bibliography-types`)
+  - `DocReferencesPart`
+  - `ExternalIdsPart`
 
 ## Original Spreadsheet
 
