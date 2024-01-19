@@ -308,7 +308,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - DJ (114) `edizione` 🎯 `BibliographyPart`, manually filled
   - DK (115) `codice iconclass` ??why just 1?
   - DL (116) `commento` 🎯 `NotePart`
-  - DM (117) `osservazioni sullo stato di conservazione`
+  - DM (117) `osservazioni sullo stato di conservazione` ??
   - DN (118) `bibliografia` 🎯 `BibliographyPart`, manually filled
   - DO (119) `data primo rilievo` 🎯 `GrfStatesPart.states`
   - DP (120) `data ultima ricognizione` 🎯 `GrfStatesPart.states`
