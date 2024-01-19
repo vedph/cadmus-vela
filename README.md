@@ -188,24 +188,29 @@ The following types can be defined:
 
 Columns marked as "header columns" are always empty and serve to group the next columns together, until the next header column. When not specified, the type is `string`.
 
-- A (1) ID (no label: e.g. `CASTELLO_01-0001`)
+- A (1) ID (no label: e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id.
 - B (2) `immagine`: ?? I found it always empty. At any rate, once we have an ID, the image resources can be accessed via some transformation of it.
-- C-E (3-5) = `area`, `sestriere`, `denominazione`.
-- F-K (6-11) = `funzione originaria`, `funzione attuale`, `tipologia struttura`, `interno/esterno`, `supporto`, `materiale`.
+- C-E (3-5) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart`
+- F (6) = `funzione originaria` 🎯 `GrfLocalizationPart.note`
+- G (7) `funzione attuale` 🎯 `GrfLocalizationPart.function`
+- H (8) `tipologia struttura` 🎯 `GrfWritingPart.script`
+- I (9) `interno/esterno` 🎯 `GrfLocalizationPart.indoor`
+- J (10) `supporto` 🎯 `GrfSupportPart.type`
+- K (11) `materiale` 🎯 `GrfSupportPart.material`
 - L (12) `eta` (boolean) ??
 - M (13) `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
-- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. ??type of content? Only numbers? Centuries?
-- Q (17) `figurativi` (boolean)
-- R (18) `testo` (boolean)
-- S (19) `numeri` (boolean)
-- T (20) `cornice` (boolean)
+- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. ??type of content? Only numbers? Centuries? 🎯 `HistoricalDatePart`
+- Q (17) `figurativi` (boolean) 🎯 `GrfFigurativePart.types`
+- R (18) `testo` (boolean) 🎯 `GrfFigurativePart.types`
+- S (19) `numeri` (boolean) 🎯 `GrfFigurativePart.types`
+- T (20) `cornice` (boolean) 🎯 `GrfFigurativePart.types`
 - U (21) `tipo figurativo`
 - V (22) `tipo cornice`
 - W (23) `misure`: ??type
 - X (24) `numero righe`
-- Y (25) `alfabeto`
+- Y (25) `alfabeto` 🎯 `GrfWritingPart.system`
 - Z (26) `lingua`: ??relation with AA?
-- AA (27) `lingua (iso-639-3)` (ISO639-3)
+- AA (27) `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages`
 - AB (28) `codice glottologico`: ??
 - AC (29) `tipologia grafica`
 - AD (30) `tecnica di esecuzione`: header column.
@@ -234,7 +239,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - BA (53) `damnatio`: header column.
   - BB (54) `presenza di damnatio` (boolean)
 - BC (55) `caratteristiche grafiche`: header column.
-  - BD (56) `maiuscolo\minuscolo prevalente`: `maiuscolo prevalente`, `minuscono prevalente`, `N\D`, empty.
+  - BD (56) `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscono prevalente`, `N\D`, empty 🎯 `GrfWritingPart.casing`
   - BE (57) `sistema interpuntivo` (boolean)
   - BF (58) `nessi e legamenti` (boolean)
   - BG (59) `rigatura` (boolean)
@@ -270,35 +275,35 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - CK (89) `imprecazioni` (boolean)
   - CL (90) `nome di luogo` (boolean)
   - CM (91) `saluti` (boolean)
-- CN `categorie figurative`: header column.
-  - CO `parti anatomiche` (boolean)
-  - CP `volti` (boolean)
-  - CQ `busto` (boolean)
-  - CR `figura umana` (boolean)
-  - CS `erotici` (boolean)
-  - CT `croce` (boolean)
-  - CU `cuore` (boolean)
-  - CV `architetture` (boolean)
-  - CW `paesaggi` (boolean)
-  - CX `geometrico` (boolean)
-  - CY `imbarcazioni` (boolean)
-  - CZ `piante` (boolean)
-  - DA `gioco` (boolean)
-  - DB `arma` (boolean)
-  - DC `armatura` (boolean)
-  - DD `stemma` (boolean)
-  - DE `bandiera` (boolean)
-  - DF `animale` (boolean)
-  - DG `simbolo zodiaco` (boolean)
-  - DH `grafitto da affilitura` (boolean)
-- DI `edizione e commento`: header column.
-  - DJ `edizione` ??
-  - DK `codice iconclass`
-  - DL `commento`
-  - DM `osservazioni sullo stato di conservazione`
-  - DN `bibliografia`
-  - DO `data primo rilievo`
-  - DP `data ultima ricognizione`
+- CN (92) `categorie figurative`: header column 🎯 `GrfFigurativePart.types`
+  - CO (93) `parti anatomiche` (boolean)
+  - CP (94) `volti` (boolean)
+  - CQ (95) `busto` (boolean)
+  - CR (96) `figura umana` (boolean)
+  - CS (97) `erotici` (boolean)
+  - CT (98) `croce` (boolean)
+  - CU (99) `cuore` (boolean)
+  - CV (100) `architetture` (boolean)
+  - CW (101) `paesaggi` (boolean)
+  - CX (102) `geometrico` (boolean)
+  - CY (103) `imbarcazioni` (boolean)
+  - CZ (104) `piante` (boolean)
+  - DA (105) `gioco` (boolean)
+  - DB (106) `arma` (boolean)
+  - DC (107) `armatura` (boolean)
+  - DD (108) `stemma` (boolean)
+  - DE (109) `bandiera` (boolean)
+  - DF (110) `animale` (boolean)
+  - DG (111) `simbolo zodiaco` (boolean)
+  - DH (112) `grafitto da affilitura` (boolean)
+- DI (113) `edizione e commento`: header column.
+  - DJ (114) `edizione` ??
+  - DK (115) `codice iconclass`
+  - DL (116) `commento`
+  - DM (117) `osservazioni sullo stato di conservazione`
+  - DN (118) `bibliografia`
+  - DO (119) `data primo rilievo` 🎯 `GrfStatesPart.states`
+  - DP (120) `data ultima ricognizione` 🎯 `GrfStatesPart.states`
 
 ## History
 
