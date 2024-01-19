@@ -1,28 +1,75 @@
 ﻿# Cadmus VeLA Core
 
-Core models for Cadmus VeLA.
-
 - 🔗 [Cadmus VeLA API](https://github.com/vedph/cadmus-vela-api)
 - 🔗 [Cadmus VeLA app](https://github.com/vedph/cadmus-vela-app)
 
+Core models for Cadmus VeLA.
+
 - [Cadmus VeLA Core](#cadmus-vela-core)
   - [Data Model](#data-model)
+    - [Items](#items)
     - [VeLA Parts](#vela-parts)
       - [GrfLocalizationPart](#grflocalizationpart)
       - [GrfSupportPart](#grfsupportpart)
+      - [GrfFigurativePart](#grffigurativepart)
       - [GrfFramePart](#grfframepart)
       - [GrfStatesPart](#grfstatespart)
       - [GrfWritingPart](#grfwritingpart)
-      - [GrfFigurativePart](#grffigurativepart)
       - [GrfTechniquePart](#grftechniquepart)
-    - [Items](#items)
   - [Original Spreadsheet](#original-spreadsheet)
+    - [Values](#values)
+    - [Columns](#columns)
+  - [History](#history)
+    - [2.0.1](#201)
+    - [2.0.0](#200)
+    - [1.0.1](#101)
 
 ## Data Model
 
 Currently the core data model for VeLA includes 7 specialized parts and 13 general parts. In what follows, each part's model is represented with a list of properties. For each property its data type (string, boolean, etc.) and eventual thesaurus are specified in brackets; arrays are represented with suffix `[]` after the data type, so e.g. `string[]` means a list of strings. Some of the properties in turn are objects with other properties. The required properties are marked with an asterisk.
 
+### Items
+
+Currently the only item is the _graffiti_ item, with parts conventionally grouped in these labelled sections:
+
+- _summary_ ("sintesi"):
+  - [GrfLocalizationPart](#grflocalizationpart)
+  - [GrfSupportPart](#grfsupportpart)
+  - [GrfFramePart](#grfframepart)
+  - [GrfStatesPart](#grfstatespart)
+  - `NotePart` with role `text`: this is the first draft of the text as copied on the spot.
+  - `NotePart` with role `date`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
+
+- _details_ ("dettagli"):
+  - [GrfWritingPart](#grfwritingpart)
+  - [GrfTechniquePart](#grftechniquepart)
+  - [GrfFigurativePart](#grffigurativepart)
+  - `HistoricalDatePart`: this provides a structured datation model which is machine-actionable.
+  - `CategoriesPart` with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
+  - `CategoriesPart` with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
+
+- _text_ ("testo"):
+  - `TextPart`: the edited text, susceptible of annotations via layers.
+  - `CommentsLayerPart` (📚 `comment-categories`)
+  - `ChronologyLayerPart`
+  - `LigaturesLayerPart` (📚 `epi-ligature-types`)
+
+- _comment_ ("commento"):
+  - `CommentPart` (📚 `comment-categories`)
+  - `NotePart`
+
+- _classification_ ("classificazione"):
+  - `MetadataPart`
+  - `IndexKeywordsPart` (📚 `languages`)
+
+- _references_ ("riferimenti"):
+  - `BibliographyPart` (📚 `bibliography-author-roles`, `bibliography-languages`, `bibliography-types`)
+  - `DocReferencesPart`
+  - `ExternalIdsPart`
+
 ### VeLA Parts
+
+These models are specific to the VeLA project, but designed to fit a more generic schema for graffiti.
 
 #### GrfLocalizationPart
 
@@ -125,45 +172,6 @@ Techniques and tools.
 - `tools`\* (`string[]`, 📚 thesaurus: `grf-tools`)
 - `note` (`string`, 5000)
 
-### Items
-
-Currently the only item is the _graffiti_ item, with parts conventionally grouped in these labelled sections:
-
-- _summary_ ("sintesi"):
-  - [GrfLocalizationPart](#grflocalizationpart)
-  - [GrfSupportPart](#grfsupportpart)
-  - [GrfFramePart](#grfframepart)
-  - [GrfStatesPart](#grfstatespart)
-  - `NotePart` with role `text`: this is the first draft of the text as copied on the spot.
-  - `NotePart` with role `date`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
-
-- _details_ ("dettagli"):
-  - [GrfWritingPart](#grfwritingpart)
-  - [GrfTechniquePart](#grftechniquepart)
-  - [GrfFigurativePart](#grffigurativepart)
-  - `HistoricalDatePart`: this provides a structured datation model which is machine-actionable.
-  - `CategoriesPart` with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
-  - `CategoriesPart` with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
-
-- _text_ ("testo"):
-  - `TextPart`: the edited text, susceptible of annotations via layers.
-  - `CommentsLayerPart` (📚 `comment-categories`)
-  - `ChronologyLayerPart`
-  - `LigaturesLayerPart` (📚 `epi-ligature-types`)
-
-- _comment_ ("commento"):
-  - `CommentPart` (📚 `comment-categories`)
-  - `NotePart`
-
-- _classification_ ("classificazione"):
-  - `MetadataPart`
-  - `IndexKeywordsPart` (📚 `languages`)
-
-- _references_ ("riferimenti"):
-  - `BibliographyPart` (📚 `bibliography-author-roles`, `bibliography-languages`, `bibliography-types`)
-  - `DocReferencesPart`
-  - `ExternalIdsPart`
-
 ## Original Spreadsheet
 
 The original schema was just a flat spreadsheet table, where some columns are grouped under so-called header columns, filled with color and without data, whose purpose is making all the following columns belonging to the same group. Often this is used to represent boolean features in a mutually exclusive relationship. Of course, this is just a hack due to the flat nature of the spreadsheet model.
@@ -207,13 +215,13 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - U (21) `tipo figurativo`
 - V (22) `tipo cornice`
 - W (23) `misure`: ??type
-- X (24) `numero righe`
+- X (24) `numero righe` (int) 🎯 `GrfWritingPart.counts`
 - Y (25) `alfabeto` 🎯 `GrfWritingPart.system`
 - Z (26) `lingua`: ??relation with AA?
 - AA (27) `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages`
 - AB (28) `codice glottologico`: ??
 - AC (29) `tipologia grafica`
-- AD (30) `tecnica di esecuzione`: header column.
+- AD (30) `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques`
   - AE (31) `presenza di disegno preparatorio` (boolean)
   - AF (32) `presenza di preparazione del supporto` (boolean)
   - AG (33) `graffio` (boolean)
@@ -222,7 +230,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - AJ (36) `disegno` (boolean)
   - AK (37) `punzonatura` (boolean)
   - AL (38) `a rilievo` (boolean)
-- AM (39) `strumento di esecuzione`: header column.
+- AM (39) `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools`
   - AN (40) `chiodo` (boolean)
   - AO (41) `gradina` (boolean)
   - AP (42) `scalpello` (boolean)
@@ -240,16 +248,16 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - BB (54) `presenza di damnatio` (boolean)
 - BC (55) `caratteristiche grafiche`: header column.
   - BD (56) `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscono prevalente`, `N\D`, empty 🎯 `GrfWritingPart.casing`
-  - BE (57) `sistema interpuntivo` (boolean)
-  - BF (58) `nessi e legamenti` (boolean)
-  - BG (59) `rigatura` (boolean)
+  - BE (57) `sistema interpuntivo` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
+  - BF (58) `nessi e legamenti` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
+  - BG (59) `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
   - BH (60) `abbreviazioni` (boolean)
 - BI (61) `monogrammi, lettere singole, ecc`: header column.
-  - BJ (62) `monogrammi` (boolean)
-  - BK (63) `lettera singola` (boolean)
-  - BL (64) `lettere non interpretabili` (boolean)
+  - BJ (62) `monogrammi` (boolean) 🎯 `GrfWritingPart.letterFeatures`
+  - BK (63) `lettera singola` (boolean) 🎯 `GrfWritingPart.letterFeatures`
+  - BL (64) `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BM (65) `disegno non interpretabile` (boolean)
-- BN (66) `tipologia di argomento`: header column.
+- BN (66) `tipologia di argomento`: header column 🎯 `CategoriesPart:functions.categories`
   - BO (67) `funeraria` (boolean)
   - BP (68) `commemorativa` (boolean)
   - BQ (69) `firma` (boolean)
@@ -298,7 +306,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - DH (112) `grafitto da affilitura` (boolean)
 - DI (113) `edizione e commento`: header column.
   - DJ (114) `edizione` ??
-  - DK (115) `codice iconclass`
+  - DK (115) `codice iconclass` ??why just 1?
   - DL (116) `commento`
   - DM (117) `osservazioni sullo stato di conservazione`
   - DN (118) `bibliografia`
