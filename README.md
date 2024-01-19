@@ -212,15 +212,15 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - R (18) `testo` (boolean) 🎯 `GrfFigurativePart.types`
 - S (19) `numeri` (boolean) 🎯 `GrfFigurativePart.types`
 - T (20) `cornice` (boolean) 🎯 `GrfFigurativePart.types`
-- U (21) `tipo figurativo`
-- V (22) `tipo cornice`
-- W (23) `misure`: ??type
+- U (21) `tipo figurativo` ??🎯 `GrfFramePart.figure`
+- V (22) `tipo cornice` 🎯 ??`GrfFramePart.frame`
+- W (23) `misure` ?? 🎯 ??`GrfFramePart.size`
 - X (24) `numero righe` (int) 🎯 `GrfWritingPart.counts`
 - Y (25) `alfabeto` 🎯 `GrfWritingPart.system`
 - Z (26) `lingua`: ??relation with AA?
 - AA (27) `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages`
-- AB (28) `codice glottologico`: ??
-- AC (29) `tipologia grafica`
+- AB (28) `codice glottologico` ??
+- AC (29) `tipologia grafica` ??
 - AD (30) `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques`
   - AE (31) `presenza di disegno preparatorio` (boolean)
   - AF (32) `presenza di preparazione del supporto` (boolean)
@@ -245,18 +245,18 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - AY (51) `lama (affilatura)` (boolean)
   - AZ (52) `tipo di lama`
 - BA (53) `damnatio`: header column.
-  - BB (54) `presenza di damnatio` (boolean)
+  - BB (54) `presenza di damnatio` (boolean) 🎯 ??`CategoriesPart:themes` adding a new entry to the thesaurus
 - BC (55) `caratteristiche grafiche`: header column.
   - BD (56) `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscono prevalente`, `N\D`, empty 🎯 `GrfWritingPart.casing`
   - BE (57) `sistema interpuntivo` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
   - BF (58) `nessi e legamenti` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
   - BG (59) `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
-  - BH (60) `abbreviazioni` (boolean)
+  - BH (60) `abbreviazioni` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
 - BI (61) `monogrammi, lettere singole, ecc`: header column.
   - BJ (62) `monogrammi` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BK (63) `lettera singola` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BL (64) `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures`
-  - BM (65) `disegno non interpretabile` (boolean)
+  - BM (65) `disegno non interpretabile` (boolean) ??
 - BN (66) `tipologia di argomento`: header column 🎯 `CategoriesPart:functions.categories`
   - BO (67) `funeraria` (boolean)
   - BP (68) `commemorativa` (boolean)
@@ -305,11 +305,11 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - DG (111) `simbolo zodiaco` (boolean)
   - DH (112) `grafitto da affilitura` (boolean)
 - DI (113) `edizione e commento`: header column.
-  - DJ (114) `edizione` ??
+  - DJ (114) `edizione` 🎯 `BibliographyPart`, manually filled
   - DK (115) `codice iconclass` ??why just 1?
-  - DL (116) `commento`
+  - DL (116) `commento` 🎯 `NotePart`
   - DM (117) `osservazioni sullo stato di conservazione`
-  - DN (118) `bibliografia`
+  - DN (118) `bibliografia` 🎯 `BibliographyPart`, manually filled
   - DO (119) `data primo rilievo` 🎯 `GrfStatesPart.states`
   - DP (120) `data ultima ricognizione` 🎯 `GrfStatesPart.states`
 
