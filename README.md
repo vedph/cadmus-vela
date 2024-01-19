@@ -51,7 +51,7 @@ Material support.
 - `material`\* (`string`, 📚 thesaurus: `grf-support-materials`)
 - `note` (`string`, 5000)
 
-### GrfFigurativePart
+#### GrfFigurativePart
 
 - 🔑 ID: `it.vedph.graffiti.figurative`
 
@@ -168,68 +168,137 @@ Currently the only item is the graffiti item, with parts conventionally grouped 
 
 The original schema was just a flat spreadsheet table, where some columns are grouped under so-called header columns, filled with color and without data, whose purpose is making all the following columns belonging to the same group. Often this is used to represent boolean features in a mutually exclusive relationship. Of course, this is just a hack due to the flat nature of the spreadsheet model.
 
-- A = ID (e.g. `CASTELLO_01-0001`)
-- B = image, I found it always empty. At any rate, once we have an ID, the image resources can be accessed via some transformation of it.
-- C-E = area, sestriere, denominazione.
-- F-K = funzione originaria, funzione attuale, tipologia struttura, interno/esterno, supporto, materiale.
-- L = "datati" (boolean)
-- M-O = terminus post, terminus ante, cronologia
-  - P figurativi
-  - Q testo
-  - R numero
-  - S cornice
-- T tipo figurativo
-- U tipo cornice
-- V misure
-- W numero righe
-- X alfabeto
-- Y lingua
-- Z lingua ISO 639/3
-- AA codice glottologico (?)
-- AB tipologia grafica (?)
-- AC tecnica esecuzione (header column)
-  - AD presenza di disegno
-  - AE presenza di preparazione del supporto
-  - AF graffio
-  - AG incisione
-  - AH intaglio
-  - AI disegno
-  - AJ punzonatura
-  - AK a rilievo
-- AL strumento di esecuzione (header column)
-  - AM chiodo
-  - AN gradina
-  - AO scalpello
-  - AP sgorbia
-  - AQ sega
-  - AR bocciarda
-  - AS grafite
-  - AT matita di piombo
-  - AU fumo di candela
-  - AV inchiostro
-  - AW vernice
-  - AX lama (affilatura)
-  - AY tipo di lama
-- AZ caratteristiche grafiche (header column)
-  - BA maiuscolo/minuscolo
-  - BB sistema interpuntivo
-  - BC nessi e legamenti
-  - BD abbreviazioni
-- BE monogrammi, lettere singole, etcc. (header column)
-  - BF monogrammi
-  - BG lettera singola
-  - BH lettere non interpretabili
-  - BI disegno non interpretabile
-- BJ tipologia di argomento (header column): columns BK-CG
-- CH categorie figurative (header column)
-- CZ (header column): edizione e commento:
-  - DA edizione
-  - DB codice iconclass
-  - DC commento
-  - DD osservazioni sullo stato di conservazione
-  - DE bibliografia
-  - DF data primo rilievo
-  - DG data ultima ricognizione
+### Values
+
+For all the value types:
+
+- _whitespaces_ are inconsistent: normalize and trim.
+- _casing_ is inconsistent: lowercase everything.
+- _null_ values are strings which represent the absence of a value. As such, they must be treated as if the cell did not contain any value at all: `n\d`.
+
+The following types can be defined:
+
+- `int`: a single positive integer number.
+- `float`: a single positive floating point number.
+- `boolean`: `si` = true, `no` or empty = false.
+- `string`: a string, representing a value or a null as defined above.
+- `ISO639-3`: a single ISO-639-3 language code or empty.
+
+### Columns
+
+Columns marked as "header columns" are always empty and serve to group the next columns together, until the next header column. When not specified, the type is `string`.
+
+- A (1) ID (no label: e.g. `CASTELLO_01-0001`)
+- B (2) `immagine`: ?? I found it always empty. At any rate, once we have an ID, the image resources can be accessed via some transformation of it.
+- C-E (3-5) = `area`, `sestriere`, `denominazione`.
+- F-K (6-11) = `funzione originaria`, `funzione attuale`, `tipologia struttura`, `interno/esterno`, `supporto`, `materiale`.
+- L (12) `eta` (boolean) ??
+- M (13) `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
+- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. ??type of content? Only numbers? Centuries?
+- Q (17) `figurativi` (boolean)
+- R (18) `testo` (boolean)
+- S (19) `numeri` (boolean)
+- T (20) `cornice` (boolean)
+- U (21) `tipo figurativo`
+- V (22) `tipo cornice`
+- W (23) `misure`: ??type
+- X (24) `numero righe`
+- Y (25) `alfabeto`
+- Z (26) `lingua`: ??relation with AA?
+- AA (27) `lingua (iso-639-3)` (ISO639-3)
+- AB (28) `codice glottologico`: ??
+- AC (29) `tipologia grafica`
+- AD (30) `tecnica di esecuzione`: header column.
+  - AE (31) `presenza di disegno preparatorio` (boolean)
+  - AF (32) `presenza di preparazione del supporto` (boolean)
+  - AG (33) `graffio` (boolean)
+  - AH (34) `incisione` (boolean)
+  - AI (35) `intaglio` (boolean)
+  - AJ (36) `disegno` (boolean)
+  - AK (37) `punzonatura` (boolean)
+  - AL (38) `a rilievo` (boolean)
+- AM (39) `strumento di esecuzione`: header column.
+  - AN (40) `chiodo` (boolean)
+  - AO (41) `gradina` (boolean)
+  - AP (42) `scalpello` (boolean)
+  - AQ (43) `sgorbia` (boolean)
+  - AR (44) `sega` (boolean)
+  - AS (45) `bocciarda` (boolean)
+  - AT (46) `grafite` (boolean)
+  - AU (47) `matita di piombo` (boolean)
+  - AV (48) `fumo di candela` (boolean)
+  - AW (49) `inchiostro` (boolean)
+  - AX (50) `vernice` (boolean)
+  - AY (51) `lama (affilatura)` (boolean)
+  - AZ (52) `tipo di lama`
+- BA (53) `damnatio`: header column.
+  - BB (54) `presenza di damnatio` (boolean)
+- BC (55) `caratteristiche grafiche`: header column.
+  - BD (56) `maiuscolo\minuscolo prevalente`: `maiuscolo prevalente`, `minuscono prevalente`, `N\D`, empty.
+  - BE (57) `sistema interpuntivo` (boolean)
+  - BF (58) `nessi e legamenti` (boolean)
+  - BG (59) `rigatura` (boolean)
+  - BH (60) `abbreviazioni` (boolean)
+- BI (61) `monogrammi, lettere singole, ecc`: header column.
+  - BJ (62) `monogrammi` (boolean)
+  - BK (63) `lettera singola` (boolean)
+  - BL (64) `lettere non interpretabili` (boolean)
+  - BM (65) `disegno non interpretabile` (boolean)
+- BN (66) `tipologia di argomento`: header column.
+  - BO (67) `funeraria` (boolean)
+  - BP (68) `commemorativa` (boolean)
+  - BQ (69) `firma` (boolean)
+  - BR (70) `celebretiva` (sic) (boolean)
+  - BS (71) `esortativa` (boolean)
+  - BT (72) `didascalica` (boolean)
+  - BU (73) `iniziale\i nome persona` (boolean)
+  - BV (74) `sigla` (boolean)
+  - BW (75) `segnaletica` (boolean)
+  - BX (76) `citazione` (boolean)
+  - BY (77) `infamante` (boolean)
+  - BZ (78) `sport` (boolean)
+  - CA (79) `prostituzione` (boolean)
+  - CB (80) `politica` (boolean)
+  - CC (81) `religiosa` (boolean)
+  - CD (82) `preghiera` (boolean)
+  - CE (83) `ex voto` (boolean)
+  - CF (84) `amore` (boolean)
+  - CG (85) `prosa` (boolean)
+  - CH (86) `poesia` (boolean)
+  - CI (87) `parlanti` (boolean)
+  - CJ (88) `insulto` (boolean)
+  - CK (89) `imprecazioni` (boolean)
+  - CL (90) `nome di luogo` (boolean)
+  - CM (91) `saluti` (boolean)
+- CN `categorie figurative`: header column.
+  - CO `parti anatomiche` (boolean)
+  - CP `volti` (boolean)
+  - CQ `busto` (boolean)
+  - CR `figura umana` (boolean)
+  - CS `erotici` (boolean)
+  - CT `croce` (boolean)
+  - CU `cuore` (boolean)
+  - CV `architetture` (boolean)
+  - CW `paesaggi` (boolean)
+  - CX `geometrico` (boolean)
+  - CY `imbarcazioni` (boolean)
+  - CZ `piante` (boolean)
+  - DA `gioco` (boolean)
+  - DB `arma` (boolean)
+  - DC `armatura` (boolean)
+  - DD `stemma` (boolean)
+  - DE `bandiera` (boolean)
+  - DF `animale` (boolean)
+  - DG `simbolo zodiaco` (boolean)
+  - DH `grafitto da affilitura` (boolean)
+- DI `edizione e commento`: header column.
+  - DJ `edizione` ??
+  - DK `codice iconclass`
+  - DL `commento`
+  - DM `osservazioni sullo stato di conservazione`
+  - DN `bibliografia`
+  - DO `data primo rilievo`
+  - DP `data ultima ricognizione`
 
 ## History
 
