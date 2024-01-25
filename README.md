@@ -16,6 +16,20 @@ Core models for Cadmus VeLA.
       - [GrfStatesPart](#grfstatespart)
       - [GrfWritingPart](#grfwritingpart)
       - [GrfTechniquePart](#grftechniquepart)
+    - [Generic Parts](#generic-parts)
+      - [BibliographyPart](#bibliographypart)
+      - [CategoriesPart](#categoriespart)
+      - [CommentPart](#commentpart)
+      - [DocReferencesPart](#docreferencespart)
+      - [ExternalIdsPart](#externalidspart)
+      - [HistoricalDatePart](#historicaldatepart)
+      - [IndexKeywordsPart](#indexkeywordspart)
+      - [MetadataPart](#metadatapart)
+      - [NotePart](#notepart)
+      - [TokenTextPart](#tokentextpart)
+      - [ChronologyLayerFragment](#chronologylayerfragment)
+      - [CommentsLayerFragment](#commentslayerfragment)
+      - [LigatureLayerFragment](#ligaturelayerfragment)
   - [Original Spreadsheet](#original-spreadsheet)
     - [Values](#values)
     - [Columns](#columns)
@@ -37,35 +51,35 @@ Currently the only item is the _graffiti_ item, with parts conventionally groupe
   - [GrfSupportPart](#grfsupportpart)
   - [GrfFramePart](#grfframepart)
   - [GrfStatesPart](#grfstatespart)
-  - `NotePart` with role `text`: this is the first draft of the text as copied on the spot.
-  - `NotePart` with role `date`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
+  - [NotePart](#notepart) with role `text`: this is the first draft of the text as copied on the spot.
+  - [NotePart](#notepart) with role `date`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
 
 - _details_ ("dettagli"):
   - [GrfWritingPart](#grfwritingpart)
   - [GrfTechniquePart](#grftechniquepart)
   - [GrfFigurativePart](#grffigurativepart)
-  - `HistoricalDatePart`: this provides a structured datation model which is machine-actionable.
-  - `CategoriesPart` with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
-  - `CategoriesPart` with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
+  - [HistoricalDatePart](#historicaldatepart): this provides a structured datation model which is machine-actionable.
+  - [CategoriesPart](#categoriespart) with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
+  - [CategoriesPart](#categoriespart) with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
 
 - _text_ ("testo"):
-  - `TextPart`: the edited text, susceptible of annotations via layers.
-  - `CommentsLayerPart` (📚 `comment-categories`)
-  - `ChronologyLayerPart`
-  - `LigaturesLayerPart` (📚 `epi-ligature-types`)
+  - [TokenTextPart](#tokentextpart): the edited text, susceptible of annotations via layers.
+  - [CommentsLayerFragment](#commentslayerfragment) (📚 `comment-categories`)
+  - [ChronologyLayerFragment](#chronologylayerfragment)
+  - [LigaturesLayerFragment](#ligaturelayerfragment) (📚 `epi-ligature-types`)
 
 - _comment_ ("commento"):
-  - `CommentPart` (📚 `comment-categories`)
-  - `NotePart`
+  - [CommentPart](#commentpart) (📚 `comment-categories`)
+  - [NotePart](#notepart)
 
 - _classification_ ("classificazione"):
-  - `MetadataPart`
-  - `IndexKeywordsPart` (📚 `languages`)
+  - [MetadataPart](#metadatapart)
+  - [IndexKeywordsPart](#indexkeywordspart) (📚 `languages`)
 
 - _references_ ("riferimenti"):
-  - `BibliographyPart` (📚 `bibliography-author-roles`, `bibliography-languages`, `bibliography-types`)
-  - `DocReferencesPart`
-  - `ExternalIdsPart`
+  - [BibliographyPart](#bibliographypart) (📚 `bibliography-author-roles`, `bibliography-languages`, `bibliography-types`)
+  - [DocReferencesPart](#docreferencespart)
+  - [ExternalIdsPart](#externalidspart)
 
 ### VeLA Parts
 
@@ -171,6 +185,182 @@ Techniques and tools.
 - `techniques`\* (`string[]`, 📚 thesaurus: `grf-techniques`)
 - `tools`\* (`string[]`, 📚 thesaurus: `grf-tools`)
 - `note` (`string`, 5000)
+
+### Generic Parts
+
+These parts belong to the generic set of Cadmus parts.
+
+#### BibliographyPart
+
+Generic bottom-up bibliography.
+
+- `entries` (`BibEntry[]`):
+  - `key` (`string`)
+  - `typeId`\* (`string`): the type identifier for the entry and its container: e.g. book, journal article, book article, proceedings article, journal review, ebook, site, magazine, newspaper, tweet, TV series, etc.
+  - `authors` (`BibAuthor[]`): 1 or more authors, each having a first name, a last name, and an optional role ID. The role IDs are usually drawn from a thesaurus, and mostly used for contributors:
+    - `firstName` (string): first name.
+    - `lastName`\* (string): last name.
+    - `roleId` (`string`): role ID.
+  - `title`\* (`string`)
+  - `language`\* (`string`): the ISO 639-3 letters (primary) language code of the bibliographic entry.
+  - `container` (`string`): the optional container: a journal, a book, a collection of proceedings, etc.
+  - `contributors` (`BibAuthor[]`): 0 or more contributors, with the same properties of the authors. Usually they also have some role specified, e.g. "editor" for the editor of a book collecting a number of articles from different authors, "translator", "organization", etc.
+  - `edition` (short): the optional edition number. Default is 0.
+  - `number` (string): the optional alphanumeric number (e.g. for a journal).
+  - `publisher` (string): the optional publisher name.
+  - `yearPub` (short): the optional year of publication. Default is 0.
+  - `placePub` (string): the optional place of publication.
+  - `location` (string): the location identifier for the bibliographic item, e.g. an URL or a DOI.
+  - `accessDate` (Date): the optional last access date, typically used for web resources.
+  - `firstPage` (short)
+  - `lastPage` (short)
+  - `keywords` (`Keyword[]`):
+    - `language` (string)
+    - `value` (string)
+  - `note` (`string`)
+
+#### CategoriesPart
+
+A set of categories which can be assigned to the item. In this project we use a couple of such parts referring to two distinct taxonomies, for support functions and content themes. While the generic thesaurus for this part is named `categories`, role-based category parts add to this name a suffix built with `_` and the role ID (thus, `categories_functions` and `categories_themes`).
+
+- `categories` (`string[]`)
+
+#### CommentPart
+
+A generic free-text comment with formatting and some metadata.
+
+- `comment` (`Comment`):
+  - `tag` (`string`)
+  - `text` (`string`, Markdown)
+  - `references` (`DocReference[]`):
+    - `type` (`string`)
+    - `tag` (`string`)
+    - `citation` (`string`)
+    - `note` (`string`)
+  - `links` (`AssertedCompositeId[]`):
+    - `target` (`PinTarget`):
+      - `gid` (`string`)
+      - `label` (`string`)
+      - `itemId` (`string`)
+      - `partId` (`string`)
+      - `partTypeId` (`string`)
+      - `roleId` (`string`)
+      - `name` (`string`)
+      - `value` (`string`)
+    - `scope` (`string`)
+    - `tag` (`string`)
+    - `assertion` (`Assertion`):
+      - `tag` (`string`)
+      - `rank` (`short`)
+      - `references` (`DocReference[]`)
+      - `note` (`string`)
+  - `categories` (`string[]`)
+  - `keywords` (`IndexKeyword[]`):
+    - `language` (`string`)
+    - `value` (`string`)
+    - `indexId` (`string`)
+    - `note` (`string`)
+    - `tag` (`string`)
+
+#### DocReferencesPart
+
+Generic short documental references.
+
+- `references` (`DocReference[]`):
+  - `type` (`string`)
+  - `tag` (`string`)
+  - `citation` (`string`)
+  - `note` (`string`)
+
+#### ExternalIdsPart
+
+External identifiers associated to the item.
+
+- `ids` (`AssertedId[]`):
+  - `tag` (`string`)
+  - `value`\* (`string`)
+  - `scope` (`string`)
+  - `assertion` (`Assertion`):
+    - `tag` (`string`)
+    - `rank` (`short`)
+    - `references` (`DocReference[]`)
+    - `note` (`string`)
+
+#### HistoricalDatePart
+
+A single historical datation.
+
+- `date` (`HistoricalDate`):
+  - `a`\* (`Datation`):
+    - `value`\* (`int`): the numeric value of the point. Its interpretation depends on other points properties: it may represent a year or a century, or a span between two consecutive Gregorian years.
+    - `isCentury` (boolean): true if value is a century number; false if it's a Gregorian year.
+    - `isSpan` (boolean): true if the value is the first year of a pair of two consecutive years. This is used for calendars which span across two Gregorian years, e.g. 776/5 BC.
+    - `month` (short): the month number (1-12) or 0.
+    - `day` (short): the day number (1-31) or 0.
+    - `isApproximate` (boolean): true if the point is approximate ("about").
+    - `isDubious` (boolean): true if the point is dubious ("perhaphs").
+    - `hint` (string): a short textual hint used to better explain or motivate the datation point.
+  - `b` (`Datation`)
+- `references` (`DocReference[]`):
+  - `type` (`string`)
+  - `tag` (`string`)
+  - `citation` (`string`)
+  - `note` (`string`)
+
+#### IndexKeywordsPart
+
+- `keywords` (`IndexKeyword[]`):
+  - `language` (`string`)
+  - `value` (`string`)
+  - `indexId` (`string`)
+  - `note` (`string`)
+  - `tag` (`string`)
+
+#### MetadataPart
+
+A generic container for name=value metadata.
+
+- `metadata` (`Metadatum[]`):
+  - `type` (`string`)
+  - `name` (`string`)
+  - `value` (`string`)
+
+#### NotePart
+
+A generic free text note with Markdown markup.
+
+- `tag` (string)
+- `note`\* (string, Markdown)
+
+#### TokenTextPart
+
+A token-based text which can get annotations from layer parts.
+
+- `citation` (`string`)
+- `lines`\* (`TextLine[]`):
+  - `y`\* (`int`)
+  - `text`\* (`string`)
+
+#### ChronologyLayerFragment
+
+A layer fragment to annotate a portion of text with a chronological indication.
+
+- `location` (`string`)
+- `tag` (`string`)
+- `label` (`string`)
+- `eventId` (`string`)
+- `date` (`HistoricalDate`): see [above](#historicaldatepart)
+
+#### CommentsLayerFragment
+
+A layer fragment to annotate a portion of text with a comment. The comment has the usual `location` (common to all fragments) and the same model as [CommentPart.comment](#commentpart).
+
+#### LigatureLayerFragment
+
+A layer fragment to annotate a portion of text with a ligature.
+
+- `location` (`string`)
+- `type` (`int`): a numeric value: 0=none, 1=ligature, 2=inversion, 3=overlap, 4=replacement, 5=graft, 6=inclusion, 7=connection, 8=complex (Manzella 1987 149-151).
 
 ## Original Spreadsheet
 
