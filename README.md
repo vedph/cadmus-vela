@@ -391,7 +391,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - C-E (3-5) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart`
 - F (6) = `funzione originaria` 🎯 `GrfLocalizationPart.note`
 - G (7) `funzione attuale` 🎯 `GrfLocalizationPart.function`
-- H (8) `tipologia struttura` 🎯 `GrfWritingPart.script`
+- H (8) `tipologia struttura` ??
 - I (9) `interno/esterno` 🎯 `GrfLocalizationPart.indoor`
 - J (10) `supporto` 🎯 `GrfSupportPart.type`
 - K (11) `materiale` 🎯 `GrfSupportPart.material`
