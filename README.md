@@ -393,26 +393,26 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - C-E (3-5) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart`
 - F = `funzione originaria` 🎯 `GrfLocalizationPart.note`
 - G `funzione attuale` 🎯 `GrfLocalizationPart.function`
-- H `tipologia struttura` 🎯 `GrfWritingPart.scripts`: if more than 1, how they are separated??
+- H `tipologia struttura` 🎯 `GrfLocalizationPart.objectType`
 - I `interno/esterno` 🎯 `GrfLocalizationPart.indoor`
 - J `supporto` 🎯 `GrfSupportPart.type`
 - K `materiale` 🎯 `GrfSupportPart.material`
 - L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period`
 - M `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
-- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). I suppose AD is always implied??. I suppose that N/O/P are mutually exclusive, and that P represents a date when it's not a terminus ante/post?? 🎯 `HistoricalDatePart`
+- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). Are there any BC dates? If so, how is BC/AD encoded? I suppose that N/O/P are mutually exclusive, and that P represents a date when it's not a terminus ante/post?? 🎯 `HistoricalDatePart`
 - Q `figurativi` (boolean) 🎯 `GrfFigurativePart.types`
 - R `testo` (boolean) 🎯 `GrfFigurativePart.types`
 - S `numeri` (boolean) 🎯 `GrfFigurativePart.types`
 - T `cornice` (boolean) 🎯 `GrfFigurativePart.types`
 - U `tipo figurativo` 🎯 `GrfFramePart.figure`
-- V `tipo cornice` 🎯 ??`GrfFramePart.frame`
+- V `tipo cornice` 🎯 `GrfFramePart.frame`
 - W `misure` width and height in cm, how expressed (e.g. "13 x 27.5")?? Do we always have width and height or nothing, not just height or just width? Which is the decimal separator (comma? dot?) 🎯 `GrfFramePart.size`
 - X `numero righe` (int) 🎯 `GrfWritingPart.counts`
 - Y `alfabeto` 🎯 `GrfWritingPart.system`
-- Z `lingua`: ignored?? if this is just the full form (e.g. "Italiano") corresponding to the AA code.
+- Z `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
 - AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages`
 - AB `codice glottologico` [Glottolog](https://glottolog.org/) code: in what relationship with AA?? Are these mutually exclusive, i.e. when it's not possible to use ISO639-3 you use glottolog? Or rather ISO is more generic and glottolog is an optional more precise specification? If we always have either one or the other, we can store it in a single field with some convention (e.g. a prefix for glottolog); if instead they coexist, we can store it among the external IDs and let AA work as the more generic (and more popular) standard for the language, even though sometimes approximate.
-- AC `tipologia scrittura` 🎯 `GrfWritingPart.script` (`grf-writing-scripts`)
+- AC `tipologia scrittura` 🎯 `GrfWritingPart.script`: if more than 1, how they are separated??
 - AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing`
 - AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques`
   - AF `presenza di disegno preparatorio` (boolean)
@@ -439,7 +439,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - BA `lama (affilatura)` (boolean)
   - BB `tipo di lama`
 - BC `damnatio`: header column.
-  - BD `presenza di damnatio` (boolean) 🎯 ??`CategoriesPart:themes` adding new entries to the thesaurus: "damnatio", "partial damnatio"
+  - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:themes` adding new entries to the thesaurus: "damnatio", "partial damnatio"
 - BE `caratteristiche grafiche`: header column.
   - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty 🎯 `GrfWritingPart.casing`
   - BG `sistema interpuntivo` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
