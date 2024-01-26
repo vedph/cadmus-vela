@@ -392,12 +392,12 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - B `immagine`: ignored.
 - C-E (3-5) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart`
 - F = `funzione originaria` 🎯 `GrfLocalizationPart.note`
-- G `funzione attuale` 🎯 `GrfLocalizationPart.function`
-- H `tipologia struttura` 🎯 `GrfLocalizationPart.objectType`
+- G `funzione attuale` 🎯 `GrfLocalizationPart.function` (📚 `categories_functions`)
+- H `tipologia struttura` 🎯 `GrfLocalizationPart.objectType` (📚 `grf-support-object-types`)
 - I `interno/esterno` 🎯 `GrfLocalizationPart.indoor`
-- J `supporto` 🎯 `GrfSupportPart.type`
-- K `materiale` 🎯 `GrfSupportPart.material`
-- L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period`
+- J `supporto` 🎯 `GrfSupportPart.type` (📚 `grf-support-types`)
+- K `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`)
+- L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`)
 - M `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
 - N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). Are there any BC dates? If so, how is BC/AD encoded? I suppose that N/O/P are mutually exclusive, and that P represents a date when it's not a terminus ante/post?? 🎯 `HistoricalDatePart`
 - Q `figurativi` (boolean) 🎯 `GrfFigurativePart.types`
@@ -414,7 +414,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - AB `codice glottologico` [Glottolog](https://glottolog.org/) code: in what relationship with AA?? Are these mutually exclusive, i.e. when it's not possible to use ISO639-3 you use glottolog? Or rather ISO is more generic and glottolog is an optional more precise specification? If we always have either one or the other, we can store it in a single field with some convention (e.g. a prefix for glottolog); if instead they coexist, we can store it among the external IDs and let AA work as the more generic (and more popular) standard for the language, even though sometimes approximate.
 - AC `tipologia scrittura` 🎯 `GrfWritingPart.script`: if more than 1, how they are separated??
 - AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing`
-- AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques`
+- AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
   - AF `presenza di disegno preparatorio` (boolean)
   - AG `presenza di preparazione del supporto` (boolean)
   - AH `graffio` (boolean)
@@ -424,7 +424,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - AL `punzonatura` (boolean)
   - AM `rubricatura` (boolean) 🎯 `GrfWritingPart.hasRubrics`
   - AN `a rilievo` (boolean)
-- AO `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools`
+- AO `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools` (📚 `grf-tools`)
   - AP `chiodo` (boolean)
   - AQ `gradina` (boolean)
   - AR `scalpello` (boolean)
@@ -441,17 +441,17 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - BC `damnatio`: header column.
   - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:themes` adding new entries to the thesaurus: "damnatio", "partial damnatio"
 - BE `caratteristiche grafiche`: header column.
-  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty 🎯 `GrfWritingPart.casing`
-  - BG `sistema interpuntivo` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
-  - BH `nessi e legamenti` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
+  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`)
+  - BG `sistema interpuntivo` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
+  - BH `nessi e legamenti` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
   - BI `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
-  - BJ `abbreviazioni` (boolean) 🎯 `GrfWritingPart.scriptFeatures`
-- BK `monogrammi, lettere singole, ecc`: header column.
+  - BJ `abbreviazioni` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
+- BK `monogrammi, lettere singole, ecc`: header column. (📚 `grf-writing-letter-features`)
   - BL `monogrammi` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BM `lettera singola` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BN `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BO `disegno non interpretabile` (boolean) add flag?? A flag is mostly used to mark redactional states; so I suppose it fits here because this means that the item is not yet interpreted or considered not interpretable as a graffiti.
-- BP `tipologia di argomento`: header column 🎯 `CategoriesPart:functions.categories`
+- BP `tipologia di argomento`: header column 🎯 `CategoriesPart:functions.categories` (📚 `categories_themes`)
   - BQ `funeraria` (boolean)
   - BR `commemorativa` (boolean)
   - BS `firma` (boolean)
@@ -477,7 +477,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - CM `imprecazioni` (boolean)
   - CN `nome di luogo` (boolean)
   - CO `saluti` (boolean)
-- CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types`
+- CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`)
   - CQ `parti anatomiche` (boolean)
   - CR `volti` (boolean)
   - CS `busto` (boolean)
