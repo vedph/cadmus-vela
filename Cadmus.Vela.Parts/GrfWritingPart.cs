@@ -26,10 +26,10 @@ public sealed class GrfWritingPart : PartBase
     public List<string> Languages { get; set; }
 
     /// <summary>
-    /// Gets or sets the script type (e.g. gothic, merchant, etc.; usually from
+    /// Gets or sets the script type(s) (e.g. gothic, merchant, etc.; usually from
     /// <c>grf-writing-scripts</c>).
     /// </summary>
-    public string? Script { get; set; }
+    public List<string> Scripts { get; set; }
 
     /// <summary>
     /// Gets or sets the casing (e.g. prevailing uppercase, prevailing lowercase,
@@ -99,6 +99,7 @@ public sealed class GrfWritingPart : PartBase
     public GrfWritingPart()
     {
         Languages = [];
+        Scripts = [];
         Counts = [];
         ScriptFeatures = [];
         LetterFeatures = [];
@@ -118,7 +119,7 @@ public sealed class GrfWritingPart : PartBase
 
         builder.AddValue("system", System);
         builder.AddValues("language", Languages);
-        builder.AddValue("script", Script);
+        builder.AddValues("script", Scripts);
 
         if (Counts?.Count > 0)
         {
@@ -161,7 +162,8 @@ public sealed class GrfWritingPart : PartBase
                 "M"),
              new DataPinDefinition(DataPinValueType.String,
                 "script",
-                "The script type."),
+                "The script type.",
+                "M"),
              new DataPinDefinition(DataPinValueType.Integer,
                 "c-...",
                 "The counts. Each count type has its name.",
@@ -197,7 +199,9 @@ public sealed class GrfWritingPart : PartBase
     {
         StringBuilder sb = new();
 
-        sb.Append("[EpiWriting] ").Append(System).Append(' ').Append(Script);
+        sb.Append("[EpiWriting] ").Append(System)
+            .Append(' ').AppendJoin(",", Scripts);
+
         if (Languages?.Count > 0)
             sb.Append(": ").AppendJoin(", ", Languages);
 

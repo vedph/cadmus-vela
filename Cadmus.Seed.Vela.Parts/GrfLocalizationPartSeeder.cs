@@ -50,6 +50,7 @@ public sealed class GrfLocalizationPartSeeder : PartSeederBase
 
         GrfLocalizationPart part = new Faker<GrfLocalizationPart>()
            .RuleFor(p => p.Place, GetPlace)
+           .RuleFor(p => p.Period, f => f.PickRandom("roman", "medieval"))
            .RuleFor(p => p.ObjectType, f => f.PickRandom("street", "bridge"))
            .RuleFor(p => p.Function, f => f.PickRandom("street", "house"))
            .RuleFor(p => p.Note, f => f.Lorem.Sentence())

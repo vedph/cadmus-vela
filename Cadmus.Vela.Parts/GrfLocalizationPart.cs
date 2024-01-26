@@ -19,6 +19,12 @@ public sealed class GrfLocalizationPart : PartBase
     public ProperName? Place { get; set; }
 
     /// <summary>
+    /// Gets or sets the period. This is a generic chronological classification
+    /// (e.g. "Roman", "Medieval", "Modern", "Contemporary", etc.).
+    /// </summary>
+    public string? Period { get; set; }
+
+    /// <summary>
     /// Gets or sets the support's current function (usually from
     /// <c>grf-support-functions).</c>.
     /// </summary>
@@ -54,6 +60,7 @@ public sealed class GrfLocalizationPart : PartBase
         if (Place != null)
             builder.AddValue("place", Place.GetFullName(), filter: true);
 
+        builder.AddValue("period", Period);
         builder.AddValue("function", Function);
         builder.AddValue("object-type", ObjectType);
         builder.AddValue("indoor", Indoor);
@@ -73,6 +80,9 @@ public sealed class GrfLocalizationPart : PartBase
                 "place",
                 "The graffiti's place.",
                 "f"),
+            new DataPinDefinition(DataPinValueType.String,
+                "period",
+                "The chronological period."),
             new DataPinDefinition(DataPinValueType.String,
                 "function",
                 "The current function of the graffiti's support."),
@@ -98,6 +108,7 @@ public sealed class GrfLocalizationPart : PartBase
         sb.Append("[GrfLocalization]:");
 
         if (Place != null) sb.Append(' ').Append(Place.GetFullName());
+        if (Period != null) sb.Append(", ").Append(Period);
         if (Indoor) sb.Append('*');
 
         if (!string.IsNullOrEmpty(Function))

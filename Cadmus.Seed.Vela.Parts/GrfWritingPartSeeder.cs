@@ -52,7 +52,7 @@ public sealed class GrfWritingPartSeeder : PartSeederBase
             {
                 f.PickRandom("lat", "grc")
             })
-            .RuleFor(p => p.Script, f => f.PickRandom("gothic", "merchant"))
+            .RuleFor(p => p.Scripts, f => [f.PickRandom("gothic", "merchant")])
             .RuleFor(p => p.Casing, f => f.PickRandom("upper", "lower"))
             .RuleFor(p => p.ScriptFeatures, f => new List<string>
             {

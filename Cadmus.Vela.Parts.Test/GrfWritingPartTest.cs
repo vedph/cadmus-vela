@@ -59,7 +59,7 @@ public sealed class GrfWritingPartTest
         part.System = "latn";
         part.Languages.Add("grc");
         part.Languages.Add("lat");
-        part.Script = "gothic";
+        part.Scripts.Add("gothic");
         part.Counts.Add(new DecoratedCount
         {
             Id = "row",
