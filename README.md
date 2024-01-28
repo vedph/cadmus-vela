@@ -410,11 +410,11 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - V `tipo cornice` 🎯 `GrfFramePart.frame`
 - W `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size`
 - X `numero righe` (int) 🎯 `GrfWritingPart.counts`
-- Y `alfabeto` 🎯 `GrfWritingPart.system`
+- Y `alfabeto` 🎯 `GrfWritingPart.system` (📚 `grf-writing-systems`)
 - Z `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
-- AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages`
-- AB `codice glottologico` [Glottolog](https://glottolog.org/) code: in what relationship with AA?? Are these mutually exclusive, i.e. when it's not possible to use ISO639-3 you use glottolog? Or rather ISO is more generic and glottolog is an optional more precise specification? If we always have either one or the other, we can store it in a single field with some convention (e.g. a prefix for glottolog); if instead they coexist, we can store it among the external IDs and let AA work as the more generic (and more popular) standard for the language, even though sometimes approximate.
-- AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script`
+- AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`)
+- AB `codice glottologico` [Glottolog](https://glottolog.org/) code: this is used whenever ISO639-3 is not enough to specify a sub-entry of it. So, in this case we encode this into `GrfWritingPart.languages` like for AA, but prefixed by AA value if any, with pattern `ISO_GLOT` (e.g. `ita_nap`) (📚 `grf-writing-languages`). ⚠️ This implies that the thesaurus should include not only all the required codes from ISO639-3, but also all those from glottolog, with format `ISO_GLOT`.
+- AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`)
 - AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing`
 - AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
   - AF `presenza di disegno preparatorio` (boolean)
@@ -502,9 +502,9 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - DJ `grafitto da affilitura` (boolean)
 - DK `edizione e commento`: header column.
   - DL `edizione` 🎯 `BibliographyPart`, manually filled
-  - DM `codice iconclass` obsolete, ignore??
+  - DM `codice iconclass` obsolete, ignore
   - DN `commento` 🎯 `NotePart`
-  - DO `osservazioni sullo stato di conservazione`, manually filled??
+  - DO `osservazioni sullo stato di conservazione`, manually filled
   - DP `bibliografia` 🎯 `BibliographyPart`, manually filled
   - DQ `data primo rilievo` 🎯 `GrfStatesPart.states`
   - DR `data ultima ricognizione` 🎯 `GrfStatesPart.states`
