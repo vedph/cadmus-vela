@@ -415,7 +415,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`)
 - AB `codice glottologico` [Glottolog](https://glottolog.org/) code: this is used whenever ISO639-3 is not enough to specify a sub-entry of it. So, in this case we encode this into `GrfWritingPart.languages` like for AA, but prefixed by AA value if any, with pattern `ISO_GLOT` (e.g. `ita_nap`) (📚 `grf-writing-languages`). ⚠️ This implies that the thesaurus should include not only all the required codes from ISO639-3, but also all those from glottolog, with format `ISO_GLOT`.
 - AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`)
-- AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing`
+- AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`)
 - AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
   - AF `presenza di disegno preparatorio` (boolean)
   - AG `presenza di preparazione del supporto` (boolean)
