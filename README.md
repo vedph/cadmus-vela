@@ -420,29 +420,29 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`) ⚙️ `ColWriting`
 
 - AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
-  - AF `presenza di disegno preparatorio` (boolean)
-  - AG `presenza di preparazione del supporto` (boolean)
-  - AH `graffio` (boolean)
-  - AI `incisione` (boolean)
-  - AJ `intaglio` (boolean)
-  - AK `disegno` (boolean)
-  - AL `punzonatura` (boolean)
-  - AM `rubricatura` (boolean) 🎯 `GrfWritingPart.hasRubrics`
-  - AN `a rilievo` (boolean)
+  - AF `presenza di disegno preparatorio` (boolean) ⚙️ `ColTech`
+  - AG `presenza di preparazione del supporto` (boolean) ⚙️ `ColTech`
+  - AH `graffio` (boolean) ⚙️ `ColTech`
+  - AI `incisione` (boolean) ⚙️ `ColTech`
+  - AJ `intaglio` (boolean) ⚙️ `ColTech`
+  - AK `disegno` (boolean) ⚙️ `ColTech`
+  - AL `punzonatura` (boolean) ⚙️ `ColTech`
+  - AM `rubricatura` (boolean) 🎯 `GrfWritingPart.hasRubrics` ⚙️ `ColWriting`
+  - AN `a rilievo` (boolean) ⚙️ `ColTech`
 
 - AO `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools` (📚 `grf-tools`)
-  - AP `chiodo` (boolean)
-  - AQ `gradina` (boolean)
-  - AR `scalpello` (boolean)
-  - AS `sgorbia` (boolean)
-  - AT `sega` (boolean)
-  - AU `bocciarda` (boolean)
-  - AV `grafite` (boolean)
-  - AW `matita di piombo` (boolean)
-  - AX `fumo di candela` (boolean)
-  - AY `inchiostro` (boolean)
-  - AZ `vernice` (boolean)
-  - BA `lama (affilatura)` (boolean)
+  - AP `chiodo` (boolean) ⚙️ `ColTech`
+  - AQ `gradina` (boolean) ⚙️ `ColTech`
+  - AR `scalpello` (boolean) ⚙️ `ColTech`
+  - AS `sgorbia` (boolean) ⚙️ `ColTech`
+  - AT `sega` (boolean) ⚙️ `ColTech`
+  - AU `bocciarda` (boolean) ⚙️ `ColTech`
+  - AV `grafite` (boolean) ⚙️ `ColTech`
+  - AW `matita di piombo` (boolean) ⚙️ `ColTech`
+  - AX `fumo di candela` (boolean) ⚙️ `ColTech`
+  - AY `inchiostro` (boolean) ⚙️ `ColTech`
+  - AZ `vernice` (boolean) ⚙️ `ColTech`
+  - BA `lama (affilatura)` (boolean) ⚙️ `ColTech`
   - BB `tipo di lama` ??
 
 - BC `damnatio`: header column.
