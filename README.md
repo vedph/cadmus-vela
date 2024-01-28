@@ -34,6 +34,7 @@ Core models for Cadmus VeLA.
     - [Values](#values)
     - [Columns](#columns)
   - [History](#history)
+    - [2.1.1](#211)
     - [2.1.0](#210)
     - [2.0.1](#201)
     - [2.0.0](#200)
@@ -509,6 +510,10 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - DR `data ultima ricognizione` 🎯 `GrfStatesPart.states`
 
 ## History
+
+### 2.1.1
+
+- 2024-01-28: updated packages.
 
 ### 2.1.0
 
