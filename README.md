@@ -443,7 +443,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - AY `inchiostro` (boolean)
   - AZ `vernice` (boolean)
   - BA `lama (affilatura)` (boolean)
-  - BB `tipo di lama`
+  - BB `tipo di lama` ??
 
 - BC `damnatio`: header column.
   - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:themes` adding new entries to the thesaurus: "damnatio", "partial damnatio"
