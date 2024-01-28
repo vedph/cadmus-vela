@@ -416,6 +416,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - AB `codice glottologico` [Glottolog](https://glottolog.org/) code: this is used whenever ISO639-3 is not enough to specify a sub-entry of it. So, in this case we encode this into `GrfWritingPart.languages` like for AA, but prefixed by AA value if any, with pattern `ISO_GLOT` (e.g. `ita_nap`) (📚 `grf-writing-languages`). ⚠️ This implies that the thesaurus should include not only all the required codes from ISO639-3, but also all those from glottolog, with format `ISO_GLOT`.
 - AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`)
 - AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`)
+
 - AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
   - AF `presenza di disegno preparatorio` (boolean)
   - AG `presenza di preparazione del supporto` (boolean)
@@ -426,6 +427,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - AL `punzonatura` (boolean)
   - AM `rubricatura` (boolean) 🎯 `GrfWritingPart.hasRubrics`
   - AN `a rilievo` (boolean)
+
 - AO `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools` (📚 `grf-tools`)
   - AP `chiodo` (boolean)
   - AQ `gradina` (boolean)
@@ -440,19 +442,23 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - AZ `vernice` (boolean)
   - BA `lama (affilatura)` (boolean)
   - BB `tipo di lama`
+
 - BC `damnatio`: header column.
   - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:themes` adding new entries to the thesaurus: "damnatio", "partial damnatio"
+
 - BE `caratteristiche grafiche`: header column.
-  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`)
+  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) ??seem to duplicate AC
   - BG `sistema interpuntivo` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
   - BH `nessi e legamenti` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
   - BI `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
   - BJ `abbreviazioni` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
+
 - BK `monogrammi, lettere singole, ecc`: header column. (📚 `grf-writing-letter-features`)
   - BL `monogrammi` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BM `lettera singola` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BN `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BO `disegno non interpretabile` (boolean) Add a flag. A flag is mostly used to mark redactional states; so I suppose it fits here because this means that the item is not yet interpreted or considered not interpretable as a graffiti.
+
 - BP `tipologia di argomento`: header column 🎯 `CategoriesPart:functions.categories` (📚 `categories_themes`)
   - BQ `funeraria` (boolean)
   - BR `commemorativa` (boolean)
@@ -479,6 +485,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - CM `imprecazioni` (boolean)
   - CN `nome di luogo` (boolean)
   - CO `saluti` (boolean)
+
 - CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`)
   - CQ `parti anatomiche` (boolean)
   - CR `volti` (boolean)
@@ -500,6 +507,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - DH `animale` (boolean)
   - DI `simbolo zodiaco` (boolean)
   - DJ `grafitto da affilitura` (boolean)
+
 - DK `edizione e commento`: header column.
   - DL `edizione` 🎯 `BibliographyPart`, manually filled
   - DM `codice iconclass` obsolete, ignore
