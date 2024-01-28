@@ -50,7 +50,7 @@ Currently the only item is the _graffiti_ item, with parts conventionally groupe
 
 - _summary_ ("sintesi"):
   - [GrfLocalizationPart](#grflocalizationpart)
-  - [CategoriesPart](#categoriespart) with role `features` (generic graffiti features; 📚 )
+  - [CategoriesPart](#categoriespart) with role `features` (generic graffiti features; 📚 `categories_features`)
   - [GrfSupportPart](#grfsupportpart)
   - [GrfFramePart](#grfframepart)
   - [GrfStatesPart](#grfstatespart)
