@@ -406,7 +406,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - T `cornice` (boolean) 🎯 `GrfFigurativePart.types`
 - U `tipo figurativo` 🎯 `GrfFramePart.figure`
 - V `tipo cornice` 🎯 `GrfFramePart.frame`
-- W `misure` width and height in cm, how expressed (e.g. "13 x 27.5")?? Do we always have width and height or nothing, not just height or just width? Which is the decimal separator (comma? dot?) 🎯 `GrfFramePart.size`
+- W `misure` width and height in cm in the form `NXN`; ??are there decimals? If yes, Which is the decimal separator (comma? dot?) 🎯 `GrfFramePart.size`
 - X `numero righe` (int) 🎯 `GrfWritingPart.counts`
 - Y `alfabeto` 🎯 `GrfWritingPart.system`
 - Z `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
