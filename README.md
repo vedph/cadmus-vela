@@ -399,20 +399,20 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - K `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`)
 - L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`)
 - M `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
-- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). Are there any BC dates? If so, how is BC/AD encoded? I suppose that N/O/P are mutually exclusive, and that P represents a date when it's not a terminus ante/post?? 🎯 `HistoricalDatePart`
+- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored 🎯 `HistoricalDatePart`
 - Q `figurativi` (boolean) 🎯 `GrfFigurativePart.types`
 - R `testo` (boolean) 🎯 `GrfFigurativePart.types`
 - S `numeri` (boolean) 🎯 `GrfFigurativePart.types`
 - T `cornice` (boolean) 🎯 `GrfFigurativePart.types`
 - U `tipo figurativo` 🎯 `GrfFramePart.figure`
 - V `tipo cornice` 🎯 `GrfFramePart.frame`
-- W `misure` width and height in cm in the form `NXN`; ??are there decimals? If yes, Which is the decimal separator (comma? dot?) 🎯 `GrfFramePart.size`
+- W `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size`
 - X `numero righe` (int) 🎯 `GrfWritingPart.counts`
 - Y `alfabeto` 🎯 `GrfWritingPart.system`
 - Z `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
 - AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages`
 - AB `codice glottologico` [Glottolog](https://glottolog.org/) code: in what relationship with AA?? Are these mutually exclusive, i.e. when it's not possible to use ISO639-3 you use glottolog? Or rather ISO is more generic and glottolog is an optional more precise specification? If we always have either one or the other, we can store it in a single field with some convention (e.g. a prefix for glottolog); if instead they coexist, we can store it among the external IDs and let AA work as the more generic (and more popular) standard for the language, even though sometimes approximate.
-- AC `tipologia scrittura` 🎯 `GrfWritingPart.script`: if more than 1, how they are separated??
+- AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script`
 - AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing`
 - AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
   - AF `presenza di disegno preparatorio` (boolean)
@@ -450,7 +450,7 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - BL `monogrammi` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BM `lettera singola` (boolean) 🎯 `GrfWritingPart.letterFeatures`
   - BN `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures`
-  - BO `disegno non interpretabile` (boolean) add flag?? A flag is mostly used to mark redactional states; so I suppose it fits here because this means that the item is not yet interpreted or considered not interpretable as a graffiti.
+  - BO `disegno non interpretabile` (boolean) Add a flag. A flag is mostly used to mark redactional states; so I suppose it fits here because this means that the item is not yet interpreted or considered not interpretable as a graffiti.
 - BP `tipologia di argomento`: header column 🎯 `CategoriesPart:functions.categories` (📚 `categories_themes`)
   - BQ `funeraria` (boolean)
   - BR `commemorativa` (boolean)
