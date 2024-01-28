@@ -49,6 +49,7 @@ Currently the only item is the _graffiti_ item, with parts conventionally groupe
 
 - _summary_ ("sintesi"):
   - [GrfLocalizationPart](#grflocalizationpart)
+  - [CategoriesPart](#categoriespart) with role `features` (generic graffiti features; 📚 )
   - [GrfSupportPart](#grfsupportpart)
   - [GrfFramePart](#grfframepart)
   - [GrfStatesPart](#grfstatespart)
@@ -60,8 +61,8 @@ Currently the only item is the _graffiti_ item, with parts conventionally groupe
   - [GrfTechniquePart](#grftechniquepart)
   - [GrfFigurativePart](#grffigurativepart)
   - [HistoricalDatePart](#historicaldatepart): this provides a structured datation model which is machine-actionable.
-  - [CategoriesPart](#categoriespart) with role `functions` (funerary, votive, etc.: 📚 thesaurus: `categories_functions`)
-  - [CategoriesPart](#categoriespart) with role `themes` (e.g. sport, politics, etc.: 📚 thesaurus: `categories_themes`)
+  - [CategoriesPart](#categoriespart) with role `functions` (e.g. funerary, votive, etc.: 📚 `categories_functions`)
+  - [CategoriesPart](#categoriespart) with role `themes` (e.g. sport, politics, etc.: 📚 `categories_themes`)
 
 - _text_ ("testo"):
   - [TokenTextPart](#tokentextpart): the edited text, susceptible of annotations via layers.
@@ -400,10 +401,10 @@ Columns marked as "header columns" are always empty and serve to group the next 
 - L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`)
 - M `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
 - N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored 🎯 `HistoricalDatePart`
-- Q `figurativi` (boolean) 🎯 `GrfFigurativePart.types`
-- R `testo` (boolean) 🎯 `GrfFigurativePart.types`
-- S `numeri` (boolean) 🎯 `GrfFigurativePart.types`
-- T `cornice` (boolean) 🎯 `GrfFigurativePart.types`
+- Q `figurativi` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`)
+- R `testo` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`)
+- S `numeri` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`)
+- T `cornice` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`)
 - U `tipo figurativo` 🎯 `GrfFramePart.figure`
 - V `tipo cornice` 🎯 `GrfFramePart.frame`
 - W `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size`
