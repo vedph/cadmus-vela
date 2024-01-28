@@ -390,32 +390,34 @@ The following types can be defined:
 
 Columns marked as "header columns" are always empty and serve to group the next columns together, until the next header column. When not specified, the type is `string`.
 
-- A ID (no label: e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id.
+The ID after 🎯 represents the target for the column, and the one after ⚙️ the parser used by the [CLI import tool](https://github.com/vedph/cadmus-vela-tool).
+
+- A ID (no label: e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id ⚙️ `Row`.
 - B `immagine`: ignored.
-- C-E (3-5) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart`
-- F = `funzione originaria` 🎯 `GrfLocalizationPart.note`
-- G `funzione attuale` 🎯 `GrfLocalizationPart.function` (📚 `categories_functions`)
-- H `tipologia struttura` 🎯 `GrfLocalizationPart.objectType` (📚 `grf-support-object-types`)
-- I `interno/esterno` 🎯 `GrfLocalizationPart.indoor`
-- J `supporto` 🎯 `GrfSupportPart.type` (📚 `grf-support-types`)
-- K `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`)
-- L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`)
+- C-E (3-5) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart` ⚙️ `ColArea`
+- F = `funzione originaria` 🎯 `GrfLocalizationPart.note` ⚙️ `ColOriginalFn`
+- G `funzione attuale` 🎯 `GrfLocalizationPart.function` (📚 `categories_functions`) ⚙️ `ColCurrentFn`
+- H `tipologia struttura` 🎯 `GrfLocalizationPart.objectType` (📚 `grf-support-object-types`) ⚙️ `ColStructType`
+- I `interno/esterno` 🎯 `GrfLocalizationPart.indoor` ⚙️ `ColIndoor`
+- J `supporto` 🎯 `GrfSupportPart.type` (📚 `grf-support-types`) ⚙️ `ColSupport`
+- K `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`) ⚙️ `ColMatType`
+- L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`) ⚙️ `ColPeriod`
 - M `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
-- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored 🎯 `HistoricalDatePart`
-- Q `figurativi` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`)
-- R `testo` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`)
-- S `numeri` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`)
-- T `cornice` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`)
-- U `tipo figurativo` 🎯 `GrfFramePart.figure`
-- V `tipo cornice` 🎯 `GrfFramePart.frame`
-- W `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size`
-- X `numero righe` (int) 🎯 `GrfWritingPart.counts`
-- Y `alfabeto` 🎯 `GrfWritingPart.system` (📚 `grf-writing-systems`)
+- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored 🎯 `HistoricalDatePart` ⚙️ `ColDatation`
+- Q `figurativi` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
+- R `testo` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
+- S `numeri` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
+- T `cornice` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
+- U `tipo figurativo` 🎯 `GrfFramePart.figure` ⚙️ `ColFig`
+- V `tipo cornice` 🎯 `GrfFramePart.frame` ⚙️ `ColFig`
+- W `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size` ⚙️ `ColSize`
+- X `numero righe` (int) 🎯 `GrfWritingPart.counts` ⚙️ `ColWriting`
+- Y `alfabeto` 🎯 `GrfWritingPart.system` (📚 `grf-writing-systems`) ⚙️ `ColWriting`
 - Z `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
-- AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`)
-- AB `codice glottologico` [Glottolog](https://glottolog.org/) code: this is used whenever ISO639-3 is not enough to specify a sub-entry of it. So, in this case we encode this into `GrfWritingPart.languages` like for AA, but prefixed by AA value if any, with pattern `ISO_GLOT` (e.g. `ita_nap`) (📚 `grf-writing-languages`). ⚠️ This implies that the thesaurus should include not only all the required codes from ISO639-3, but also all those from glottolog, with format `ISO_GLOT`.
-- AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`)
-- AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`)
+- AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`) ⚙️ `ColWriting`
+- AB `codice glottologico` [Glottolog](https://glottolog.org/) code: this is used whenever ISO639-3 is not enough to specify a sub-entry of it. So, in this case we encode this into `GrfWritingPart.languages` like for AA, but prefixed by AA value if any, with pattern `ISO_GLOT` (e.g. `ita_nap`) (📚 `grf-writing-languages`). ⚠️ This implies that the thesaurus should include not only all the required codes from ISO639-3, but also all those from Glottolog, with format `ISO_GLOT` ⚙️ `ColWriting`
+- AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`) ⚙️ `ColWriting`
+- AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`) ⚙️ `ColWriting`
 
 - AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
   - AF `presenza di disegno preparatorio` (boolean)
@@ -454,16 +456,16 @@ Columns marked as "header columns" are always empty and serve to group the next 
   - BJ `abbreviazioni` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
 
 - BK `monogrammi, lettere singole, ecc`: header column. (📚 `grf-writing-letter-features`)
-  - BL `monogrammi` (boolean) 🎯 `GrfWritingPart.letterFeatures`
-  - BM `lettera singola` (boolean) 🎯 `GrfWritingPart.letterFeatures`
-  - BN `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures`
-  - BO `disegno non interpretabile` (boolean) Add a flag. A flag is mostly used to mark redactional states; so I suppose it fits here because this means that the item is not yet interpreted or considered not interpretable as a graffiti.
+  - BL `monogrammi` (boolean) 🎯 `GrfWritingPart.letterFeatures` ⚙️ `ColWriting`
+  - BM `lettera singola` (boolean) 🎯 `GrfWritingPart.letterFeatures` ⚙️ `ColWriting`
+  - BN `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures` ⚙️ `ColWriting`
+  - BO `disegno non interpretabile` (boolean) Add a flag. A flag is mostly used to mark redactional states; so I suppose it fits here because this means that the item is not yet interpreted or considered not interpretable as a graffiti. ⚙️ `ColUnint`
 
 - BP `tipologia di argomento`: header column 🎯 `CategoriesPart:functions.categories` (📚 `categories_themes`)
   - BQ `funeraria` (boolean)
   - BR `commemorativa` (boolean)
   - BS `firma` (boolean)
-  - BT `celebretiva` (sic) (boolean)
+  - BT `celebretiva` (sic??) (boolean)
   - BU `esortativa` (boolean)
   - BV `didascalica` (boolean)
   - BW `iniziale\i nome persona` (boolean)
