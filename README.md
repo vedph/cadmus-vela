@@ -461,32 +461,32 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - BN `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures` ⚙️ `ColWriting`
   - BO `disegno non interpretabile` (boolean) Add a flag. A flag is mostly used to mark redactional states; so I suppose it fits here because this means that the item is not yet interpreted or considered not interpretable as a graffiti. ⚙️ `ColUnint`
 
-- BP `tipologia di argomento`: header column 🎯 `CategoriesPart:functions.categories` (📚 `categories_themes`)
+- BP `tipologia di argomento`: header column 🎯 `CategoriesPart:functions` (📚 `categories_functions`) unless specified otherwise:
   - BQ `funeraria` (boolean)
   - BR `commemorativa` (boolean)
   - BS `firma` (boolean)
   - BT `celebretiva` (sic??) (boolean)
   - BU `esortativa` (boolean)
   - BV `didascalica` (boolean)
-  - BW `iniziale\i nome persona` (boolean)
-  - BX `sigla` (boolean)
+  - BW `iniziale\i nome persona` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - BX `sigla` (boolean) 🎯 `GrfWritingPart.letterFeatures` (📚 `grf-writing-letter-features`)
   - BY `segnaletica` (boolean)
-  - BZ `citazione` (boolean)
-  - CA `infamante` (boolean)
-  - CB `sport` (boolean)
-  - CC `prostituzione` (boolean)
-  - CD `politica` (boolean)
-  - CE `religiosa` (boolean)
-  - CF `preghiera` (boolean)
-  - CG `ex voto` (boolean)
-  - CH `amore` (boolean)
-  - CI `prosa` (boolean)
-  - CJ `poesia` (boolean)
+  - BZ `citazione` (boolean) ??
+  - CA `infamante` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CB `sport` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CC `prostituzione` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CD `politica` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CE `religiosa` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CF `preghiera` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CG `ex voto` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CH `amore` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CI `prosa` (boolean) complementary to CJ, ignored.
+  - CJ `poesia` (boolean) 🎯 `GrfLocalizationPart.hasPoetry`
   - CK `parlanti` (boolean)
-  - CL `insulto` (boolean)
-  - CM `imprecazioni` (boolean)
-  - CN `nome di luogo` (boolean)
-  - CO `saluti` (boolean)
+  - CL `insulto` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CM `imprecazioni` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CN `nome di luogo` (boolean) ??
+  - CO `saluti` (boolean) ??
 
 - CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`)
   - CQ `parti anatomiche` (boolean)
