@@ -471,13 +471,13 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - BQ `funeraria` (boolean)
   - BR `commemorativa` (boolean)
   - BS `firma` (boolean)
-  - BT `celebretiva` (sic??) (boolean)
+  - BT `celebrativa` (boolean)
   - BU `esortativa` (boolean)
   - BV `didascalica` (boolean)
   - BW `iniziale\i nome persona` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
   - BX `sigla` (boolean) 🎯 `GrfWritingPart.letterFeatures` (📚 `grf-writing-letter-features`)
   - BY `segnaletica` (boolean)
-  - BZ `citazione` (boolean) ??
+  - BZ `citazione` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
   - CA `infamante` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
   - CB `sport` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
   - CC `prostituzione` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
@@ -486,8 +486,8 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - CF `preghiera` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
   - CG `ex voto` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
   - CH `amore` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CI `prosa` (boolean) complementary to CJ, ignored.
-  - CJ `poesia` (boolean) 🎯 `GrfLocalizationPart.hasPoetry`
+  - CI `prosa` (boolean) 🎯 `GrfWritingPart.hasProse`
+  - CJ `poesia` (boolean) 🎯 `GrfWritingPart.hasPoetry`
   - CK `parlanti` (boolean)
   - CL `insulto` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
   - CM `imprecazioni` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
