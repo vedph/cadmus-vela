@@ -73,7 +73,7 @@ public sealed class GrfSupportPart : PartBase
 
         sb.Append("[GrfSupport]");
 
-        if (!string.IsNullOrEmpty(Type)) sb.Append(": ").Append(Type);
+        if (!string.IsNullOrEmpty(Type)) sb.Append(' ').Append(Type);
 
         if (!string.IsNullOrEmpty(Material))
             sb.Append(" (").Append(Material).Append(')');

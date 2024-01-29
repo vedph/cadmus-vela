@@ -76,8 +76,7 @@ public sealed class GrfFigurativePart : PartBase
 
         if (Types?.Count > 0)
         {
-            sb.Append(": ");
-            sb.AppendJoin(", ", Types);
+            sb.Append(' ').AppendJoin(", ", Types);
         }
 
         return sb.ToString();

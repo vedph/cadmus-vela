@@ -85,7 +85,7 @@ public sealed class GrfFramePart : PartBase
         StringBuilder sb = new();
         sb.Append("[GrfFrame]");
 
-        if (Size != null) sb.Append(": ").Append(Size);
+        if (Size != null) sb.Append(' ').Append(Size);
         return sb.ToString();
     }
 }

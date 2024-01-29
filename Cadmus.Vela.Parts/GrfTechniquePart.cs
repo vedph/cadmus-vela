@@ -86,10 +86,10 @@ public sealed class GrfTechniquePart : PartBase
 
         sb.Append("[GrfTechnique]");
 
-        if (Techniques?.Count > 0) sb.AppendJoin(", ", Techniques);
+        if (Techniques?.Count > 0) sb.Append(' ').AppendJoin(", ", Techniques);
         if (Tools?.Count > 0)
         {
-            if (sb.Length > 0) sb.Append(" - ");
+            sb.Append(" - ");
             sb.AppendJoin(", ", Tools);
         }
 

@@ -34,6 +34,7 @@ Core models for Cadmus VeLA.
     - [Values](#values)
     - [Columns](#columns)
   - [History](#history)
+    - [2.1.2](#212)
     - [2.1.1](#211)
     - [2.1.0](#210)
     - [2.0.1](#201)
@@ -403,7 +404,12 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - K `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`) ⚙️ `ColMatType`
 - L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`) ⚙️ `ColPeriod`
 - M `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
-- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. A single cell contains a single numeric value expressed with Roman numbers for centuries, or with Arabic numbers for years (Gregorian calendar). Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored 🎯 `HistoricalDatePart` ⚙️ `ColDatation`
+- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. 🎯 `HistoricalDatePart` ⚙️ `ColDatation`. A single cell contains any of these formats:
+  - `R SECOLO` where `R` is an uppercase Roman number.
+  - `YYYY` year.
+
+>Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored 
+
 - Q `figurativi` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
 - R `testo` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
 - S `numeri` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
@@ -488,7 +494,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - CN `nome di luogo` (boolean) ??
   - CO `saluti` (boolean) ??
 
-- CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`)
+- CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`) ⚙️ `ColFigTypes`
   - CQ `parti anatomiche` (boolean)
   - CR `volti` (boolean)
   - CS `busto` (boolean)
@@ -513,13 +519,17 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - DK `edizione e commento`: header column.
   - DL `edizione` 🎯 `BibliographyPart`, manually filled
   - DM `codice iconclass` obsolete, ignore
-  - DN `commento` 🎯 `NotePart`
-  - DO `osservazioni sullo stato di conservazione`, 🎯 `GrfStatesPart.note`
+  - DN `commento` 🎯 `NotePart` ⚙️ `ColComment`
+  - DO `osservazioni sullo stato di conservazione`, 🎯 `GrfStatesPart.note` ⚙️ `ColStates`
   - DP `bibliografia` 🎯 `BibliographyPart`, manually filled
-  - DQ `data primo rilievo` (GG/MM/AAAA) 🎯 `GrfStatesPart.states`
-  - DR `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states`
+  - DQ `data primo rilievo` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
+  - DR `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
 
 ## History
+
+### 2.1.2
+
+- 2024-01-29: fixes to `ToString` in parts.
 
 ### 2.1.1
 

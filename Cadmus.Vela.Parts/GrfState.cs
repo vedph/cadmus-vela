@@ -35,6 +35,7 @@ public class GrfState
     /// </returns>
     public override string ToString()
     {
-        return $"{Type} on {Date} by {Reporter}";
+        return $"{Type} on {Date} by " +
+            $"{Reporter}{(string.IsNullOrEmpty(Note)? "" : "*")}";
     }
 }

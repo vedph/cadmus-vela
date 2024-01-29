@@ -105,10 +105,10 @@ public sealed class GrfLocalizationPart : PartBase
     {
         StringBuilder sb = new();
 
-        sb.Append("[GrfLocalization]:");
+        sb.Append("[GrfLocalization]");
 
         if (Place != null) sb.Append(' ').Append(Place.GetFullName());
-        if (Period != null) sb.Append(", ").Append(Period);
+        if (!string.IsNullOrEmpty(Period)) sb.Append(", ").Append(Period);
         if (Indoor) sb.Append('*');
 
         if (!string.IsNullOrEmpty(Function))
