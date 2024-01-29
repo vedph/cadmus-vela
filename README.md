@@ -408,7 +408,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - `R SECOLO` where `R` is an uppercase Roman number.
   - `YYYY` year.
 
->Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored 
+>Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored.
 
 - Q `figurativi` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
 - R `testo` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
