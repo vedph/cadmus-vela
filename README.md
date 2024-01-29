@@ -449,7 +449,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - AY `inchiostro` (boolean) ⚙️ `ColTech`
   - AZ `vernice` (boolean) ⚙️ `ColTech`
   - BA `lama (affilatura)` (boolean) ⚙️ `ColTech`
-  - BB `tipo di lama` ??
+  - BB `tipo di lama` (string): values are only `lama curva`, `lama dritta` or empty. We thus provide two entries in the thesaurus for these values. ⚙️ `ColTech`
 
 - BC `damnatio`: header column.
   - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:themes` adding new entries to the thesaurus: "damnatio", "partial damnatio"
@@ -491,8 +491,8 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - CK `parlanti` (boolean)
   - CL `insulto` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
   - CM `imprecazioni` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CN `nome di luogo` (boolean) ??
-  - CO `saluti` (boolean) ??
+  - CN `nome di luogo` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CO `saluti` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
 
 - CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`) ⚙️ `ColFigTypes`
   - CQ `parti anatomiche` (boolean)
