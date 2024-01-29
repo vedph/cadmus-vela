@@ -514,10 +514,10 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - DL `edizione` 🎯 `BibliographyPart`, manually filled
   - DM `codice iconclass` obsolete, ignore
   - DN `commento` 🎯 `NotePart`
-  - DO `osservazioni sullo stato di conservazione`, manually filled
+  - DO `osservazioni sullo stato di conservazione`, 🎯 `GrfStatesPart.note`
   - DP `bibliografia` 🎯 `BibliographyPart`, manually filled
-  - DQ `data primo rilievo` 🎯 `GrfStatesPart.states`
-  - DR `data ultima ricognizione` 🎯 `GrfStatesPart.states`
+  - DQ `data primo rilievo` (GG/MM/AAAA) 🎯 `GrfStatesPart.states`
+  - DR `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states`
 
 ## History
 
