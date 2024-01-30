@@ -409,10 +409,10 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 >Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored.
 
-- Q `figurativi` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- R `testo` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- S `numeri` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- T `cornice` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- Q `figurativi` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- R `testo` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- S `numeri` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- T `cornice` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
 
 - U `tipo figurativo` 🎯 `GrfFramePart.figure` ⚙️ `ColFig`
 - V `tipo cornice` 🎯 `GrfFramePart.frame` ⚙️ `ColFig`
@@ -424,7 +424,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`) ⚙️ `ColWriting`
 - AB `codice glottologico` [Glottolog](https://glottolog.org/) code: this is used whenever ISO639-3 is not enough to specify a sub-entry of it. So, in this case we encode this into `GrfWritingPart.languages` like for AA, but prefixed by AA value if any, with pattern `ISO_GLOT` (e.g. `ita_nap`) (📚 `grf-writing-languages`). ⚠️ This implies that the thesaurus should include not only all the required codes from ISO639-3, but also all those from Glottolog, with format `ISO_GLOT` ⚙️ `ColWriting`
 - AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`) ⚙️ `ColWriting`
-- AD `tipologia grafica` (`maiuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`) ⚙️ `ColWriting`
+- AD `tipologia grafica` (`corsivo`, `maiuscolo`, `maiuscolo e minuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`) ⚙️ `ColWriting`
 
 - AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
   - AF `presenza di disegno preparatorio` (boolean) ⚙️ `ColTech`
@@ -437,20 +437,20 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - AM `rubricatura` (boolean) 🎯 `GrfWritingPart.hasRubrics` ⚙️ `ColWriting`
   - AN `a rilievo` (boolean) ⚙️ `ColTech`
 
-- AO `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools` (📚 `grf-tools`)
-  - AP `chiodo` (boolean) ⚙️ `ColTech`
-  - AQ `gradina` (boolean) ⚙️ `ColTech`
-  - AR `scalpello` (boolean) ⚙️ `ColTech`
-  - AS `sgorbia` (boolean) ⚙️ `ColTech`
-  - AT `sega` (boolean) ⚙️ `ColTech`
-  - AU `bocciarda` (boolean) ⚙️ `ColTech`
-  - AV `grafite` (boolean) ⚙️ `ColTech`
-  - AW `matita di piombo` (boolean) ⚙️ `ColTech`
-  - AX `fumo di candela` (boolean) ⚙️ `ColTech`
-  - AY `inchiostro` (boolean) ⚙️ `ColTech`
-  - AZ `vernice` (boolean) ⚙️ `ColTech`
-  - BA `lama (affilatura)` (boolean) ⚙️ `ColTech`
-  - BB `tipo di lama` (string): values are only `lama curva`, `lama dritta` or empty. We thus provide two entries in the thesaurus for these values. ⚙️ `ColTech`
+- AO `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools` (📚 `grf-tools`) ⚙️ `ColTech`:
+  - AP `chiodo` (boolean)
+  - AQ `gradina` (boolean)
+  - AR `scalpello` (boolean)
+  - AS `sgorbia` (boolean)
+  - AT `sega` (boolean)
+  - AU `bocciarda` (boolean)
+  - AV `grafite` (boolean)
+  - AW `matita di piombo` (boolean)
+  - AX `fumo di candela` (boolean)
+  - AY `inchiostro` (boolean)
+  - AZ `vernice` (boolean)
+  - BA `lama (affilatura)` (boolean)
+  - BB `tipo di lama` (string): values are only `lama curva`, `lama dritta` or empty. We thus provide two entries in the thesaurus for these values.
 
 - BC `damnatio`: header column.
   - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:topic` adding new entries to the thesaurus: "damnatio", "partial damnatio"
