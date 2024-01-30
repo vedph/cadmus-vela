@@ -51,7 +51,7 @@ Currently the only item is the _graffiti_ item, with parts conventionally groupe
 
 - _summary_ ("sintesi"):
   - [GrfLocalizationPart](#grflocalizationpart)
-  - [CategoriesPart](#categoriespart) with role `features` (generic graffiti features; 📚 `categories_features`)
+  - [CategoriesPart](#categoriespart) with role `feature` (generic graffiti features; 📚 `categories_feature`)
   - [GrfSupportPart](#grfsupportpart)
   - [GrfFramePart](#grfframepart)
   - [GrfStatesPart](#grfstatespart)
@@ -63,8 +63,7 @@ Currently the only item is the _graffiti_ item, with parts conventionally groupe
   - [GrfTechniquePart](#grftechniquepart)
   - [GrfFigurativePart](#grffigurativepart)
   - [HistoricalDatePart](#historicaldatepart): this provides a structured datation model which is machine-actionable.
-  - [CategoriesPart](#categoriespart) with role `functions` (e.g. funerary, votive, etc.: 📚 `categories_functions`)
-  - [CategoriesPart](#categoriespart) with role `themes` (e.g. sport, politics, etc.: 📚 `categories_themes`)
+  - [CategoriesPart](#categoriespart) with role `topic` (e.g. sport, politics, etc.: 📚 `categories_topic`)
 
 - _text_ ("testo"):
   - [TokenTextPart](#tokentextpart): the edited text, susceptible of annotations via layers.
@@ -226,7 +225,7 @@ Generic bottom-up bibliography.
 
 #### CategoriesPart
 
-A set of categories which can be assigned to the item. In this project we use a couple of such parts referring to two distinct taxonomies, for support functions and content themes. While the generic thesaurus for this part is named `categories`, role-based category parts add to this name a suffix built with `_` and the role ID (thus, `categories_functions` and `categories_themes`).
+A set of categories which can be assigned to the item. In this project we use a couple of such parts referring to two distinct taxonomies, for support functions and content themes. While the generic thesaurus for this part is named `categories`, role-based category parts add to this name a suffix built with `_` and the role ID (thus, `categories_function` and `categories_topic`).
 
 - `categories` (`string[]`)
 
@@ -410,13 +409,15 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 >Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored.
 
-- Q `figurativi` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
-- R `testo` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
-- S `numeri` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
-- T `cornice` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_features`) ⚙️ `ColFeatures`
+- Q `figurativi` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- R `testo` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- S `numeri` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- T `cornice` (boolean) 🎯 `CategoriesPart:features` (📚 `categories_feature`) ⚙️ `ColFeatures`
+
 - U `tipo figurativo` 🎯 `GrfFramePart.figure` ⚙️ `ColFig`
 - V `tipo cornice` 🎯 `GrfFramePart.frame` ⚙️ `ColFig`
 - W `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size` ⚙️ `ColSize`
+
 - X `numero righe` (int) 🎯 `GrfWritingPart.counts` ⚙️ `ColWriting`
 - Y `alfabeto` 🎯 `GrfWritingPart.system` (📚 `grf-writing-systems`) ⚙️ `ColWriting`
 - Z `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
@@ -452,49 +453,49 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - BB `tipo di lama` (string): values are only `lama curva`, `lama dritta` or empty. We thus provide two entries in the thesaurus for these values. ⚙️ `ColTech`
 
 - BC `damnatio`: header column.
-  - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:themes` adding new entries to the thesaurus: "damnatio", "partial damnatio"
+  - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:topic` adding new entries to the thesaurus: "damnatio", "partial damnatio"
 
-- BE `caratteristiche grafiche`: header column.
-  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) ??seem to duplicate AC
-  - BG `sistema interpuntivo` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
-  - BH `nessi e legamenti` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
+- BE `caratteristiche grafiche`: header column, all targeting 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) except when stated otherwise:
+  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty
+  - BG `sistema interpuntivo` (boolean)
+  - BH `nessi e legamenti` (boolean)
   - BI `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
-  - BJ `abbreviazioni` (boolean) 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`)
+  - BJ `abbreviazioni` (boolean)
 
-- BK `monogrammi, lettere singole, ecc`: header column. (📚 `grf-writing-letter-features`)
-  - BL `monogrammi` (boolean) 🎯 `GrfWritingPart.letterFeatures` ⚙️ `ColWriting`
-  - BM `lettera singola` (boolean) 🎯 `GrfWritingPart.letterFeatures` ⚙️ `ColWriting`
-  - BN `lettere non interpretabili` (boolean) 🎯 `GrfWritingPart.letterFeatures` ⚙️ `ColWriting`
-  - BO `disegno non interpretabile` (boolean) Add a flag. A flag is mostly used to mark redactional states; so I suppose it fits here because this means that the item is not yet interpreted or considered not interpretable as a graffiti. ⚙️ `ColUnint`
+- BK `monogrammi, lettere singole, ecc`: header column, all targeting 🎯 `GrfWritingPart.letterFeatures` (📚 `grf-writing-letter-features`) using ⚙️ `ColWriting`:
+  - BL `monogrammi` (boolean)
+  - BM `lettera singola` (boolean)
+  - BN `lettere non interpretabili` (boolean): this also sets an item flag.
+  - BO `disegno non interpretabile` (boolean): this also sets an item flag.
 
-- BP `tipologia di argomento`: header column 🎯 `CategoriesPart:functions` (📚 `categories_functions`) unless specified otherwise:
+- BP `tipologia di argomento`: header column, all targeting 🎯 `CategoriesPart:topic` (📚 `categories_topic`) unless specified otherwise:
   - BQ `funeraria` (boolean)
   - BR `commemorativa` (boolean)
   - BS `firma` (boolean)
   - BT `celebrativa` (boolean)
   - BU `esortativa` (boolean)
   - BV `didascalica` (boolean)
-  - BW `iniziale\i nome persona` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - BX `sigla` (boolean) 🎯 `GrfWritingPart.letterFeatures` (📚 `grf-writing-letter-features`)
+  - BW `iniziale\i nome persona` (boolean)
+  - BX `sigla` (boolean)
   - BY `segnaletica` (boolean)
-  - BZ `citazione` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CA `infamante` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CB `sport` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CC `prostituzione` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CD `politica` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CE `religiosa` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CF `preghiera` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CG `ex voto` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CH `amore` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - BZ `citazione` (boolean)
+  - CA `infamante` (boolean)
+  - CB `sport` (boolean) 🎯
+  - CC `prostituzione` (boolean)
+  - CD `politica` (boolean)
+  - CE `religiosa` (boolean)
+  - CF `preghiera` (boolean)
+  - CG `ex voto` (boolean)
+  - CH `amore` (boolean)
   - CI `prosa` (boolean) 🎯 `GrfWritingPart.hasProse`
   - CJ `poesia` (boolean) 🎯 `GrfWritingPart.hasPoetry`
   - CK `parlanti` (boolean)
-  - CL `insulto` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CM `imprecazioni` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CN `nome di luogo` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
-  - CO `saluti` (boolean) 🎯 `CategoriesPart:themes` (📚 `categories_themes`)
+  - CL `insulto` (boolean)
+  - CM `imprecazioni` (boolean)
+  - CN `nome di luogo` (boolean)
+  - CO `saluti` (boolean)
 
-- CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`) ⚙️ `ColFigTypes`
+- CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`) ⚙️ `ColFigTypes`:
   - CQ `parti anatomiche` (boolean)
   - CR `volti` (boolean)
   - CS `busto` (boolean)
@@ -516,12 +517,12 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - DI `simbolo zodiaco` (boolean)
   - DJ `grafitto da affilitura` (boolean)
 
-- DK `edizione e commento`: header column.
-  - DL `edizione` 🎯 `BibliographyPart`, manually filled
-  - DM `codice iconclass` obsolete, ignore
+- DK `edizione e commento`: header column:
+  - DL `edizione` 🎯 `BibliographyPart`: manually filled.
+  - DM `codice iconclass`: obsolete, ignore.
   - DN `commento` 🎯 `NotePart` ⚙️ `ColComment`
   - DO `osservazioni sullo stato di conservazione`, 🎯 `GrfStatesPart.note` ⚙️ `ColStates`
-  - DP `bibliografia` 🎯 `BibliographyPart`, manually filled
+  - DP `bibliografia` 🎯 `BibliographyPart`: manually filled.
   - DQ `data primo rilievo` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
   - DR `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
 
