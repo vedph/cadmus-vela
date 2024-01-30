@@ -34,6 +34,7 @@ Core models for Cadmus VeLA.
     - [Values](#values)
     - [Columns](#columns)
   - [History](#history)
+    - [2.1.3](#213)
     - [2.1.2](#212)
     - [2.1.1](#211)
     - [2.1.0](#210)
@@ -102,6 +103,7 @@ Graffiti localization.
     - `value`\* (`string`)
 - `period`\* (`string`, 📚 thesaurus: `grf-periods`)
 - `objectType`\* (`string`, 📚 thesaurus: `grf-support-object-types`)
+- `damnatio` (`string`, 📚 thesaurus: `grf-damnatio-types`)
 - `function`\* (`string`, 📚 thesaurus: `grf-support-functions`)
 - `note` (`string` 5000): note about original function.
 - `indoor`\* (`boolean`)
@@ -453,7 +455,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - BB `tipo di lama` (string): values are only `lama curva`, `lama dritta` or empty. We thus provide two entries in the thesaurus for these values.
 
 - BC `damnatio`: header column.
-  - BD `presenza di damnatio` (boolean) 🎯 `CategoriesPart:topic` adding new entries to the thesaurus: "damnatio", "partial damnatio"
+  - BD `presenza di damnatio` (`parziale`, `totale`, `non presente` or empty) 🎯 `GrfLocalizationPart.damnatio` (📚 `grf-damnatio-types`) ⚙️ `ColDamnatio`
 
 - BE `caratteristiche grafiche`: header column, all targeting 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) except when stated otherwise:
   - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty
@@ -527,6 +529,10 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - DR `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
 
 ## History
+
+### 2.1.3
+
+- 2024-01-30: added `damnatio` type to `GrfLocalizationPart`.
 
 ### 2.1.2
 

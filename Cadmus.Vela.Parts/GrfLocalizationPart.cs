@@ -20,13 +20,14 @@ public sealed class GrfLocalizationPart : PartBase
 
     /// <summary>
     /// Gets or sets the period. This is a generic chronological classification
-    /// (e.g. "Roman", "Medieval", "Modern", "Contemporary", etc.).
+    /// (e.g. "Roman", "Medieval", "Modern", "Contemporary", etc.), usually
+    /// from a thesaurus like <c>grf-periods</c>.
     /// </summary>
     public string? Period { get; set; }
 
     /// <summary>
-    /// Gets or sets the support's current function (usually from
-    /// <c>grf-support-functions).</c>.
+    /// Gets or sets the support's current function (usually from a thesaurus
+    /// like <c>grf-support-functions).</c>.
     /// </summary>
     public string? Function { get; set; }
 
@@ -40,6 +41,12 @@ public sealed class GrfLocalizationPart : PartBase
     /// <c>grf-support-object-types</c>).
     /// </summary>
     public string? ObjectType { get; set; }
+
+    /// <summary>
+    /// Gets or sets the damnatio type if any, usually from a thesaurus like
+    /// <c>grf-damnatio-types</c>.
+    /// </summary>
+    public string? Damnatio { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this graffiti is indoor.
@@ -63,6 +70,7 @@ public sealed class GrfLocalizationPart : PartBase
         builder.AddValue("period", Period);
         builder.AddValue("function", Function);
         builder.AddValue("object-type", ObjectType);
+        builder.AddValue("damnatio", Damnatio);
         builder.AddValue("indoor", Indoor);
 
         return builder.Build(this);
@@ -89,6 +97,9 @@ public sealed class GrfLocalizationPart : PartBase
             new DataPinDefinition(DataPinValueType.String,
                 "object-type",
                 "The graffiti's object type."),
+            new DataPinDefinition(DataPinValueType.String,
+                "damnatio-type",
+                "The graffiti's damnatio type if any."),
             new DataPinDefinition(DataPinValueType.Boolean,
                 "indoor",
                 "True if the graffiti is indoor.")
