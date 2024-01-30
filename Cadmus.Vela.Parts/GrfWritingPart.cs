@@ -26,16 +26,27 @@ public sealed class GrfWritingPart : PartBase
     public List<string> Languages { get; set; }
 
     /// <summary>
+    /// Gets or sets the glottolog (https://glottolog.org) code(s).
+    /// </summary>
+    public List<string> GlottologCodes { get; set; }
+
+    /// <summary>
     /// Gets or sets the script type(s) (e.g. gothic, merchant, etc.; usually from
     /// <c>grf-writing-scripts</c>).
     /// </summary>
     public List<string> Scripts { get; set; }
 
     /// <summary>
-    /// Gets or sets the casing (e.g. prevailing uppercase, prevailing lowercase,
-    /// etc; usually from <c>grf-writing-casing</c>).
+    /// Gets or sets the casing (e.g. uppercase, lowercase, etc; usually from
+    /// <c>grf-writing-casing</c>).
     /// </summary>
     public string? Casing { get; set; }
+
+    /// <summary>
+    /// Gets or sets the prevalent casing, usually from
+    /// <c>grf-writing-prevalent-casing</c>.
+    /// </summary>
+    public string? PrevalentCasing { get; set; }
 
     /// <summary>
     /// Gets or sets script features (usually from <c>grf-writing-script-features</c>).
@@ -99,6 +110,7 @@ public sealed class GrfWritingPart : PartBase
     public GrfWritingPart()
     {
         Languages = [];
+        GlottologCodes = [];
         Scripts = [];
         Counts = [];
         ScriptFeatures = [];
@@ -119,6 +131,7 @@ public sealed class GrfWritingPart : PartBase
 
         builder.AddValue("system", System);
         builder.AddValues("language", Languages);
+        builder.AddValues("glottolog", GlottologCodes);
         builder.AddValues("script", Scripts);
 
         if (Counts?.Count > 0)
@@ -158,7 +171,11 @@ public sealed class GrfWritingPart : PartBase
                 "The writing system."),
              new DataPinDefinition(DataPinValueType.String,
                 "language",
-                "The language(s) used in the text.",
+                "The language(s) in the text.",
+                "M"),
+             new DataPinDefinition(DataPinValueType.String,
+                "glottolog",
+                "The Glottolog code(s) for languages in the text.",
                 "M"),
              new DataPinDefinition(DataPinValueType.String,
                 "script",

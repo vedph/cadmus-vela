@@ -34,6 +34,7 @@ Core models for Cadmus VeLA.
     - [Values](#values)
     - [Columns](#columns)
   - [History](#history)
+    - [2.1.4](#214)
     - [2.1.3](#213)
     - [2.1.2](#212)
     - [2.1.1](#211)
@@ -165,8 +166,10 @@ Writing description.
 
 - `system`\* (`string`, 📚 thesaurus: `grf-writing-systems`, usually ISO 15924 lowercase): writing system. This is required because there are cases where writing system and languages are not the same, e.g. you write Greek text with Latin letters.
 - `languages`\* (`string[]`, 📚 thesaurus: `grf-writing-languages`, usually ISO 639-3)
+- `glottologCodes` (`string[]`, 📚 thesaurus: `grf-writing-glottologs`)
 - `scripts`\* (`string[]`, 📚 thesaurus: `grf-writing-scripts`): paleographic script(s) (e.g. gothic, merchant, etc.).
 - `casing`\* (`string`, 📚 thesaurus: `grf-writing-casing`)
+- `prevalentCasing`\* (`string`, 📚 thesaurus: `grf-writing-prevalent-casing`)
 - `scriptFeatures` (`string[]`; 📚 thesaurus: `grf-writing-script-features`)
 - `letterFeatures` (`string[]`; 📚 thesaurus: `grf-writing-letter-features`)
 - `counts` (`DecoratedCount`[]):
@@ -457,8 +460,8 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - BC `damnatio`: header column.
   - BD `presenza di damnatio` (`parziale`, `totale`, `non presente` or empty) 🎯 `GrfLocalizationPart.damnatio` (📚 `grf-damnatio-types`) ⚙️ `ColDamnatio`
 
-- BE `caratteristiche grafiche`: header column, all targeting 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) except when stated otherwise:
-  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty
+- BE `caratteristiche grafiche`: header column, all targeting 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) using ⚙️ `ColWriting` except when stated otherwise:
+  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty TODO
   - BG `sistema interpuntivo` (boolean)
   - BH `nessi e legamenti` (boolean)
   - BI `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
@@ -529,6 +532,10 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - DR `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
 
 ## History
+
+### 2.1.4
+
+- 2024-01-30: added `glottologCodes` and `prevalentCasing` to `GrfWritingPart`.
 
 ### 2.1.3
 
