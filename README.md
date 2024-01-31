@@ -427,7 +427,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - Y `alfabeto` 🎯 `GrfWritingPart.system` (📚 `grf-writing-systems`) ⚙️ `ColWriting`
 - Z `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
 - AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`) ⚙️ `ColWriting`
-- AB `codice glottologico` [Glottolog](https://glottolog.org/) code: this is used whenever ISO639-3 is not enough to specify a sub-entry of it. So, in this case we encode this into `GrfWritingPart.languages` like for AA, but prefixed by AA value if any, with pattern `ISO_GLOT` (e.g. `ita_nap`) (📚 `grf-writing-languages`). ⚠️ This implies that the thesaurus should include not only all the required codes from ISO639-3, but also all those from Glottolog, with format `ISO_GLOT` ⚙️ `ColWriting`
+- AB `codice glottologico` [Glottolog](https://glottolog.org/) codes (📚 `grf-writing-glottologs`) ⚙️ `ColWriting`
 - AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`) ⚙️ `ColWriting`
 - AD `tipologia grafica` (`corsivo`, `maiuscolo`, `maiuscolo e minuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`) ⚙️ `ColWriting`
 
@@ -461,7 +461,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - BD `presenza di damnatio` (`parziale`, `totale`, `non presente` or empty) 🎯 `GrfLocalizationPart.damnatio` (📚 `grf-damnatio-types`) ⚙️ `ColDamnatio`
 
 - BE `caratteristiche grafiche`: header column, all targeting 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) using ⚙️ `ColWriting` except when stated otherwise:
-  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty TODO
+  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty (📚 `grf-writing-prevalent-casing`) ⚙️ `ColWriting`
   - BG `sistema interpuntivo` (boolean)
   - BH `nessi e legamenti` (boolean)
   - BI `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
