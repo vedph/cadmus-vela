@@ -34,6 +34,7 @@ Core models for Cadmus VeLA.
     - [Values](#values)
     - [Columns](#columns)
   - [History](#history)
+    - [2.1.7](#217)
     - [2.1.4](#214)
     - [2.1.3](#213)
     - [2.1.2](#212)
@@ -533,7 +534,11 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 ## History
 
-- 2024-02-11: updated test packages.
+### 2.1.7
+
+- 2024-02-11:
+  - updated test packages.
+  - fixed missing tag in `VelaRepositoryProvider`.
 
 ### 2.1.4
 

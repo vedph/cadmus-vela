@@ -9,13 +9,16 @@ using System;
 using Cadmus.Vela.Parts;
 using Cadmus.Epigraphy.Parts;
 using Cadmus.Geo.Parts;
+using Fusi.Tools.Configuration;
 
 namespace Cadmus.Vela.Services;
 
 /// <summary>
-/// Cadmus __PRJ__ repository provider.
+/// Cadmus VeLA repository provider.
+/// Tag: <c>repository-provider.vela</c>.
 /// </summary>
 /// <seealso cref="IRepositoryProvider" />
+[Tag("repository-provider.vela")]
 public sealed class VelaRepositoryProvider : IRepositoryProvider
 {
     private readonly IPartTypeProvider _partTypeProvider;
