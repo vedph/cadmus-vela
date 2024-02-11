@@ -533,6 +533,8 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 ## History
 
+- 2024-02-11: updated test packages.
+
 ### 2.1.4
 
 - 2024-01-30: added `glottologCodes` and `prevalentCasing` to `GrfWritingPart`.
