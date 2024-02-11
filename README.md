@@ -406,7 +406,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - I `interno/esterno` 🎯 `GrfLocalizationPart.indoor` ⚙️ `ColIndoor`
 - J `supporto` 🎯 `GrfSupportPart.type` (📚 `grf-support-types`) ⚙️ `ColSupport`
 - K `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`) ⚙️ `ColMatType`
-- L `eta` (string) one of `romana`, `medievale`, `moderna`, `contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`) ⚙️ `ColPeriod`
+- L `età` (string) one of `età romana`, `età medioevale`, `età moderna`, `età contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`) ⚙️ `ColPeriod`
 - M `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
 - N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. 🎯 `HistoricalDatePart` ⚙️ `ColDatation`. A single cell contains any of these formats:
   - `R SECOLO` where `R` is an uppercase Roman number.
