@@ -34,15 +34,6 @@ Core models for Cadmus VeLA.
     - [Values](#values)
     - [Columns](#columns)
   - [History](#history)
-    - [2.1.7](#217)
-    - [2.1.4](#214)
-    - [2.1.3](#213)
-    - [2.1.2](#212)
-    - [2.1.1](#211)
-    - [2.1.0](#210)
-    - [2.0.1](#201)
-    - [2.0.0](#200)
-    - [1.0.1](#101)
 
 ## Data Model
 
@@ -533,6 +524,10 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
   - DR `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
 
 ## History
+
+### 2.1.8
+
+- 2024-05-15: updated packages.
 
 ### 2.1.7
 
