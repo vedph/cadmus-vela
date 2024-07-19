@@ -525,6 +525,10 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 ## History
 
+### 2.1.9
+
+- 2024-07-19: updated packages.
+
 ### 2.1.8
 
 - 2024-05-15: updated packages.
