@@ -14,14 +14,14 @@
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 		<Copyright>by Daniele Fusi</Copyright>
 		<PackageTags>Cadmus;epigraphy</PackageTags>
-		<Version>2.1.10</Version>
-		<FileVersion>2.1.10</FileVersion>
-		<AssemblyVersion>2.1.10</AssemblyVersion>
+		<Version>2.1.11</Version>
+		<FileVersion>2.1.11</FileVersion>
+		<AssemblyVersion>2.1.11</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Bogus" Version="35.6.1" />
-		<PackageReference Include="Cadmus.Seed" Version="7.0.3" />
+		<PackageReference Include="Cadmus.Seed" Version="7.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
