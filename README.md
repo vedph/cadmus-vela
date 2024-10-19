@@ -32,8 +32,22 @@ Core models for Cadmus VeLA.
       - [LigatureLayerFragment](#ligaturelayerfragment)
   - [Original Spreadsheet](#original-spreadsheet)
     - [Values](#values)
-    - [Columns](#columns)
+    - [Columns - Version 2](#columns---version-2)
+    - [Columns - Version 1](#columns---version-1)
   - [History](#history)
+    - [2.1.11](#2111)
+    - [2.1.10](#2110)
+    - [2.1.9](#219)
+    - [2.1.8](#218)
+    - [2.1.7](#217)
+    - [2.1.4](#214)
+    - [2.1.3](#213)
+    - [2.1.2](#212)
+    - [2.1.1](#211)
+    - [2.1.0](#210)
+    - [2.0.1](#201)
+    - [2.0.0](#200)
+    - [1.0.1](#101)
 
 ## Data Model
 
@@ -383,7 +397,154 @@ The following types can be defined:
 - `string`: a string, representing a value or a null as defined above.
 - `ISO639-3`: a single ISO-639-3 language code or empty.
 
-### Columns
+### Columns - Version 2
+
+Columns have been changed after this tool had been completed. A new version of the tool will match this new state:
+
+The ID after 🎯 represents the target for the column, and the one after ⚙️ the parser used by the [CLI import tool](https://github.com/vedph/cadmus-vela-tool).
+
+- A ID (no label: e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id ⚙️ `Row`.
+- B `immagine`: ignored.
+- C `stato` 🌟
+- D `autore` 🌟
+- E `segmento progetto` 🌟
+- F,G,H (6-8) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart` ⚙️ `ColArea`
+- I = `funzione originaria` 🎯 `GrfLocalizationPart.note` ⚙️ `ColOriginalFn`
+- J `funzione attuale` 🎯 `GrfLocalizationPart.function` (📚 `categories_functions`) ⚙️ `ColCurrentFn`
+- K `tipologia struttura` 🎯 `GrfLocalizationPart.objectType` (📚 `grf-support-object-types`) ⚙️ `ColStructType`
+- L `interno/esterno` 🎯 `GrfLocalizationPart.indoor` ⚙️ `ColIndoor`
+- M `supporto` 🎯 `GrfSupportPart.type` (📚 `grf-support-types`) ⚙️ `ColSupport`
+- N `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`) ⚙️ `ColMatType`
+- O `età` (string) one of `età romana`, `età medioevale`, `età moderna`, `età contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`) ⚙️ `ColPeriod`
+- P `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
+- Q-S (17-19) = `terminus post`, `terminus ante`, `cronologia`. 🎯 `HistoricalDatePart` ⚙️ `ColDatation`. A single cell contains any of these formats:
+  - `R SECOLO` where `R` is an uppercase Roman number.
+  - `YYYY` year.
+
+>Possible combinations: Q, R, S, Q+R, Q+S=Q, R+S=Q. This is because Q/R are termini and can occur together for an interval, but for some reason in this case S copies the value from Q/R and must be ignored.
+
+- T `figurativi` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- U `testo` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- V `numeri` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- W `cornice` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+
+- X `tipo figurativo` 🎯 `GrfFramePart.figure` ⚙️ `ColFig`
+- Y `tipo cornice` 🎯 `GrfFramePart.frame` ⚙️ `ColFig`
+- Z `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size` ⚙️ `ColSize`
+
+- AA `numero righe` (int) 🎯 `GrfWritingPart.counts` ⚙️ `ColWriting`
+- AB `alfabeto` 🎯 `GrfWritingPart.system` (📚 `grf-writing-systems`) ⚙️ `ColWriting`
+- AC `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
+- AD `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`) ⚙️ `ColWriting`
+- AE `codice glottologico` [Glottolog](https://glottolog.org/) codes (📚 `grf-writing-glottologs`) ⚙️ `ColWriting`
+- AF `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`) ⚙️ `ColWriting`
+- AG `tipologia grafica` (`corsivo`, `maiuscolo`, `maiuscolo e minuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`) ⚙️ `ColWriting`
+
+- AH `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
+  - AI `presenza di disegno preparatorio` (boolean) ⚙️ `ColTech`
+  - AJ `presenza di preparazione del supporto` (boolean) ⚙️ `ColTech`
+  - AK `graffio` (boolean) ⚙️ `ColTech`
+  - AL `incisione` (boolean) ⚙️ `ColTech`
+  - AM `intaglio` (boolean) ⚙️ `ColTech`
+  - AN `disegno` (boolean) ⚙️ `ColTech`
+  - AO `punzonatura` (boolean) ⚙️ `ColTech`
+  - AP `a rilievo` (boolean) ⚙️ `ColTech`
+
+> Entry `rubricatura` (boolean) has been removed from this set.
+
+- AQ `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools` (📚 `grf-tools`) ⚙️ `ColTech`:
+  - AR `chiodo` (boolean)
+  - AS `gradina` (boolean)
+  - AT `scalpello` (boolean)
+  - AU `sgorbia` (boolean)
+  - AV `sega` (boolean)
+  - AW `bocciarda` (boolean)
+  - AX `carbocino` (sic, boolean) 🌟
+  - AY `seppia` 🌟 (boolean)
+  - AZ `grafite` (boolean)
+  - BA `matita di piombo` (boolean)
+  - BB `fumo di candela` (boolean)
+  - BC `inchiostro` (boolean)
+  - BD `vernice` (boolean)
+  - BE `lama (affilatura)` (boolean)
+  - BF `tipo di lama` (string): values are only `lama curva`, `lama dritta` or empty. We thus provide two entries in the thesaurus for these values.
+
+- BG `damnatio`: header column.
+  - BH `presenza di damnatio` (`parziale`, `totale`, `non presente` or empty) 🎯 `GrfLocalizationPart.damnatio` (📚 `grf-damnatio-types`) ⚙️ `ColDamnatio`
+
+- BI `caratteristiche grafiche`: header column, all targeting 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) using ⚙️ `ColWriting` except when stated otherwise:
+  - BJ `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty (📚 `grf-writing-prevalent-casing`) ⚙️ `ColWriting`
+  - BK `sistema interpuntivo` (boolean)
+  - BL `nessi e legamenti` (boolean)
+  - BM `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
+  - BN `abbreviazioni` (boolean)
+
+- BO `monogrammi, lettere singole, ecc`: header column, all targeting 🎯 `GrfWritingPart.letterFeatures` (📚 `grf-writing-letter-features`) using ⚙️ `ColWriting`:
+  - BP `monogrammi` (boolean)
+  - BQ `lettera singola` (boolean)
+  - BR `lettere non interpretabili` (boolean): this also sets an item flag.
+  - BS `disegno non interpretabile` (boolean): this also sets an item flag.
+
+- BT `tipologia di argomento`: header column, all targeting 🎯 `CategoriesPart:topic` (📚 `categories_topic`) unless specified otherwise:
+  - BU `funeraria` (boolean)
+  - BV `commemorativa` (boolean)
+  - BW `firma` (boolean)
+  - BX `celebrativa` (boolean)
+  - BY `esortativa` (boolean)
+  - BZ `didascalica` (boolean)
+  - CA `iniziale\i nome persona` (boolean)
+  - CB `sigla` (boolean)
+  - CC `segnaletica` (boolean)
+  - CD `citazione` (boolean)
+  - CE `infamante` (boolean)
+  - CF `sport` (boolean) 🎯
+  - CG `prostituzione` (boolean)
+  - CH `politica` (boolean)
+  - CI `religiosa` (boolean)
+  - CJ `preghiera` (boolean)
+  - CK `ex voto` (boolean)
+  - CL `amore` (boolean)
+  - CM `prosa` (boolean) 🎯 `GrfWritingPart.hasProse`
+  - CN `poesia` (boolean) 🎯 `GrfWritingPart.hasPoetry`
+  - CO `parlanti` (boolean)
+  - CP `insulto` (boolean)
+  - CQ `imprecazioni` (boolean)
+  - CR `nome di luogo` (boolean)
+  - CS `saluti` (boolean)
+
+- CT `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`) ⚙️ `ColFigTypes`:
+  - CU `parti anatomiche` (boolean)
+  - CV `volti` (boolean)
+  - CW `busto` (boolean)
+  - CX `figura umana` (boolean)
+  - CY `erotici` (boolean)
+  - CZ `croce` (boolean)
+  - DA `cuore` (boolean)
+  - DB `architetture` (boolean)
+  - DC `paesaggi` (boolean)
+  - DD `geometrico` (boolean)
+  - DE `imbarcazioni` (boolean)
+  - DF `piante` (boolean)
+  - DG `gioco` (boolean)
+  - DH `arma` (boolean)
+  - DI `armatura` (boolean)
+  - DJ `stemma` (boolean)
+  - DK `bandiera` (boolean)
+  - DL `animale` (boolean)
+  - DM `simbolo zodiaco` (boolean)
+  - DN `grafitto da affilitura` (boolean)
+
+- DO `edizione e commento`: header column:
+  - DP `edizione` 🎯 `BibliographyPart`: manually filled.
+  - DQ `commento` 🎯 `NotePart` ⚙️ `ColComment`
+  - DR `osservazioni sullo stato di conservazione`, 🎯 `GrfStatesPart.note` ⚙️ `ColStates`
+  - DS `bibliografia` 🎯 `BibliographyPart`: manually filled.
+  - DT `data primo rilievo` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
+  - DU `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
+  
+> `codice iconclass`: obsolete, has been removed.
+
+### Columns - Version 1
 
 Columns marked as "header columns" are always empty and serve to group the next columns together, until the next header column. When not specified, the type is `string`.
 
