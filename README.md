@@ -405,9 +405,9 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 - A ID (no label: e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id ⚙️ `Row`.
 - B `immagine`: ignored.
-- C `stato` 🌟
-- D `autore` 🌟
-- E `segmento progetto` 🌟
+- C `stato` 🌟 🎯 `GrfStatesPart.states` (📚 `grf-states`) ⚙️ `ColStates`.
+- D `autore` 🌟 🎯 `MetadataPart` ⚙️ `ColAuthor`.
+- E `segmento progetto` 🌟 🎯 item flags: `urbana`=64, `monastica`=128, `ducale`=256.
 - F,G,H (6-8) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart` ⚙️ `ColArea`
 - I = `funzione originaria` 🎯 `GrfLocalizationPart.note` ⚙️ `ColOriginalFn`
 - J `funzione attuale` 🎯 `GrfLocalizationPart.function` (📚 `categories_functions`) ⚙️ `ColCurrentFn`
