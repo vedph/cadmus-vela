@@ -407,7 +407,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - B `immagine`: ignored.
 - C `stato` 🌟 🎯 `GrfStatesPart.states` (📚 `grf-states`) ⚙️ `ColStates`.
 - D `autore` 🌟 🎯 `MetadataPart` ⚙️ `ColAuthor`.
-- E `segmento progetto` 🌟 🎯 item flags: `urbana`=64, `monastica`=128, `ducale`=256.
+- E `segmento progetto` 🌟 🎯 item flags: `vela urbana`=64, `vela monastica`=128, `vela palazzo ducale`=256, `imai`=512.
 - F,G,H (6-8) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart` ⚙️ `ColArea`
 - I = `funzione originaria` 🎯 `GrfLocalizationPart.note` ⚙️ `ColOriginalFn`
 - J `funzione attuale` 🎯 `GrfLocalizationPart.function` (📚 `categories_functions`) ⚙️ `ColCurrentFn`
