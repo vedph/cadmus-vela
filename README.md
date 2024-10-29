@@ -3,385 +3,171 @@
 - 🔗 [Cadmus VeLA API](https://github.com/vedph/cadmus-vela-api)
 - 🔗 [Cadmus VeLA app](https://github.com/vedph/cadmus-vela-app)
 
-Core models for Cadmus VeLA.
+Core models for Cadmus VeLA 3. Old models for VeLA 2 are [here](old-models.md).
 
-- [Cadmus VeLA Core](#cadmus-vela-core)
-  - [Data Model](#data-model)
-    - [Items](#items)
-    - [VeLA Parts](#vela-parts)
-      - [GrfLocalizationPart](#grflocalizationpart)
-      - [GrfSupportPart](#grfsupportpart)
-      - [GrfFigurativePart](#grffigurativepart)
-      - [GrfFramePart](#grfframepart)
-      - [GrfStatesPart](#grfstatespart)
-      - [GrfWritingPart](#grfwritingpart)
-      - [GrfTechniquePart](#grftechniquepart)
-    - [Generic Parts](#generic-parts)
-      - [BibliographyPart](#bibliographypart)
-      - [CategoriesPart](#categoriespart)
-      - [CommentPart](#commentpart)
-      - [DocReferencesPart](#docreferencespart)
-      - [ExternalIdsPart](#externalidspart)
-      - [HistoricalDatePart](#historicaldatepart)
-      - [IndexKeywordsPart](#indexkeywordspart)
-      - [MetadataPart](#metadatapart)
-      - [NotePart](#notepart)
-      - [TokenTextPart](#tokentextpart)
-      - [ChronologyLayerFragment](#chronologylayerfragment)
-      - [CommentsLayerFragment](#commentslayerfragment)
-      - [LigatureLayerFragment](#ligaturelayerfragment)
-  - [Original Spreadsheet](#original-spreadsheet)
-    - [Values](#values)
-    - [Columns - Version 2](#columns---version-2)
-    - [Columns - Version 1](#columns---version-1)
-  - [History](#history)
-    - [2.1.11](#2111)
-    - [2.1.10](#2110)
-    - [2.1.9](#219)
-    - [2.1.8](#218)
-    - [2.1.7](#217)
-    - [2.1.4](#214)
-    - [2.1.3](#213)
-    - [2.1.2](#212)
-    - [2.1.1](#211)
-    - [2.1.0](#210)
-    - [2.0.1](#201)
-    - [2.0.0](#200)
-    - [1.0.1](#101)
+## Models
 
-## Data Model
+A single item represents a graffiti/inscription. Each item has these metadata:
 
-Currently the core data model for VeLA includes 7 specialized parts and 13 general parts. In what follows, each part's model is represented with a list of properties. For each property its data type (string, boolean, etc.) and eventual thesaurus are specified in brackets; arrays are represented with suffix `[]` after the data type, so e.g. `string[]` means a list of strings. Some of the properties in turn are objects with other properties. The required properties are marked with an asterisk.
+- ID (A)
+- flags: include editorial state (C) and project segment (F)
+- title (A)
+- description
 
-### Items
+The item parts are:
 
-Currently the only item is the _graffiti_ item, with parts conventionally grouped in these labelled sections:
+- **summary** (sintesi):
+  - [MetadataPart](https://github.com/vedph/cadmus-general/blob/master/docs/metadata.md): used metadata are:
+    - `id` (A)
+    - `author` (E)
+    - `_edition`: temporary store for edition (ER)
+    - `_comment`: temporary store for comment (ES)
+    - `_biblio`: temporary store for bibliography (ET)
+  - 🌟 [DistrictLocationPart](#districtlocationpart)
+  - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`fn` for function of inscription/graffiti (S)
+  - 🌟❗ `EpiSupportPart` (🔑 `it.vedph.epigraphy.support`), refactored:
+    - `material`\* (`string` 📚 `epi-support-materials`, BW)
+    - `originalFn` (`string` 📚 `epi-support-functions`, M)
+    - `currentFn` (`string` 📚 `epi-support-functions`, O)
+    - `originalType` (`string` 📚 `epi-support-types`, N)
+    - `currentType` (`string` 📚 `epi-support-types`, P)
+    - `objectType` (`string` 📚 `epi-support-object-types`, R)
+    - `indoor` (`boolean`, Q)
+    - `supportSize` (`PhysicalSize`, BY)
+    - `hasField` (`boolean`, CF)
+    - `fieldSize` (`PhysicalSize`, CG)
+    - `hasMirror` (`boolean`, CC)
+    - `mirrorSize` (`PhysicalSize`, BZ)
+    - `hasFrame` (`boolean`, CD)
+    - `frame` (`string`, CE)
+    - `counts` (`DecoratedCount[]`, 📚 `epi-support-count-types` DF): e.g. rows, columns, etc.
+    - `features` (📚 `epi-support-features`, S): e.g. ruling, etc.
+    - `hasDamnatio` (`boolean`, CB)
+    - `note` (`string`, 5000)
+  - [PhysicalStatesPart](https://github.com/vedph/cadmus-general/blob/master/docs/physical-states.md)
+  - [NotePart](https://github.com/vedph/cadmus-general/blob/master/docs/note.md):`txt`: this is the first draft of the text as copied on the spot.
+  - [NotePart](https://github.com/vedph/cadmus-general/blob/master/docs/note.md):`dat`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
 
-- _summary_ ("sintesi"):
-  - [GrfLocalizationPart](#grflocalizationpart)
-  - [CategoriesPart](#categoriespart) with role `feature` (generic graffiti features; 📚 `categories_feature`)
-  - [GrfSupportPart](#grfsupportpart)
-  - [GrfFramePart](#grfframepart)
-  - [GrfStatesPart](#grfstatespart)
-  - [NotePart](#notepart) with role `text`: this is the first draft of the text as copied on the spot.
-  - [NotePart](#notepart) with role `date`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
+- **details** (dettagli):
+  - 🌟❗ `EpiWritingPart` (🔑 `it.vedph.epigraphy.writing`), refactored:
+    - `system`\* (📚 `epi-writing-systems`, usually [ISO 15924](https://unicode.org/iso15924/iso15924-codes.html))
+    - `script`\* (📚 `epi-writing-scripts`, DJ)
+    - `casing` (`string`, 📚 `epi-writing-casings`): prevalent casing if applicable.
+    - `features` (DI+DK, 📚 `epi-writing-features`)
+    - `note` (`string`, 5000)
+  - 🌟 `EpiTechniquePart` (🔑 `it.vedph.epigraphy.technique`):
+    - `techniques`\* (`string[]`, 📚 `epi-technique-types`)
+    - `tools`\* (`string[]`, 📚 `epi-technique-tools`)
+    - `note` (`string`, 5000)
+  - [HistoricalDatePart](https://github.com/vedph/cadmus-general/blob/master/docs/historical-date.md)
+  - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`lng` (📚 `categories_lng`) for a hierarchical taxonomy with this structure (which allows extending the list and picking more than a single language for multilingual texts):
+    - languages: Y entries
+    - ISO639: Z entries
+    - glottolog: AA entries
+  - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`cnt` (📚 `categories_cnt`) for content, covering:
+    - content: AB entries
+    - numbers: BO entries (in this case BO is redundant)
+  - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`fig` (📚 `categories_fig`) for figurative features (DR)
 
-- _details_ ("dettagli"):
-  - [GrfWritingPart](#grfwritingpart)
-  - [GrfTechniquePart](#grftechniquepart)
-  - [GrfFigurativePart](#grffigurativepart)
-  - [HistoricalDatePart](#historicaldatepart): this provides a structured datation model which is machine-actionable.
-  - [CategoriesPart](#categoriespart) with role `topic` (e.g. sport, politics, etc.: 📚 `categories_topic`)
+- **text** (testo):
+  - [TokenTextPart](https://github.com/vedph/cadmus-general/blob/master/docs/token-text.md): the edited text, susceptible of annotations via layers.
+  - [CommentsLayerFragment](https://github.com/vedph/cadmus-general/blob/master/docs/fr.comment.md) (📚 `comment-categories`)
+  - [ChronologyLayerFragment](https://github.com/vedph/cadmus-general/blob/master/docs/fr.chronology.md)
+  - [EpiLigaturesLayerFragment](fr.it.vedph.epigraphy.ligatures) (📚 `epi-ligatures-types`)
 
-- _text_ ("testo"):
-  - [TokenTextPart](#tokentextpart): the edited text, susceptible of annotations via layers.
-  - [CommentsLayerFragment](#commentslayerfragment) (📚 `comment-categories`)
-  - [ChronologyLayerFragment](#chronologylayerfragment)
-  - [LigaturesLayerFragment](#ligaturelayerfragment) (📚 `epi-ligature-types`)
+- **comment** (commento):
+  - [CommentPart](https://github.com/vedph/cadmus-general/blob/master/docs/comment.md) (📚 `comment-categories`)
+  - [NotePart](https://github.com/vedph/cadmus-general/blob/master/docs/note.md)
 
-- _comment_ ("commento"):
-  - [CommentPart](#commentpart) (📚 `comment-categories`)
-  - [NotePart](#notepart)
+- **references** (riferimenti):
+  - [BibliographyPart](https://github.com/vedph/cadmus-general/blob/master/docs/bibliography.md) (📚 `bibliography-author-roles`, `bibliography-languages`, `bibliography-types`)
+  - [DocReferencesPart](https://github.com/vedph/cadmus-general/blob/master/docs/doc-references.md)
+  - [ExternalIdsPart](https://github.com/vedph/cadmus-general/blob/master/docs/external-ids.md)
 
-- _classification_ ("classificazione"):
-  - [MetadataPart](#metadatapart)
-  - [IndexKeywordsPart](#indexkeywordspart) (📚 `languages`)
+### DistrictLocationPart
 
-- _references_ ("riferimenti"):
-  - [BibliographyPart](#bibliographypart) (📚 `bibliography-author-roles`, `bibliography-languages`, `bibliography-types`)
-  - [DocReferencesPart](#docreferencespart)
-  - [ExternalIdsPart](#externalidspart)
+A new generic part for a single, district-based location with configurable hierarchy and presets. Derived from obsoleted `GrfLocalizationPart`.
 
-### VeLA Parts
-
-These models are specific to the VeLA project, but designed to fit a more generic schema for graffiti.
-
-#### GrfLocalizationPart
-
-- 🔑 ID: `it.vedph.graffiti.localization`
-
-Graffiti localization.
-
-- `place`\* (🧱 `ProperName`):
-  - `language` (`string`, 📚 thesaurus: `grf-place-languages`)
-  - `tag` (`string`)
-  - `pieces` (`ProperNamePiece[]`, 📚 thesaurus: `grf-place-piece-types`, providing 3 levels: area, sestriere, location):
-    - `type`\* (`string`)
-    - `value`\* (`string`)
-- `period`\* (`string`, 📚 thesaurus: `grf-periods`)
-- `objectType`\* (`string`, 📚 thesaurus: `grf-support-object-types`)
-- `damnatio` (`string`, 📚 thesaurus: `grf-damnatio-types`)
-- `function`\* (`string`, 📚 thesaurus: `grf-support-functions`)
-- `note` (`string` 5000): note about original function.
-- `indoor`\* (`boolean`)
-
-#### GrfSupportPart
-
-- 🔑 ID: `it.vedph.graffiti.support`
-
-Material support.
-
-- `type`\* (`string`, 📚 thesaurus: `grf-support-types`)
-- `material`\* (`string`, 📚 thesaurus: `grf-support-materials`)
-- `note` (`string`, 5000)
-
-#### GrfFigurativePart
-
-- 🔑 ID: `it.vedph.graffiti.figurative`
-
-Figurative part description.
-
-- `types` (`string[]`, 📚 thesaurus: `grf-figurative-types`)
-- `description` (`string`, 5000)
-
-#### GrfFramePart
-
-- 🔑 ID: `it.vedph.graffiti.frame`
-
-Frame, size and figure.
-
-- `size`\* (🧱 `PhysicalSize`):
-  - `tag` (`string`, 📚 thesaurus: `physical-size-tags`)
-  - `w` (`PhysicalDimension`):
-    - `value`\* (`number`)
-    - `unit`\* (`string`, 📚 thesaurus: `physical-size-units`)
-    - `tag` (`string`, 📚 thesaurus: `physical-size-dim-tags`)
-  - `h` (`PhysicalDimension`)
-  - `d` (`PhysicalDimension`)
-  - `note` (`string`)
-- `figure` (`string`, 5000)
-- `frame` (`string`, 5000)
-
-#### GrfStatesPart
-
-- 🔑 ID: `it.vedph.graffiti.states`
-
-State(s) reported for the graffiti.
-
-- `states`\* (`GrfState[]`):
-  - `type`\* (`string`, 📚 thesaurus: `grf-states`)
-  - `date`\* (`date`)
-  - `reporter`\* (`string`)
-  - `note` (`string`, 5000)
-
-#### GrfWritingPart
-
-- 🔑 ID: `it.vedph.graffiti.writing`
-
-Writing description.
-
-- `system`\* (`string`, 📚 thesaurus: `grf-writing-systems`, usually ISO 15924 lowercase): writing system. This is required because there are cases where writing system and languages are not the same, e.g. you write Greek text with Latin letters.
-- `languages`\* (`string[]`, 📚 thesaurus: `grf-writing-languages`, usually ISO 639-3)
-- `glottologCodes` (`string[]`, 📚 thesaurus: `grf-writing-glottologs`)
-- `scripts`\* (`string[]`, 📚 thesaurus: `grf-writing-scripts`): paleographic script(s) (e.g. gothic, merchant, etc.).
-- `casing`\* (`string`, 📚 thesaurus: `grf-writing-casing`)
-- `prevalentCasing`\* (`string`, 📚 thesaurus: `grf-writing-prevalent-casing`)
-- `scriptFeatures` (`string[]`; 📚 thesaurus: `grf-writing-script-features`)
-- `letterFeatures` (`string[]`; 📚 thesaurus: `grf-writing-letter-features`)
-- `counts` (`DecoratedCount`[]):
-  - `id`\* (`string`, 📚 thesaurus: `grf-writing-count-ids`)
-  - `tag` (`string`, 📚 thesaurus: `grf-writing-count-tags`)
-  - `value`\* (`number`)
-  - `note` (`string`)
-- `hasRuling` (`boolean`)
-- `ruling` (`string`, 5000)
-- `hasRubrics` (`boolean`)
-- `rubrics` (`string`, 5000)
-- `hasProse` (`boolean`)
-- `hasPoetry` (`boolean`)
-- `metres` (`string[]`, 📚 thesaurus: `grf-writing-metres`)
-
-#### GrfTechniquePart
-
-- 🔑 ID: `it.vedph.graffiti.technique`
-
-Techniques and tools.
-
-- `techniques`\* (`string[]`, 📚 thesaurus: `grf-techniques`)
-- `tools`\* (`string[]`, 📚 thesaurus: `grf-tools`)
-- `note` (`string`, 5000)
-
-### Generic Parts
-
-These parts belong to the generic set of Cadmus parts.
-
-#### BibliographyPart
-
-Generic bottom-up bibliography.
-
-- `entries` (`BibEntry[]`):
-  - `key` (`string`)
-  - `typeId`\* (`string`): the type identifier for the entry and its container: e.g. book, journal article, book article, proceedings article, journal review, ebook, site, magazine, newspaper, tweet, TV series, etc.
-  - `authors` (`BibAuthor[]`): 1 or more authors, each having a first name, a last name, and an optional role ID. The role IDs are usually drawn from a thesaurus, and mostly used for contributors:
-    - `firstName` (string): first name.
-    - `lastName`\* (string): last name.
-    - `roleId` (`string`): role ID.
-  - `title`\* (`string`)
-  - `language`\* (`string`): the ISO 639-3 letters (primary) language code of the bibliographic entry.
-  - `container` (`string`): the optional container: a journal, a book, a collection of proceedings, etc.
-  - `contributors` (`BibAuthor[]`): 0 or more contributors, with the same properties of the authors. Usually they also have some role specified, e.g. "editor" for the editor of a book collecting a number of articles from different authors, "translator", "organization", etc.
-  - `edition` (short): the optional edition number. Default is 0.
-  - `number` (string): the optional alphanumeric number (e.g. for a journal).
-  - `publisher` (string): the optional publisher name.
-  - `yearPub` (short): the optional year of publication. Default is 0.
-  - `placePub` (string): the optional place of publication.
-  - `location` (string): the location identifier for the bibliographic item, e.g. an URL or a DOI.
-  - `accessDate` (Date): the optional last access date, typically used for web resources.
-  - `firstPage` (short)
-  - `lastPage` (short)
-  - `keywords` (`Keyword[]`):
-    - `language` (string)
-    - `value` (string)
-  - `note` (`string`)
-
-#### CategoriesPart
-
-A set of categories which can be assigned to the item. In this project we use a couple of such parts referring to two distinct taxonomies, for support functions and content themes. While the generic thesaurus for this part is named `categories`, role-based category parts add to this name a suffix built with `_` and the role ID (thus, `categories_function` and `categories_topic`).
-
-- `categories` (`string[]`)
-
-#### CommentPart
-
-A generic free-text comment with formatting and some metadata.
-
-- `comment` (`Comment`):
-  - `tag` (`string`)
-  - `text` (`string`, Markdown)
-  - `references` (`DocReference[]`):
-    - `type` (`string`)
+- `DistrictLocationPart` (🔑 `it.vedph.district-location`):
+  - `place`\* (🧱 `ProperName`):
+    - `language` (`string`, 📚 `district-name-languages`)
     - `tag` (`string`)
-    - `citation` (`string`)
-    - `note` (`string`)
-  - `links` (`AssertedCompositeId[]`):
-    - `target` (`PinTarget`):
-      - `gid` (`string`)
-      - `label` (`string`)
-      - `itemId` (`string`)
-      - `partId` (`string`)
-      - `partTypeId` (`string`)
-      - `roleId` (`string`)
-      - `name` (`string`)
-      - `value` (`string`)
-    - `scope` (`string`)
-    - `tag` (`string`)
-    - `assertion` (`Assertion`):
-      - `tag` (`string`)
-      - `rank` (`short`)
-      - `references` (`DocReference[]`)
-      - `note` (`string`)
-  - `categories` (`string[]`)
-  - `keywords` (`IndexKeyword[]`):
-    - `language` (`string`)
-    - `value` (`string`)
-    - `indexId` (`string`)
-    - `note` (`string`)
-    - `tag` (`string`)
+    - `pieces` (`ProperNamePiece[]`, 📚 `district-name-piece-types`, providing 3 levels: area, sestriere, location):
+      - `type`\* (`string`)
+      - `value`\* (`string`)
+  - `note` (`string` 5000)
 
-#### DocReferencesPart
+>Levels are provided via a hierarchical-like thesaurus, where each component is defined by a simple ID with any number of children entries, each with a composite ID, e.g.:
 
-Generic short documental references.
+```json
+{
+  "id": "district-name-piece-types@en",
+  "entries": [
+    {
+      "id": "p*",
+      "value": "provincia"
+    },
+    {
+      "id": "c*",
+      "value": "città"
+    },
+    {
+      "id": "a*",
+      "value": "area"
+    },
+    {
+      "id": "a.cr",
+      "value": "Cannareggio"
+    },
+    {
+      "id": "a.cs",
+      "value": "Castello"
+    },
+    {
+      "id": "a.dd",
+      "value": "Dorsoduro"
+    },
+    {
+      "id": "a.sm",
+      "value": "San Marco"
+    },
+    {
+      "id": "a.sp",
+      "value": "San Polo"
+    },
+    {
+      "id": "a.sc",
+      "value": "Santa Croce"
+    },
+    {
+      "id": "l*",
+      "value": "località"
+    },
+    {
+      "id": "s*",
+      "value": "struttura"
+    },
+    {
+      "id": "_order",
+      "value": "p c a l s"
+    }
+  ]
+},
+```
 
-- `references` (`DocReference[]`):
-  - `type` (`string`)
-  - `tag` (`string`)
-  - `citation` (`string`)
-  - `note` (`string`)
+>Here, the asterisk suffix means a parent entry, while entries with children have their values composed by the parent entry ID without the asterisk, plus dot and another ID, like `a.cr`. Finally, the `_order` entry is used to define the hierarchical order of components.
 
-#### ExternalIdsPart
+- other generic epigraphical parts could be available, but are not included here:
+  - [EpiFormulaPatterns](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-formula-patterns.md)
+  - [EpiSigns](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-signs.md)
+  - [EpiSupportFragments](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-support-frr.md)
+  - [EpiLigaturesLayerFragment](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/fr.epi-ligatures.md)
 
-External identifiers associated to the item.
-
-- `ids` (`AssertedId[]`):
-  - `tag` (`string`)
-  - `value`\* (`string`)
-  - `scope` (`string`)
-  - `assertion` (`Assertion`):
-    - `tag` (`string`)
-    - `rank` (`short`)
-    - `references` (`DocReference[]`)
-    - `note` (`string`)
-
-#### HistoricalDatePart
-
-A single historical datation.
-
-- `date` (`HistoricalDate`):
-  - `a`\* (`Datation`):
-    - `value`\* (`int`): the numeric value of the point. Its interpretation depends on other points properties: it may represent a year or a century, or a span between two consecutive Gregorian years.
-    - `isCentury` (boolean): true if value is a century number; false if it's a Gregorian year.
-    - `isSpan` (boolean): true if the value is the first year of a pair of two consecutive years. This is used for calendars which span across two Gregorian years, e.g. 776/5 BC.
-    - `month` (short): the month number (1-12) or 0.
-    - `day` (short): the day number (1-31) or 0.
-    - `isApproximate` (boolean): true if the point is approximate ("about").
-    - `isDubious` (boolean): true if the point is dubious ("perhaphs").
-    - `hint` (string): a short textual hint used to better explain or motivate the datation point.
-  - `b` (`Datation`)
-- `references` (`DocReference[]`):
-  - `type` (`string`)
-  - `tag` (`string`)
-  - `citation` (`string`)
-  - `note` (`string`)
-
-#### IndexKeywordsPart
-
-- `keywords` (`IndexKeyword[]`):
-  - `language` (`string`)
-  - `value` (`string`)
-  - `indexId` (`string`)
-  - `note` (`string`)
-  - `tag` (`string`)
-
-#### MetadataPart
-
-A generic container for name=value metadata.
-
-- `metadata` (`Metadatum[]`):
-  - `type` (`string`)
-  - `name` (`string`)
-  - `value` (`string`)
-
-#### NotePart
-
-A generic free text note with Markdown markup.
-
-- `tag` (string)
-- `note`\* (string, Markdown)
-
-#### TokenTextPart
-
-A token-based text which can get annotations from layer parts.
-
-- `citation` (`string`)
-- `lines`\* (`TextLine[]`):
-  - `y`\* (`int`)
-  - `text`\* (`string`)
-
-#### ChronologyLayerFragment
-
-A layer fragment to annotate a portion of text with a chronological indication.
-
-- `location` (`string`)
-- `tag` (`string`)
-- `label` (`string`)
-- `eventId` (`string`)
-- `date` (`HistoricalDate`): see [above](#historicaldatepart)
-
-#### CommentsLayerFragment
-
-A layer fragment to annotate a portion of text with a comment. The comment has the usual `location` (common to all fragments) and the same model as [CommentPart.comment](#commentpart).
-
-#### LigatureLayerFragment
-
-A layer fragment to annotate a portion of text with a ligature.
-
-- `location` (`string`)
-- `type` (`int`): a numeric value: 0=none, 1=ligature, 2=inversion, 3=overlap, 4=replacement, 5=graft, 6=inclusion, 7=connection, 8=complex (Manzella 1987 149-151).
+---
 
 ## Original Spreadsheet
 
-The original schema was just a flat spreadsheet table, where some columns are grouped under so-called header columns, filled with color and without data, whose purpose is making all the following columns belonging to the same group. Often this is used to represent boolean features in a mutually exclusive relationship. Of course, this is just a hack due to the flat nature of the spreadsheet model.
-
-### Values
+The original schema is just a flat spreadsheet table, where some columns are grouped under so-called header columns, filled with color and without data, whose purpose is making all the following columns belonging to the same group. Often this is used to represent boolean features in a mutually exclusive relationship. Of course, this is just a hack due to the flat nature of the spreadsheet model.
 
 For all the value types:
 
@@ -389,300 +175,199 @@ For all the value types:
 - _casing_ is inconsistent: lowercase everything.
 - _null_ values are strings which represent the absence of a value. As such, they must be treated as if the cell did not contain any value at all: `n\d`.
 
-The following types can be defined:
+Columns have been [refactored](https://docs.google.com/spreadsheets/d/1Palm6ltRzc7zCXIsZcpRx4gf6QX7yjjXrzQvZMTpjmE/edit?gid=832312466#gid=832312466).
 
-- `int`: a single positive integer number.
-- `float`: a single positive floating point number.
-- `boolean`: `si` = true, `no` or empty = false.
-- `string`: a string, representing a value or a null as defined above.
-- `ISO639-3`: a single ISO-639-3 language code or empty.
+The ID after 🎯 represents the target for the column, and the one after ⚙️ the parser used by the [CLI import tool](https://github.com/vedph/cadmus-vela-tool). The symbol 📚 means a closed set of values, usually corresponding to a thesaurus; the symbol ☯️ means a string value representing a 3-state value: `si`, `no`, `n/d` or `n\d`.
 
-### Columns - Version 2
+### Metadata
 
-Columns have been changed after this tool had been completed. A new version of the tool will match this new state:
+- A (no label) (string): ID (e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id ⚙️ `Row`.
+- B `immagine`: ignored. The link between image and item is via ID (column A).
+- C `stato` (📚 string) 🎯 `item.flags`: the editing state of the item (in lavorazione, importata, lavorata, rilevata).
+- D `convalida` (boolean) 🎯 `item.flags`: "convalidata" editing state.
+- E `autore` (string) 🎯 `MetadataPart`.`author`.
+- F `segmento progetto` (📚 string) 🎯 `item.flags` (vela urbana, vela monastica, vela palazzo ducale, imai).
 
-The ID after 🎯 represents the target for the column, and the one after ⚙️ the parser used by the [CLI import tool](https://github.com/vedph/cadmus-vela-tool).
+### Location
 
-- A ID (no label: e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id ⚙️ `Row`.
-- B `immagine`: ignored.
-- C `stato` 🌟 🎯 `GrfStatesPart.states` (📚 `grf-states`) ⚙️ `ColStates`.
-- D `autore` 🌟 🎯 `MetadataPart` ⚙️ `ColAuthor`.
-- E `segmento progetto` 🌟 🎯 item flags: `vela urbana`=64, `vela monastica`=128, `vela palazzo ducale`=256, `imai`=512.
-- F,G,H (6-8) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart` ⚙️ `ColArea`
-- I = `funzione originaria` 🎯 `GrfLocalizationPart.note` ⚙️ `ColOriginalFn`
-- J `funzione attuale` 🎯 `GrfLocalizationPart.function` (📚 `categories_functions`) ⚙️ `ColCurrentFn`
-- K `tipologia struttura` 🎯 `GrfLocalizationPart.objectType` (📚 `grf-support-object-types`) ⚙️ `ColStructType`
-- L `interno/esterno` 🎯 `GrfLocalizationPart.indoor` ⚙️ `ColIndoor`
-- M `supporto` 🎯 `GrfSupportPart.type` (📚 `grf-support-types`) ⚙️ `ColSupport`
-- N `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`) ⚙️ `ColMatType`
-- O `età` (string) one of `età romana`, `età medioevale`, `età moderna`, `età contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`) ⚙️ `ColPeriod`
-- P `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
-- Q-S (17-19) = `terminus post`, `terminus ante`, `cronologia`. 🎯 `HistoricalDatePart` ⚙️ `ColDatation`. A single cell contains any of these formats:
-  - `R SECOLO` where `R` is an uppercase Roman number.
-  - `YYYY` year.
+- (G) `contesto attuale di conservazione` 🎯 `DistrictLocationPart`:
+  - H `provincia` (📚 string: see e.g. <https://github.com/p1mps/regioni-province-comuni-italia/blob/master/regioni_province.csv>)
+  - I `città` (string)
+  - J `centri/localita'` (string, e.g. Cannareggio)
+  - K `localizzazione` (string, e.g. Fondamenta Daniele Canal)
+  - L `denominazione struttura` (string, e.g. Chiesa Santa Maria dei Servi)
 
->Possible combinations: Q, R, S, Q+R, Q+S=Q, R+S=Q. This is because Q/R are termini and can occur together for an interval, but for some reason in this case S copies the value from Q/R and must be ignored.
+### Context Support
 
-- T `figurativi` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- U `testo` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- V `numeri` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- W `cornice` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- M `funzione origin.` (string 📚 `epi-support-functions`: privata, pubblica, religiosa, n/d) 🎯 `EpiSupportPart`.`originalFn`.
+- N `tipologia originaria della struttura` (string 📚 `epi-support-types`: abitazione, biblioteca, caserma, castello, chiostro, colonnato, convento, edificio di culto, magazzino, monastero, museo, ospizio, palazzo, ponte, pozzo, prigione, scuderia, scuola, seminario, stalla, strada, torre, ufficio pubblico, n/d) 🎯 `EpiSupportPart`.`originalType`.
+- O `funzione attuale` (same as M) 🎯 `EpiSupportPart`.`currentFn`.
+- P `tipologia attuale` (same as N) 🎯 `EpiSupportPart`.`currentType`.
+- Q `interno/esterno` (string: interno, esterno) 🎯 `EpiSupportPart`.`indoor`.
+- R `supporto` (string 📚 `epi-support-object-types`: arredo ecclesiastico, balaustra, colonna, cornice, davanzale, finestra, gradino, lapide (graffito su), muro, panchina, pavimentazione stradale, pavimento, pilastro, porta, pozzo, stipite, suppellettile, volta) 🎯 `EpiSupportPart`.`objectType`.
+- (S) `funzione dell'epigrafe/graffito`: 🎯 `CategoriesPart`:`fn` (📚 `categories_fn`). All the cells have ☯️ type:
+  - T `testo`
+  - U `monogramma`
+  - V `lettera singola`
+  - W `lettere non interpretabili`
 
-- X `tipo figurativo` 🎯 `GrfFramePart.figure` ⚙️ `ColFig`
-- Y `tipo cornice` 🎯 `GrfFramePart.frame` ⚙️ `ColFig`
-- Z `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size` ⚙️ `ColSize`
+### Language
 
-- AA `numero righe` (int) 🎯 `GrfWritingPart.counts` ⚙️ `ColWriting`
-- AB `alfabeto` 🎯 `GrfWritingPart.system` (📚 `grf-writing-systems`) ⚙️ `ColWriting`
-- AC `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
-- AD `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`) ⚙️ `ColWriting`
-- AE `codice glottologico` [Glottolog](https://glottolog.org/) codes (📚 `grf-writing-glottologs`) ⚙️ `ColWriting`
-- AF `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`) ⚙️ `ColWriting`
-- AG `tipologia grafica` (`corsivo`, `maiuscolo`, `maiuscolo e minuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`) ⚙️ `ColWriting`
+- (X) `alfabeto`: 🎯 `CategoriesPart`.`lng` (📚 `categories_lng`)
+  - Y `lingua` (📚 string: ARM, CHI, ENG, DUT, FRE, GER, GRC, GRE, ITA, JPN, LAT, N\D)
+  - Z `lingua (ISO-639-3)` (📚 string: ARA, DEU, ELL, ENG, FRA, GRC, ITA, JPN, LAT, VEC, N\D)
+  - AA `codice glottologico` (📚 string: ANCI1242, ARME1259, ITAL1282, LATI1261, LITE1248, MEDI1251, MODE1248, NUCL1643, STAN1290, STAN1293, STAN1295, VENE1258, N\D: see [Glottolog](https://glottolog.org/) codes)
 
-- AH `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
-  - AI `presenza di disegno preparatorio` (boolean) ⚙️ `ColTech`
-  - AJ `presenza di preparazione del supporto` (boolean) ⚙️ `ColTech`
-  - AK `graffio` (boolean) ⚙️ `ColTech`
-  - AL `incisione` (boolean) ⚙️ `ColTech`
-  - AM `intaglio` (boolean) ⚙️ `ColTech`
-  - AN `disegno` (boolean) ⚙️ `ColTech`
-  - AO `punzonatura` (boolean) ⚙️ `ColTech`
-  - AP `a rilievo` (boolean) ⚙️ `ColTech`
+### Content
 
-> Entry `rubricatura` (boolean) has been removed from this set.
+- (AB) `contenuto` 🎯 `CategoriesPart`.`cnt` (📚 `categories_cnt`). All the cells have ☯️ type:
+  - AC `amore`
+  - AD `augurale`
+  - AE `autentica di reliquie`
+  - AF `bollo laterizio`
+  - AG `calendario`
+  - AH `celebrativa`
+  - AI `citazione`
+  - AJ `commemorativa`
+  - AK `consacrazione`
+  - AL `dedicatoria`
+  - AM `devozionale`
+  - AN `didascalica`
+  - AO `documentaria`
+  - AP `esegetica`
+  - AQ `esortativa`
+  - AR `ex voto`
+  - AS `firma`
+  - AT `funeraria`
+  - AU `imprecazione`
+  - AV `infamante`
+  - AW `iniziale\i nome persona`
+  - AX `insulto`
+  - AY `invocativa`
+  - AZ `marchio edile`
+  - BA `nome`
+  - BB `nome di luogo`
+  - BC `parlante`
+  - BD `politica`
+  - BE `poesia`
+  - BF `prosa`
+  - BG `prostituzione`
+  - BH `preghiera`
+  - BI `religiosa`
+  - BJ `saluto`
+  - BK `segnaletica`
+  - BL `sigla`
+  - BM `sport`
+  - BN `funzione non definibile` (this can be combined with others in the case it applies to just a letter or other isolated sign in the context of a text)
+- BO `numeri` (☯️ string) 🎯 `CategoriesPart`.`cnt` (📚 `categories_cnt`):
+  - BP `cifra` (📚 string: araba, armena, cirillica, glagolitica, romana, n\d)
 
-- AQ `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools` (📚 `grf-tools`) ⚙️ `ColTech`:
-  - AR `chiodo` (boolean)
-  - AS `gradina` (boolean)
-  - AT `scalpello` (boolean)
-  - AU `sgorbia` (boolean)
-  - AV `sega` (boolean)
-  - AW `bocciarda` (boolean)
-  - AX `carbocino` (sic, boolean) 🌟
-  - AY `seppia` 🌟 (boolean)
-  - AZ `grafite` (boolean)
-  - BA `matita di piombo` (boolean)
-  - BB `fumo di candela` (boolean)
-  - BC `inchiostro` (boolean)
-  - BD `vernice` (boolean)
-  - BE `lama (affilatura)` (boolean)
-  - BF `tipo di lama` (string): values are only `lama curva`, `lama dritta` or empty. We thus provide two entries in the thesaurus for these values.
+### Date
 
-- BG `damnatio`: header column.
-  - BH `presenza di damnatio` (`parziale`, `totale`, `non presente` or empty) 🎯 `GrfLocalizationPart.damnatio` (📚 `grf-damnatio-types`) ⚙️ `ColDamnatio`
+- BQ `cronologia` (☯️ string) 🎯 `HistoricalDatePart`:
+  - BR `data` (string: possible formats are `R SECOLO` where `R` is an uppercase Roman number, or `YYYY` for a year)
+  - BS `datazione` (☯️ string)
+  - BT `secolo` (same format as BR)
+  - BU `termine post quem` (same format as BR)
+  - BV `termine ante quem` (same format as BR): note that we can have both terminus ante and terminus post for an interval. In this case BS is the same as BU+BV.
 
-- BI `caratteristiche grafiche`: header column, all targeting 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) using ⚙️ `ColWriting` except when stated otherwise:
-  - BJ `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty (📚 `grf-writing-prevalent-casing`) ⚙️ `ColWriting`
-  - BK `sistema interpuntivo` (boolean)
-  - BL `nessi e legamenti` (boolean)
-  - BM `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
-  - BN `abbreviazioni` (boolean)
+### Material Support
 
-- BO `monogrammi, lettere singole, ecc`: header column, all targeting 🎯 `GrfWritingPart.letterFeatures` (📚 `grf-writing-letter-features`) using ⚙️ `ColWriting`:
-  - BP `monogrammi` (boolean)
-  - BQ `lettera singola` (boolean)
-  - BR `lettere non interpretabili` (boolean): this also sets an item flag.
-  - BS `disegno non interpretabile` (boolean): this also sets an item flag.
+- BW `materia` (string 📚 `epi-support-materials`: cemento, ceramica, laterizio, legno, materiale litico, metallo, vetro) 🎯 `EpiSupportPart`.`material`.
+- (BX) `misure`:
+  - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize`.
+  - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize`.
+- CA `stato di conservazione` (📚 string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego)
+  - CB `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio`.
+- CC `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror`.
+  - CD `cornice` (☯️ string) 🎯 `EpiSupportPart`.`hasFrame`.
+  - CE `tipo di cornice` (string) `EpiSupportPart`.`frame`.
+- (CF) `campo` 🎯 `EpiSupportPart`.`hasField`:
+  - CG `misure` 🎯 `EpiSupportPart`.`fieldSize`.
 
-- BT `tipologia di argomento`: header column, all targeting 🎯 `CategoriesPart:topic` (📚 `categories_topic`) unless specified otherwise:
-  - BU `funeraria` (boolean)
-  - BV `commemorativa` (boolean)
-  - BW `firma` (boolean)
-  - BX `celebrativa` (boolean)
-  - BY `esortativa` (boolean)
-  - BZ `didascalica` (boolean)
-  - CA `iniziale\i nome persona` (boolean)
-  - CB `sigla` (boolean)
-  - CC `segnaletica` (boolean)
-  - CD `citazione` (boolean)
-  - CE `infamante` (boolean)
-  - CF `sport` (boolean) 🎯
-  - CG `prostituzione` (boolean)
-  - CH `politica` (boolean)
-  - CI `religiosa` (boolean)
-  - CJ `preghiera` (boolean)
-  - CK `ex voto` (boolean)
-  - CL `amore` (boolean)
-  - CM `prosa` (boolean) 🎯 `GrfWritingPart.hasProse`
-  - CN `poesia` (boolean) 🎯 `GrfWritingPart.hasPoetry`
-  - CO `parlanti` (boolean)
-  - CP `insulto` (boolean)
-  - CQ `imprecazioni` (boolean)
-  - CR `nome di luogo` (boolean)
-  - CS `saluti` (boolean)
+### Techniques and Tools
 
-- CT `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`) ⚙️ `ColFigTypes`:
-  - CU `parti anatomiche` (boolean)
-  - CV `volti` (boolean)
-  - CW `busto` (boolean)
-  - CX `figura umana` (boolean)
-  - CY `erotici` (boolean)
-  - CZ `croce` (boolean)
-  - DA `cuore` (boolean)
-  - DB `architetture` (boolean)
-  - DC `paesaggi` (boolean)
-  - DD `geometrico` (boolean)
-  - DE `imbarcazioni` (boolean)
-  - DF `piante` (boolean)
-  - DG `gioco` (boolean)
-  - DH `arma` (boolean)
-  - DI `armatura` (boolean)
-  - DJ `stemma` (boolean)
-  - DK `bandiera` (boolean)
-  - DL `animale` (boolean)
-  - DM `simbolo zodiaco` (boolean)
-  - DN `grafitto da affilitura` (boolean)
+All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
-- DO `edizione e commento`: header column:
-  - DP `edizione` 🎯 `BibliographyPart`: manually filled.
-  - DQ `commento` 🎯 `NotePart` ⚙️ `ColComment`
-  - DR `osservazioni sullo stato di conservazione`, 🎯 `GrfStatesPart.note` ⚙️ `ColStates`
-  - DS `bibliografia` 🎯 `BibliographyPart`: manually filled.
-  - DT `data primo rilievo` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
-  - DU `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
-  
-> `codice iconclass`: obsolete, has been removed.
+- (CH) `tecnica di esecuzione`: except where specified, cells have ☯️ type:
+  - CI `solco` (string)
+  - CJ `a rilievo`
+  - CK `disegno`
+  - CL `graffio`
+  - CM `incisione`
+  - CN `intaglio`
+  - CO `punzonatura`
+- (CP) `strumento di esecuzione`: cells have ☯️ type:
+  - CQ `bocciarda`
+  - CR `carbocino` (sic)
+  - CS `fumo di candela`
+  - CT `gradina`
+  - CU `grafite`
+  - CV `inchiostro`
+  - CW `matita di piombo`
+  - CX `scalpello`
+  - CY `sega`
+  - CZ `sgorbia`
+  - DA `strumento accuminato`
+  - DB `vernice`
+  - DC `lama (affilatura)`
+  - (DD) `impaginazione del testo`:
+    - DE `rigatura` (☯️ string) 🎯 `EpiSupportPart`.`features`.
+    - DF `numero righe` (integer) 🎯 `EpiSupportPart`.`counts`.`rows`.
+    - DG `note` (string) 🎯 `EpiSupportPart`.`note`.
+    - DH `presenza di preparazione del supporto` (☯️ string) 🎯 `EpiSupportPart`.`features`.
 
-### Columns - Version 1
+### Writing
 
-Columns marked as "header columns" are always empty and serve to group the next columns together, until the next header column. When not specified, the type is `string`.
+- DI `scrittura` (📚 string: maiuscola, maiuscola e minuscola, minuscola, n\d) 🎯 `EpiWritingPart`.`casing`
+  - DJ `tipologia grafica caratteri latini` (📚 string: cancelleresca, capitale epigrafica, capitale libraria, capitale romanica, carolina, corsiva nuova, curiale, gotica, insulare, italica, mercantesca, merovingica, minuscola diplomatica, onciale, semionciale, umanistica, visigotica, altro, n\d) 🎯 `EpiWritingPart`.`script`
+  - DK `segni grafici particolari` (☯️ string: si, no, n\d) 🎯 `EpiWritingPart`.`features` (📚 `epi-writing-features`). All cells have ☯️ type:
+    - DL `abbreviazioni`
+    - DM `nessi e legamenti`
+    - DN `lettere incluse`
+    - DO `lettere sovrapposte`
+    - DP `punteggiatura`
+    - DQ `segni di interpunzione`
 
-The ID after 🎯 represents the target for the column, and the one after ⚙️ the parser used by the [CLI import tool](https://github.com/vedph/cadmus-vela-tool).
+### Figurative
 
-- A ID (no label: e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id ⚙️ `Row`.
-- B `immagine`: ignored.
-- C-E (3-5) = `area`, `sestriere`, `denominazione` 🎯 `GrfLocalizationPart` ⚙️ `ColArea`
-- F = `funzione originaria` 🎯 `GrfLocalizationPart.note` ⚙️ `ColOriginalFn`
-- G `funzione attuale` 🎯 `GrfLocalizationPart.function` (📚 `categories_functions`) ⚙️ `ColCurrentFn`
-- H `tipologia struttura` 🎯 `GrfLocalizationPart.objectType` (📚 `grf-support-object-types`) ⚙️ `ColStructType`
-- I `interno/esterno` 🎯 `GrfLocalizationPart.indoor` ⚙️ `ColIndoor`
-- J `supporto` 🎯 `GrfSupportPart.type` (📚 `grf-support-types`) ⚙️ `ColSupport`
-- K `materiale` 🎯 `GrfSupportPart.material` (📚 `grf-support-materials`) ⚙️ `ColMatType`
-- L `età` (string) one of `età romana`, `età medioevale`, `età moderna`, `età contemporanea` 🎯 `GrfLocalizationPart.period` (📚 `grf-periods`) ⚙️ `ColPeriod`
-- M `datati` (boolean): apparently this just tells whether a date is specified in the next columns.
-- N-P (14-16) = `terminus post`, `terminus ante`, `cronologia`. 🎯 `HistoricalDatePart` ⚙️ `ColDatation`. A single cell contains any of these formats:
-  - `R SECOLO` where `R` is an uppercase Roman number.
-  - `YYYY` year.
+- DR `figurativo` (☯️ string) 🎯 `CategoriesPart`:`fig` (📚 `categories_fig`). All cells have ☯️ type:
+  - DS `disegno non interpretabile`
+  - DT `abbigliamento`
+  - DU `animale`
+  - DV `architettura`
+  - DW `arma`
+  - DX `armatura`
+  - DY `bandiera`
+  - DZ `busto`
+  - EA `croce`
+  - EB `cuore`
+  - EC `erotico`
+  - ED `figura umana`
+  - EE `geometrico`
+  - EF `gioco`
+  - EG `imbarcazione`
+  - EH `lingua`
+  - EI `paesaggio`
+  - EJ `pianta`
+  - EK `simbolo zodiacale`
+  - EL `stemma`
+  - EM `volto`
 
->Possible combinations: N, O, P, N+O, N+P=N, O+P=N. This is because N/O are termini and can occur together for an interval, but for some reason in this case P copies the value from N/O and must be ignored.
+### Other Metadata
 
-- Q `figurativi` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- R `testo` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- S `numeri` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
-- T `cornice` (boolean) 🎯 `CategoriesPart:feature` (📚 `categories_feature`) ⚙️ `ColFeatures`
+- (EN) `ricognizione`: 🎯 `PhysicalStatesPart`:
+  - EO `data prima ricognizione` (string with format `DD/MM/YYYY`)
+  - EP `data ultima ricognizione` (string with format `DD/MM/YYYY`)
 
-- U `tipo figurativo` 🎯 `GrfFramePart.figure` ⚙️ `ColFig`
-- V `tipo cornice` 🎯 `GrfFramePart.frame` ⚙️ `ColFig`
-- W `misure` width and height in cm in the form `NXN`; decimals use dot 🎯 `GrfFramePart.size` ⚙️ `ColSize`
+### Unstructured Data
 
-- X `numero righe` (int) 🎯 `GrfWritingPart.counts` ⚙️ `ColWriting`
-- Y `alfabeto` 🎯 `GrfWritingPart.system` (📚 `grf-writing-systems`) ⚙️ `ColWriting`
-- Z `lingua`: ignored, this is just the full form (e.g. "Italiano") corresponding to the AA code.
-- AA `lingua (iso-639-3)` (ISO639-3) 🎯 `GrfWritingPart.languages` (📚 `grf-writing-languages`) ⚙️ `ColWriting`
-- AB `codice glottologico` [Glottolog](https://glottolog.org/) codes (📚 `grf-writing-glottologs`) ⚙️ `ColWriting`
-- AC `tipologia scrittura`: separated by comma 🎯 `GrfWritingPart.script` (📚 `grf-writing-scripts`) ⚙️ `ColWriting`
-- AD `tipologia grafica` (`corsivo`, `maiuscolo`, `maiuscolo e minuscolo`, `minuscolo`, `n\d`) 🎯 `GrfWritingPart.casing` (📚 `grf-writing-casing`) ⚙️ `ColWriting`
+These data are temporarily stored in metadata, all prefixed by `_`. These should then be used as a source to fill the appropriate part.
 
-- AE `tecnica di esecuzione`: header column 🎯 `GrfTechniquePart.techniques` (📚 `grf-techniques`)
-  - AF `presenza di disegno preparatorio` (boolean) ⚙️ `ColTech`
-  - AG `presenza di preparazione del supporto` (boolean) ⚙️ `ColTech`
-  - AH `graffio` (boolean) ⚙️ `ColTech`
-  - AI `incisione` (boolean) ⚙️ `ColTech`
-  - AJ `intaglio` (boolean) ⚙️ `ColTech`
-  - AK `disegno` (boolean) ⚙️ `ColTech`
-  - AL `punzonatura` (boolean) ⚙️ `ColTech`
-  - AM `rubricatura` (boolean) 🎯 `GrfWritingPart.hasRubrics` ⚙️ `ColWriting`
-  - AN `a rilievo` (boolean) ⚙️ `ColTech`
-
-- AO `strumento di esecuzione`: header column 🎯 `GrfTechniquePart.tools` (📚 `grf-tools`) ⚙️ `ColTech`:
-  - AP `chiodo` (boolean)
-  - AQ `gradina` (boolean)
-  - AR `scalpello` (boolean)
-  - AS `sgorbia` (boolean)
-  - AT `sega` (boolean)
-  - AU `bocciarda` (boolean)
-  - AV `grafite` (boolean)
-  - AW `matita di piombo` (boolean)
-  - AX `fumo di candela` (boolean)
-  - AY `inchiostro` (boolean)
-  - AZ `vernice` (boolean)
-  - BA `lama (affilatura)` (boolean)
-  - BB `tipo di lama` (string): values are only `lama curva`, `lama dritta` or empty. We thus provide two entries in the thesaurus for these values.
-
-- BC `damnatio`: header column.
-  - BD `presenza di damnatio` (`parziale`, `totale`, `non presente` or empty) 🎯 `GrfLocalizationPart.damnatio` (📚 `grf-damnatio-types`) ⚙️ `ColDamnatio`
-
-- BE `caratteristiche grafiche`: header column, all targeting 🎯 `GrfWritingPart.scriptFeatures` (📚 `grf-writing-script-features`) using ⚙️ `ColWriting` except when stated otherwise:
-  - BF `maiuscolo\minuscolo prevalente`: values are `maiuscolo prevalente`, `minuscolo prevalente`, `N\D`, empty (📚 `grf-writing-prevalent-casing`) ⚙️ `ColWriting`
-  - BG `sistema interpuntivo` (boolean)
-  - BH `nessi e legamenti` (boolean)
-  - BI `rigatura` (boolean) 🎯 `GrfWritingPart.hasRuling`
-  - BJ `abbreviazioni` (boolean)
-
-- BK `monogrammi, lettere singole, ecc`: header column, all targeting 🎯 `GrfWritingPart.letterFeatures` (📚 `grf-writing-letter-features`) using ⚙️ `ColWriting`:
-  - BL `monogrammi` (boolean)
-  - BM `lettera singola` (boolean)
-  - BN `lettere non interpretabili` (boolean): this also sets an item flag.
-  - BO `disegno non interpretabile` (boolean): this also sets an item flag.
-
-- BP `tipologia di argomento`: header column, all targeting 🎯 `CategoriesPart:topic` (📚 `categories_topic`) unless specified otherwise:
-  - BQ `funeraria` (boolean)
-  - BR `commemorativa` (boolean)
-  - BS `firma` (boolean)
-  - BT `celebrativa` (boolean)
-  - BU `esortativa` (boolean)
-  - BV `didascalica` (boolean)
-  - BW `iniziale\i nome persona` (boolean)
-  - BX `sigla` (boolean)
-  - BY `segnaletica` (boolean)
-  - BZ `citazione` (boolean)
-  - CA `infamante` (boolean)
-  - CB `sport` (boolean) 🎯
-  - CC `prostituzione` (boolean)
-  - CD `politica` (boolean)
-  - CE `religiosa` (boolean)
-  - CF `preghiera` (boolean)
-  - CG `ex voto` (boolean)
-  - CH `amore` (boolean)
-  - CI `prosa` (boolean) 🎯 `GrfWritingPart.hasProse`
-  - CJ `poesia` (boolean) 🎯 `GrfWritingPart.hasPoetry`
-  - CK `parlanti` (boolean)
-  - CL `insulto` (boolean)
-  - CM `imprecazioni` (boolean)
-  - CN `nome di luogo` (boolean)
-  - CO `saluti` (boolean)
-
-- CP `categorie figurative`: header column 🎯 `GrfFigurativePart.types` (📚 `grf-figurative-types`) ⚙️ `ColFigTypes`:
-  - CQ `parti anatomiche` (boolean)
-  - CR `volti` (boolean)
-  - CS `busto` (boolean)
-  - CT `figura umana` (boolean)
-  - CU `erotici` (boolean)
-  - CV `croce` (boolean)
-  - CW `cuore` (boolean)
-  - CX `architetture` (boolean)
-  - CY `paesaggi` (boolean)
-  - CZ `geometrico` (boolean)
-  - DA `imbarcazioni` (boolean)
-  - DB `piante` (boolean)
-  - DC `gioco` (boolean)
-  - DD `arma` (boolean)
-  - DE `armatura` (boolean)
-  - DF `stemma` (boolean)
-  - DG `bandiera` (boolean)
-  - DH `animale` (boolean)
-  - DI `simbolo zodiaco` (boolean)
-  - DJ `grafitto da affilitura` (boolean)
-
-- DK `edizione e commento`: header column:
-  - DL `edizione` 🎯 `BibliographyPart`: manually filled.
-  - DM `codice iconclass`: obsolete, ignore.
-  - DN `commento` 🎯 `NotePart` ⚙️ `ColComment`
-  - DO `osservazioni sullo stato di conservazione`, 🎯 `GrfStatesPart.note` ⚙️ `ColStates`
-  - DP `bibliografia` 🎯 `BibliographyPart`: manually filled.
-  - DQ `data primo rilievo` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
-  - DR `data ultima ricognizione` (GG/MM/AAAA) 🎯 `GrfStatesPart.states` ⚙️ `ColStates`
+- (EQ) `edizione e commento`
+  - ER `edizione` 🎯 `MetadataPart`.`_edition`
+  - ES `commento` 🎯 `MetadataPart`.`_comment`
+  - ET `bibliografia` 🎯 `MetadataPart`.`_biblio`
 
 ## History
 
