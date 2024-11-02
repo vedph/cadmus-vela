@@ -16,6 +16,11 @@ A single item represents a graffiti/inscription. Each item has these metadata (l
   - lavorata
   - rilevata
   - convalidata
+  - nascosta
+  - urbana
+  - monastica
+  - ducale
+  - IMAI
 - title (A)
 - description
 
@@ -167,6 +172,37 @@ A new generic part for a single, district-based location with configurable hiera
   - [EpiSigns](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-signs.md)
   - [EpiSupportFragments](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-support-frr.md)
   - [EpiLigaturesLayerFragment](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/fr.epi-ligatures.md)
+
+## Item Facet
+
+The single item facet is structured as follows, reflecting the general ordering used in the original spreadsheet. There are 11 generic parts, 3 epigraphic parts, 2 generic text layer parts, and 1 epigraphic layer part.
+
+- sintesi
+  - metadati: `MetadataPart`
+  - localizzazione: `DistrictLocationPart`
+  - supporto: `EpiSupportPart`
+  - funzione: `CategoriesPart:fn`
+  - lingua: `CategoriesPart:lng`
+  - contenuto: `CategoriesPart:cnt`
+  - cronologia: `HistoricalDatePart`
+  - stati: `PhysicalStatesPart`
+- dettagli
+  - tecnica: `EpiTechniquePart`
+  - scrittura: `EpiWritingPart`
+  - figurativo: `CategoriesPart:fig`
+- testo:
+  - bozza: `NotePart:txt`
+  - testo edito: `TokenTextPart`
+  - commenti: `CommentsLayerFragment`
+  - cronologia: `ChronologyLayerFragment`
+  - legature: `EpiLigaturesLayerFragment`
+- commento:
+  - commento: `CommentPart`
+  - note: `NotePart`
+- rierimenti:
+  - bibliografia `BibliographyPart`
+  - riferimenti `DocReferencesPart`
+  - ID esterni `ExternalIdsPart`
 
 ---
 
