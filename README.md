@@ -7,10 +7,15 @@ Core models for Cadmus VeLA 3. Old models for VeLA 2 are [here](old-models.md).
 
 ## Models
 
-A single item represents a graffiti/inscription. Each item has these metadata:
+A single item represents a graffiti/inscription. Each item has these metadata (letters in brackets refer to the original [spreadsheet](#original-spreadsheet) column):
 
 - ID (A)
-- flags: include editorial state (C) and project segment (F)
+- flags: include editorial state (C) and project segment (F). Flags are:
+  - in lavorazione
+  - importata
+  - lavorata
+  - rilevata
+  - convalidata
 - title (A)
 - description
 
