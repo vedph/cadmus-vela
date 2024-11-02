@@ -376,6 +376,8 @@ These data are temporarily stored in metadata, all prefixed by `_`. These should
 
 ## History
 
+### 2.1.12
+
 - 2024-10-30: updated packages.
 
 ### 2.1.11
