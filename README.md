@@ -219,15 +219,15 @@ For all the value types:
 
 Columns have been [refactored](https://docs.google.com/spreadsheets/d/1Palm6ltRzc7zCXIsZcpRx4gf6QX7yjjXrzQvZMTpjmE/edit?gid=832312466#gid=832312466).
 
-The ID after 🎯 represents the target for the column, and the one after ⚙️ the parser used by the [CLI import tool](https://github.com/vedph/cadmus-vela-tool). The symbol 📚 means a closed set of values, usually corresponding to a thesaurus; the symbol ☯️ means a string value representing a 3-state value: `si`, `no`, `n/d` or `n\d`.
+The ID after 🎯 represents the target for the column, and the one after ⚙️ the parser used by the [CLI import tool](https://github.com/vedph/cadmus-vela-tool). The symbol 📚 means a closed set of values, usually corresponding to a thesaurus; the symbol ☯️ means a string value representing a 3-state value: `si`, `no`, `n/d` or `n\d`. The symbol ⚙️ refers to the software module responsible of the import process for each datum in the [CLI tool](https://github.com/vedph/cadmus-vela-tool).
 
 ### Metadata
 
 - A (no label) (string): ID (e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart`.`id` ⚙️ `Row`.
 - B `immagine`: ignored. The link between image and item is via ID (column A).
-- C `stato` (📚 string) 🎯 `item.flags`: the editing state of the item (in lavorazione, importata, lavorata, rilevata).
+- C `stato` (📚 string) 🎯 `item.flags`: the editing state of the item (in lavorazione, importata, lavorata, rilevata). ⚙️ `ColEdState`.
 - D `convalida` (☯️ boolean) 🎯 `item.flags`: "convalidata" editing state.
-- E `autore` (CSV string) 🎯 `MetadataPart`.`author`: there can be 1 or more authors, separated by comma. Each author will become an `author` metadata entry.
+- E `autore` (CSV string) 🎯 `MetadataPart`.`author`: there can be 1 or more authors, separated by comma. Each author will become an `author` metadata entry. ⚙️ `ColAuthor`.
 - F `segmento progetto` (📚 string) 🎯 `item.flags` (vela urbana, vela monastica, vela palazzo ducale, imai).
 
 ### Location
