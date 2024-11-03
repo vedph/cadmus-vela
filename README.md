@@ -242,9 +242,9 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 ### Context Support
 
 - M `funzione origin.` (string 📚 `epi-support-functions`: privata, pubblica, religiosa, n/d) 🎯 `EpiSupportPart`.`originalFn` ⚙️ [ColOriginalFn](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColOriginalFnEntryRegionParser.cs)
-- N `tipologia originaria della struttura` (string 📚 `epi-support-types`: abitazione, biblioteca, caserma, castello, chiostro, colonnato, convento, edificio di culto, magazzino, monastero, museo, ospizio, palazzo, ponte, pozzo, prigione, scuderia, scuola, seminario, stalla, strada, torre, ufficio pubblico, n/d) 🎯 `EpiSupportPart`.`originalType`.
+- N `tipologia originaria della struttura` (string 📚 `epi-support-types`: abitazione, biblioteca, caserma, castello, chiostro, colonnato, convento, edificio di culto, magazzino, monastero, museo, ospizio, palazzo, ponte, pozzo, prigione, scuderia, scuola, seminario, stalla, strada, torre, ufficio pubblico, n/d) 🎯 `EpiSupportPart`.`originalType` ⚙️ [ColOriginalType](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColOriginalTypeEntryRegionParser.cs)
 - O `funzione attuale` (same as M) 🎯 `EpiSupportPart`.`currentFn` ⚙️ [ColCurrentFn](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColCurrentFnEntryRegionParser.cs)
-- P `tipologia attuale` (same as N) 🎯 `EpiSupportPart`.`currentType`.
+- P `tipologia attuale` (same as N) 🎯 `EpiSupportPart`.`currentType` ⚙️ [ColCurrentType](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColCurrentTypeEntryRegionParser.cs)
 - Q `interno/esterno` (string: interno, esterno) 🎯 `EpiSupportPart`.`indoor`.
 - R `supporto` (string 📚 `epi-support-object-types`: arredo ecclesiastico, balaustra, colonna, cornice, davanzale, finestra, gradino, lapide (graffito su), muro, panchina, pavimentazione stradale, pavimento, pilastro, porta, pozzo, stipite, suppellettile, volta) 🎯 `EpiSupportPart`.`objectType` ⚙️ [ColSupport](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportEntryRegionParser.cs)
 - (S) `funzione dell'epigrafe/graffito`: 🎯 `CategoriesPart`:`fn` (📚 `categories_fn`). All the cells have ☯️ type:
