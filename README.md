@@ -222,19 +222,19 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 ### Metadata
 
-- A (no label) (string): ID (e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart` id ⚙️ `Row`.
+- A (no label) (string): ID (e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart`.`id` ⚙️ `Row`.
 - B `immagine`: ignored. The link between image and item is via ID (column A).
 - C `stato` (📚 string) 🎯 `item.flags`: the editing state of the item (in lavorazione, importata, lavorata, rilevata).
-- D `convalida` (boolean) 🎯 `item.flags`: "convalidata" editing state.
-- E `autore` (string) 🎯 `MetadataPart`.`author`.
+- D `convalida` (☯️ boolean) 🎯 `item.flags`: "convalidata" editing state.
+- E `autore` (CSV string) 🎯 `MetadataPart`.`author`: there can be 1 or more authors, separated by comma. Each author will become an `author` metadata entry.
 - F `segmento progetto` (📚 string) 🎯 `item.flags` (vela urbana, vela monastica, vela palazzo ducale, imai).
 
 ### Location
 
 - (G) `contesto attuale di conservazione` 🎯 `DistrictLocationPart`:
-  - H `provincia` (📚 string: see e.g. <https://github.com/p1mps/regioni-province-comuni-italia/blob/master/regioni_province.csv>)
+  - H `provincia` (📚 string: see e.g. <https://github.com/p1mps/regioni-province-comuni-italia/blob/master/regioni_province.csv>). When specified, this will be validated against the canonical list of provinces.
   - I `città` (string)
-  - J `centri/localita'` (string, e.g. Cannareggio)
+  - J `centri/localita'` (📚 string: Cannareggio, Castello, Dorsoduro, San Marco, San Polo, Santa Croce)
   - K `localizzazione` (string, e.g. Fondamenta Daniele Canal)
   - L `denominazione struttura` (string, e.g. Chiesa Santa Maria dei Servi)
 
@@ -255,9 +255,9 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 ### Language
 
 - (X) `alfabeto`: 🎯 `CategoriesPart`.`lng` (📚 `categories_lng`, a single thesaurus with 3 branches for these different code sets):
-  - Y `lingua` (📚 string: ARM, CHI, ENG, DUT, FRE, GER, GRC, GRE, ITA, JPN, LAT, N\D)??should we remove n.d.???should we remove this branch?
-  - Z `lingua (ISO-639-3)` (📚 string: ARA, DEU, ELL, ENG, FRA, GRC, ITA, JPN, LAT, VEC, N\D)??vec is not ISO639??should we remove n.d.?
-  - AA `codice glottologico` (📚 string: ANCI1242, ARME1259, ITAL1282, LATI1261, LITE1248, MEDI1251, MODE1248, NUCL1643, STAN1290, STAN1293, STAN1295, VENE1258, N\D: see [Glottolog](https://glottolog.org/) codes)??should we remove n.d.?
+  - Y `lingua` (📚 string: ARM, CHI, ENG, DUT, FRE, GER, GRC, GRE, ITA, JPN, LAT, N\D)??should we remove this branch?
+  - Z `lingua (ISO-639-3)` (📚 string: ARA, DEU, ELL, ENG, FRA, GRC, ITA, JPN, LAT, VEC, N\D)??vec is not ISO639
+  - AA `codice glottologico` (📚 string: ANCI1242, ARME1259, ITAL1282, LATI1261, LITE1248, MEDI1251, MODE1248, NUCL1643, STAN1290, STAN1293, STAN1295, VENE1258, N\D: see [Glottolog](https://glottolog.org/) codes)
 
 ### Content
 
@@ -340,7 +340,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
   - CO `punzonatura`
 - (CP) `strumento di esecuzione` (📚 `epi-technique-tools`): cells have ☯️ type:
   - CQ `bocciarda`
-  - CR `carbocino` (sic)
+  - CR `carbocino` (sic): this is a typo. To be sure, we will allow both "carbocino" and "carboncino".
   - CS `fumo di candela`
   - CT `gradina`
   - CU `grafite`
@@ -362,7 +362,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
 - DI `scrittura` (📚 `epi-writing-casings`: maiuscola, maiuscola e minuscola, minuscola, n\d) 🎯 `EpiWritingPart`.`casing`
   - DJ `tipologia grafica caratteri latini` (📚 `epi-writing-scripts`: cancelleresca, capitale epigrafica, capitale libraria, capitale romanica, carolina, corsiva nuova, curiale, gotica, insulare, italica, mercantesca, merovingica, minuscola diplomatica, onciale, semionciale, umanistica, visigotica, altro, n\d) 🎯 `EpiWritingPart`.`script`
-  - DK `segni grafici particolari` (☯️ string: si, no, n\d) 🎯 `EpiWritingPart`.`features` (📚 `epi-writing-features`). All cells have ☯️ type:
+  - DK `segni grafici particolari` 🎯 `EpiWritingPart`.`features` (📚 `epi-writing-features`). All cells have ☯️ type:
     - DL `abbreviazioni`
     - DM `nessi e legamenti`
     - DN `lettere incluse`
@@ -372,7 +372,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
 ### Figurative
 
-- DR `figurativo` (☯️ string) 🎯 `CategoriesPart`:`fig` (📚 `categories_fig`). All cells have ☯️ type:
+- DR `figurativo` 🎯 `CategoriesPart`:`fig` (📚 `categories_fig`). All cells have ☯️ type:
   - DS `disegno non interpretabile`
   - DT `abbigliamento`
   - DU `animale`
