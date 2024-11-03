@@ -318,7 +318,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - (BX) `misure`:
   - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize`.
   - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize`.
-- CA `stato di conservazione` (📚 string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego)
+- CA `stato di conservazione` (📚 `physical-states`: string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego)
   - CB `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio`.
 - CC `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror`.
   - CD `cornice` (☯️ string) 🎯 `EpiSupportPart`.`hasFrame`.
@@ -360,8 +360,8 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
 ### Writing
 
-- DI `scrittura` (📚 string: maiuscola, maiuscola e minuscola, minuscola, n\d) 🎯 `EpiWritingPart`.`casing`
-  - DJ `tipologia grafica caratteri latini` (📚 string: cancelleresca, capitale epigrafica, capitale libraria, capitale romanica, carolina, corsiva nuova, curiale, gotica, insulare, italica, mercantesca, merovingica, minuscola diplomatica, onciale, semionciale, umanistica, visigotica, altro, n\d) 🎯 `EpiWritingPart`.`script`
+- DI `scrittura` (📚 `epi-writing-casings`: maiuscola, maiuscola e minuscola, minuscola, n\d) 🎯 `EpiWritingPart`.`casing`
+  - DJ `tipologia grafica caratteri latini` (📚 `epi-writing-scripts`: cancelleresca, capitale epigrafica, capitale libraria, capitale romanica, carolina, corsiva nuova, curiale, gotica, insulare, italica, mercantesca, merovingica, minuscola diplomatica, onciale, semionciale, umanistica, visigotica, altro, n\d) 🎯 `EpiWritingPart`.`script`
   - DK `segni grafici particolari` (☯️ string: si, no, n\d) 🎯 `EpiWritingPart`.`features` (📚 `epi-writing-features`). All cells have ☯️ type:
     - DL `abbreviazioni`
     - DM `nessi e legamenti`
