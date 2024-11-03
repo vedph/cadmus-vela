@@ -223,16 +223,16 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 ### Metadata
 
-- A (no label) (string): ID (e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart`.`id` ⚙️ `Row`.
+- A (no label) (string): ID (e.g. `CASTELLO_01-0001`) 🎯 `item.title`, `MetadataPart`.`id` ⚙️ [Row](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/RowEntryRegionParser.cs).
 - B `immagine`: ignored. The link between image and item is via ID (column A).
-- C `stato` (📚 string) 🎯 `item.flags`: the editing state of the item (in lavorazione, importata, lavorata, rilevata). ⚙️ `ColEdState`.
-- D `convalida` (☯️ boolean) 🎯 `item.flags`: "convalidata" editing state.
-- E `autore` (CSV string) 🎯 `MetadataPart`.`author`: there can be 1 or more authors, separated by comma. Each author will become an `author` metadata entry. ⚙️ `ColAuthor`.
-- F `segmento progetto` (📚 string) 🎯 `item.flags` (vela urbana, vela monastica, vela palazzo ducale, imai).
+- C `stato` (📚 string) 🎯 `item.flags`: the editing state of the item (in lavorazione, importata, lavorata, rilevata). ⚙️ [ColEdState](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColEdStateEntryRegionParser.cs).
+- D `convalida` (☯️ boolean) 🎯 `item.flags`: "convalidata" editing state. ⚙️ [ColValidated](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColValidatedEntryRegionParser.cs).
+- E `autore` (CSV string) 🎯 `MetadataPart`.`author`: there can be 1 or more authors, separated by comma. Each author will become an `author` metadata entry. ⚙️ [ColAuthor](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColAuthorEntryRegionParser.cs).
+- F `segmento progetto` (📚 string) 🎯 `item.flags` (vela urbana, vela monastica, vela palazzo ducale, imai). ⚙️ [ColProject](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColProjectEntryRegionParser.cs).
 
 ### Location
 
-- (G) `contesto attuale di conservazione` 🎯 `DistrictLocationPart`:
+- (G) `contesto attuale di conservazione` 🎯 `DistrictLocationPart` ⚙️ [ColArea](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColAreaEntryRegionParser.cs):
   - H `provincia` (📚 string: see e.g. <https://github.com/p1mps/regioni-province-comuni-italia/blob/master/regioni_province.csv>). When specified, this will be validated against the canonical list of provinces.
   - I `città` (string)
   - J `centri/localita'` (📚 string: Cannareggio, Castello, Dorsoduro, San Marco, San Polo, Santa Croce)
@@ -241,12 +241,12 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 ### Context Support
 
-- M `funzione origin.` (string 📚 `epi-support-functions`: privata, pubblica, religiosa, n/d) 🎯 `EpiSupportPart`.`originalFn`.
+- M `funzione origin.` (string 📚 `epi-support-functions`: privata, pubblica, religiosa, n/d) 🎯 `EpiSupportPart`.`originalFn` ⚙️ [ColOriginalFn](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColOriginalFnEntryRegionParser.cs)
 - N `tipologia originaria della struttura` (string 📚 `epi-support-types`: abitazione, biblioteca, caserma, castello, chiostro, colonnato, convento, edificio di culto, magazzino, monastero, museo, ospizio, palazzo, ponte, pozzo, prigione, scuderia, scuola, seminario, stalla, strada, torre, ufficio pubblico, n/d) 🎯 `EpiSupportPart`.`originalType`.
-- O `funzione attuale` (same as M) 🎯 `EpiSupportPart`.`currentFn`.
+- O `funzione attuale` (same as M) 🎯 `EpiSupportPart`.`currentFn` ⚙️ [ColCurrentFn](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColCurrentFnEntryRegionParser.cs)
 - P `tipologia attuale` (same as N) 🎯 `EpiSupportPart`.`currentType`.
 - Q `interno/esterno` (string: interno, esterno) 🎯 `EpiSupportPart`.`indoor`.
-- R `supporto` (string 📚 `epi-support-object-types`: arredo ecclesiastico, balaustra, colonna, cornice, davanzale, finestra, gradino, lapide (graffito su), muro, panchina, pavimentazione stradale, pavimento, pilastro, porta, pozzo, stipite, suppellettile, volta) 🎯 `EpiSupportPart`.`objectType`.
+- R `supporto` (string 📚 `epi-support-object-types`: arredo ecclesiastico, balaustra, colonna, cornice, davanzale, finestra, gradino, lapide (graffito su), muro, panchina, pavimentazione stradale, pavimento, pilastro, porta, pozzo, stipite, suppellettile, volta) 🎯 `EpiSupportPart`.`objectType` ⚙️ [ColSupport](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportEntryRegionParser.cs)
 - (S) `funzione dell'epigrafe/graffito`: 🎯 `CategoriesPart`:`fn` (📚 `categories_fn`). All the cells have ☯️ type:
   - T `testo`
   - U `monogramma`
