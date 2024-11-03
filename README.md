@@ -330,7 +330,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
-- (CH) `tecnica di esecuzione`: except where specified, cells have ☯️ type:
+- (CH) `tecnica di esecuzione` (📚 `epi-technique-types`): except where specified, cells have ☯️ type:
   - CI `solco` (string)
   - CJ `a rilievo`
   - CK `disegno`
@@ -338,7 +338,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
   - CM `incisione`
   - CN `intaglio`
   - CO `punzonatura`
-- (CP) `strumento di esecuzione`: cells have ☯️ type:
+- (CP) `strumento di esecuzione` (📚 `epi-technique-tools`): cells have ☯️ type:
   - CQ `bocciarda`
   - CR `carbocino` (sic)
   - CS `fumo di candela`
@@ -353,10 +353,10 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
   - DB `vernice`
   - DC `lama (affilatura)`
   - (DD) `impaginazione del testo`:
-    - DE `rigatura` (☯️ string) 🎯 `EpiSupportPart`.`features`.
-    - DF `numero righe` (integer) 🎯 `EpiSupportPart`.`counts`.`rows`.
+    - DE `rigatura` (☯️ string) 🎯 `EpiSupportPart`.`features` (📚 `epi-support-features`).
+    - DF `numero righe` (integer) 🎯 `EpiSupportPart`.`counts`.`rows` (📚 `epi-support-count-types`).
     - DG `note` (string) 🎯 `EpiSupportPart`.`note`.
-    - DH `presenza di preparazione del supporto` (☯️ string) 🎯 `EpiSupportPart`.`features`.
+    - DH `presenza di preparazione del supporto` (☯️ string) 🎯 `EpiSupportPart`.`features` (📚 `epi-support-features`).
 
 ### Writing
 
