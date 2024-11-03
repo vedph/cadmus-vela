@@ -34,6 +34,7 @@ The item parts are:
     - `_comment`: temporary store for comment (ES)
     - `_biblio`: temporary store for bibliography (ET)
   - 🌟 [DistrictLocationPart](#districtlocationpart)
+  - [GeoAssertedLocationsPart](https://github.com/vedph/cadmus-geo/blob/master/docs/asserted-locations.md)
   - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`fn` for function of inscription/graffiti (S)
   - 🌟❗ `EpiSupportPart` (🔑 `it.vedph.epigraphy.support`), refactored:
     - `material`\* (`string` 📚 `epi-support-materials`, BW)
