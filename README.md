@@ -254,8 +254,8 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 ### Language
 
-- (X) `alfabeto`: 🎯 `CategoriesPart`.`lng` (📚 `categories_lng`)
-  - Y `lingua` (📚 string: ARM, CHI, ENG, DUT, FRE, GER, GRC, GRE, ITA, JPN, LAT, N\D)??should we remove n.d.?
+- (X) `alfabeto`: 🎯 `CategoriesPart`.`lng` (📚 `categories_lng`, a single thesaurus with 3 branches for these different code sets):
+  - Y `lingua` (📚 string: ARM, CHI, ENG, DUT, FRE, GER, GRC, GRE, ITA, JPN, LAT, N\D)??should we remove n.d.???should we remove this branch?
   - Z `lingua (ISO-639-3)` (📚 string: ARA, DEU, ELL, ENG, FRA, GRC, ITA, JPN, LAT, VEC, N\D)??vec is not ISO639??should we remove n.d.?
   - AA `codice glottologico` (📚 string: ANCI1242, ARME1259, ITAL1282, LATI1261, LITE1248, MEDI1251, MODE1248, NUCL1643, STAN1290, STAN1293, STAN1295, VENE1258, N\D: see [Glottolog](https://glottolog.org/) codes)??should we remove n.d.?
 
