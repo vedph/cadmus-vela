@@ -321,8 +321,8 @@ TODO: ensure that reading date from BR and termini from BU,BV is enough.
 
 - BW `materia` (string 📚 `epi-support-materials`: cemento, ceramica, laterizio, legno, materiale litico, metallo, vetro) 🎯 `EpiSupportPart`.`material` ⚙️ [ColMaterial](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColMaterialEntryRegionParser.cs).
 - (BX) `misure` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs):
-  - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize`.
-  - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize`.
+  - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
+  - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs)..
 - CA `stato di conservazione` (📚 `physical-states`: string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego)
   - CB `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
 - CC `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
