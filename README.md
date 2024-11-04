@@ -377,7 +377,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
 ### Figurative
 
-- DR `figurativo` 🎯 `CategoriesPart`:`fig` (📚 `categories_fig`). All cells have ☯️ type:
+- DR `figurativo` (📚 `categories_fig`) 🎯 `CategoriesPart`:`fig` ⚙️ [ColFigurative](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColFigurativeEntryRegionParser.cs). All cells have ☯️ type:
   - DS `disegno non interpretabile`
   - DT `abbigliamento`
   - DU `animale`
@@ -410,7 +410,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
 These data are temporarily stored in metadata, all prefixed by `_`. These should then be used as a source to fill the appropriate part.
 
-- (EQ) `edizione e commento`
+- (EQ) `edizione e commento` ⚙️ [ColEdition](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColEditionEntryRegionParser.cs)
   - ER `edizione` 🎯 `MetadataPart`.`_edition`
   - ES `commento` 🎯 `MetadataPart`.`_comment`
   - ET `bibliografia` 🎯 `MetadataPart`.`_biblio`
