@@ -324,12 +324,12 @@ TODO: ensure that reading date from BR and termini from BU,BV is enough.
   - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize`.
   - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize`.
 - CA `stato di conservazione` (📚 `physical-states`: string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego)
-  - CB `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio`.
-- CC `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror`.
-  - CD `cornice` (☯️ string) 🎯 `EpiSupportPart`.`hasFrame`.
-  - CE `tipo di cornice` (string) `EpiSupportPart`.`frame`.
-- (CF) `campo` 🎯 `EpiSupportPart`.`hasField`:
-  - CG `misure` (same format as BY) 🎯 `EpiSupportPart`.`fieldSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
+  - CB `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+- CC `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+  - CD `cornice` (☯️ string) 🎯 `EpiSupportPart`.`hasFrame` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+  - CE `tipo di cornice` (string) `EpiSupportPart`.`frame` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+- (CF) `campo` 🎯 `EpiSupportPart`.`hasField` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs):
+  - CG `misure` (same format as BY) 🎯 `EpiSupportPart``fieldSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
 
 ### Techniques and Tools
 
