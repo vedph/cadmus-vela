@@ -303,21 +303,23 @@ These 3 columns are unified into a single [BCP47](https://observablehq.com/@galo
   - BL `sigla`
   - BM `sport`
   - BN `funzione non definibile` (this can be combined with others in the case it applies to just a letter or other isolated sign in the context of a text)
-- BO `numeri` (☯️ string) 🎯 `CategoriesPart`.`cnt` (📚 `categories_cnt`):
+- BO `numeri` (☯️ string) 🎯 `CategoriesPart`.`cnt` (📚 `categories_cnt`) ⚙️ [ColContent](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColContentEntryRegionParser.cs):
   - BP `cifra` (📚 string: araba, armena, cirillica, glagolitica, romana, n\d)
 
 ### Date
 
-- BQ `cronologia` (☯️ string) 🎯 `HistoricalDatePart`:
+- BQ `cronologia` (☯️ string) 🎯 `HistoricalDatePart` ⚙️ [ColDatation](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColDatationEntryRegionParser.cs):
   - BR `data` (string: possible formats are `R SECOLO` where `R` is an uppercase Roman number, or `YYYY` for a year)
   - BS `datazione` (☯️ string)
   - BT `secolo` (same format as BR)
   - BU `termine post quem` (same format as BR)
   - BV `termine ante quem` (same format as BR): note that we can have both terminus ante and terminus post for an interval. In this case BS is the same as BU+BV.
 
+TODO: ensure that reading date from BR and termini from BU,BV is enough.
+
 ### Material Support
 
-- BW `materia` (string 📚 `epi-support-materials`: cemento, ceramica, laterizio, legno, materiale litico, metallo, vetro) 🎯 `EpiSupportPart`.`material`.
+- BW `materia` (string 📚 `epi-support-materials`: cemento, ceramica, laterizio, legno, materiale litico, metallo, vetro) 🎯 `EpiSupportPart`.`material` ⚙️ [ColMaterial](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColMaterialEntryRegionParser.cs).
 - (BX) `misure`:
   - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize`.
   - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize`.
