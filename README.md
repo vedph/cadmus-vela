@@ -357,7 +357,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
   - DA `strumento accuminato`
   - DB `vernice`
   - DC `lama (affilatura)`
-  - (DD) `impaginazione del testo`:
+  - (DD) `impaginazione del testo` ⚙️ [ColLayout](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColLayoutEntryRegionParser.cs):
     - DE `rigatura` (☯️ string) 🎯 `EpiSupportPart`.`features` (📚 `epi-support-features`).
     - DF `numero righe` (integer) 🎯 `EpiSupportPart`.`counts`.`rows` (📚 `epi-support-count-types`).
     - DG `note` (string) 🎯 `EpiSupportPart`.`note`.
