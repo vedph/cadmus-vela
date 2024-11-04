@@ -365,7 +365,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
 ### Writing
 
-- DI `scrittura` (📚 `epi-writing-casings`: maiuscola, maiuscola e minuscola, minuscola, n\d) 🎯 `EpiWritingPart`.`casing`
+- DI `scrittura` (📚 `epi-writing-casings`: maiuscola, maiuscola e minuscola, minuscola, n\d) 🎯 `EpiWritingPart`.`casing` ⚙️ [ColWriting](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColWritingEntryRegionParser.cs):
   - DJ `tipologia grafica caratteri latini` (📚 `epi-writing-scripts`: cancelleresca, capitale epigrafica, capitale libraria, capitale romanica, carolina, corsiva nuova, curiale, gotica, insulare, italica, mercantesca, merovingica, minuscola diplomatica, onciale, semionciale, umanistica, visigotica, altro, n\d) 🎯 `EpiWritingPart`.`script`
   - DK `segni grafici particolari` 🎯 `EpiWritingPart`.`features` (📚 `epi-writing-features`). All cells have ☯️ type:
     - DL `abbreviazioni`
