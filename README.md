@@ -322,7 +322,7 @@ TODO: ensure that reading date from BR and termini from BU,BV is enough.
 - BW `materia` (string 📚 `epi-support-materials`: cemento, ceramica, laterizio, legno, materiale litico, metallo, vetro) 🎯 `EpiSupportPart`.`material` ⚙️ [ColMaterial](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColMaterialEntryRegionParser.cs).
 - (BX) `misure` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs):
   - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
-  - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs)..
+  - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
 - CA `stato di conservazione` (📚 `physical-states`: string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego) 🎯 `PhysicalStatesPart` ⚙️ [ColStates](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColStatesEntryRegionParser.cs)
   - CB `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
 - CC `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
@@ -335,7 +335,7 @@ TODO: ensure that reading date from BR and termini from BU,BV is enough.
 
 All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
-- (CH) `tecnica di esecuzione` (📚 `epi-technique-types`): except where specified, cells have ☯️ type:
+- (CH) `tecnica di esecuzione` (📚 `epi-technique-types`): except where specified, cells have ☯️ type ⚙️ [ColTech](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColTechEntryRegionParser.cs):
   - CI `solco` (string)
   - CJ `a rilievo`
   - CK `disegno`
@@ -343,7 +343,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
   - CM `incisione`
   - CN `intaglio`
   - CO `punzonatura`
-- (CP) `strumento di esecuzione` (📚 `epi-technique-tools`): cells have ☯️ type:
+- (CP) `strumento di esecuzione` (📚 `epi-technique-tools`): cells have ☯️ type ⚙️ [ColTech](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColTechEntryRegionParser.cs):
   - CQ `bocciarda`
   - CR `carbocino` (sic): this is a typo. To be sure, we will allow both "carbocino" and "carboncino".
   - CS `fumo di candela`
