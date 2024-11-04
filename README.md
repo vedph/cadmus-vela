@@ -247,7 +247,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - P `tipologia attuale` (same as N) 🎯 `EpiSupportPart`.`currentType` ⚙️ [ColCurrentType](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColCurrentTypeEntryRegionParser.cs)
 - Q `interno/esterno` (string: interno, esterno) 🎯 `EpiSupportPart`.`indoor` ⚙️ [ColIndoor](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColIndoorEntryRegionParser.cs)
 - R `supporto` (string 📚 `epi-support-object-types`: arredo ecclesiastico, balaustra, colonna, cornice, davanzale, finestra, gradino, lapide (graffito su), muro, panchina, pavimentazione stradale, pavimento, pilastro, porta, pozzo, stipite, suppellettile, volta) 🎯 `EpiSupportPart`.`objectType` ⚙️ [ColSupport](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportEntryRegionParser.cs)
-- (S) `funzione dell'epigrafe/graffito`: 🎯 `CategoriesPart`:`fn` (📚 `categories_fn`). All the cells have ☯️ type:
+- (S) `funzione dell'epigrafe/graffito`: 🎯 `CategoriesPart`:`fn` (📚 `categories_fn`) ⚙️ [ColFn](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColFnEntryRegionParser.cs). All the cells have ☯️ type:
   - T `testo`
   - U `monogramma`
   - V `lettera singola`
