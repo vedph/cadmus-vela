@@ -323,7 +323,7 @@ TODO: ensure that reading date from BR and termini from BU,BV is enough.
 - (BX) `misure` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs):
   - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
   - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
-- CA `stato di conservazione` (📚 `physical-states`: string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego) 🎯 `PhysicalStatesPart` ⚙️ [ColStates](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColStatesEntryRegionParser.cs)
+- CA `stato di conservazione` (📚 `physical-states`: string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego) 🎯 `PhysicalStatesPart` ⚙️ [ColStates](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColStatesEntryRegionParser.cs).
   - CB `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
 - CC `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
   - CD `cornice` (☯️ string) 🎯 `EpiSupportPart`.`hasFrame` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
@@ -402,7 +402,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
 ### Other Metadata
 
-- (EN) `ricognizione`: 🎯 `PhysicalStatesPart`:
+- (EN) `ricognizione`: 🎯 `PhysicalStatesPart` ⚙️ [ColStates](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColStatesEntryRegionParser.cs):
   - EO `data prima ricognizione` (string with format `DD/MM/YYYY`)
   - EP `data ultima ricognizione` (string with format `DD/MM/YYYY`)
 
