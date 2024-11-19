@@ -417,6 +417,10 @@ These data are temporarily stored in metadata, all prefixed by `_`. These should
 
 ## History
 
+### 3.0.0
+
+- 2024-11-19: ⚠️ upgraded to .NET 9.
+
 ### 2.1.12
 
 - 2024-10-30: updated packages.
