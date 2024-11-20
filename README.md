@@ -285,7 +285,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 - BS `cronologia` (string): età classica, età medioevale, età moderna, età contemporanea, n/d. 🎯 `MetadataPart` `era` ⚙️ [ColEra](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColEraEntryRegionParser.cs).
 
-The following columns target 🎯 `HistoricalDatePart` ⚙️ [ColDatation](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColDatationEntryRegionParser.cs):
+The following columns target 🎯 `HistoricalDatePart` ⚙️ [ColDatation](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColDatationEntryRegionParser.cs), [ColTerminusPost](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColTerminusPostEntryRegionParser.cs), [ColTerminusAnte](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColTerminusAnteEntryRegionParser.cs):
 
 - BT `data` (string: possible formats are `R SECOLO` where `R` is an uppercase Roman number, or `YYYY` for a year)
 - BU `datazione` (☯️ string)
