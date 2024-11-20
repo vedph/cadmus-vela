@@ -14,9 +14,9 @@
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 		<Copyright>by Daniele Fusi</Copyright>
 		<PackageTags>Cadmus;epigraphy</PackageTags>
-		<Version>3.0.0</Version>
-		<FileVersion>3.0.0</FileVersion>
-		<AssemblyVersion>3.0.0</AssemblyVersion>
+		<Version>3.0.1</Version>
+		<FileVersion>3.0.1</FileVersion>
+		<AssemblyVersion>3.0.1</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -29,7 +29,7 @@
 		<PackageReference Include="Cadmus.General.Parts" Version="7.0.0" />
 		<PackageReference Include="Cadmus.Mongo" Version="8.0.0" />
 		<PackageReference Include="Cadmus.Philology.Parts" Version="9.0.0" />
-		<PackageReference Include="Cadmus.Seed.Epigraphy.Parts" Version="5.0.0" />
+		<PackageReference Include="Cadmus.Seed.Epigraphy.Parts" Version="5.0.1" />
 		<PackageReference Include="Cadmus.Seed.General.Parts" Version="7.0.0" />
 		<PackageReference Include="Cadmus.Seed.Geo.Parts" Version="4.0.0" />
 		<PackageReference Include="Cadmus.Seed.Philology.Parts" Version="9.0.0" />

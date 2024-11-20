@@ -394,6 +394,10 @@ These data except for `edizione` are temporarily stored in metadata, all prefixe
 
 ## History
 
+### 3.0.1
+
+- 2024-11-20: updated packages (epigraphy).
+
 ### 3.0.0
 
 - 2024-11-19: ⚠️ upgraded to .NET 9.
