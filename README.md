@@ -35,42 +35,15 @@ The item parts are:
     - `_biblio`: temporary store for bibliography (ET)
   - 🌟 [DistrictLocationPart](#districtlocationpart)
   - [GeoAssertedLocationsPart](https://github.com/vedph/cadmus-geo/blob/master/docs/asserted-locations.md)
+  - [EpiSupportPart](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-support.md)
   - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`fn` for function of inscription/graffiti (S)
-  - 🌟❗ `EpiSupportPart` (🔑 `it.vedph.epigraphy.support`), refactored:
-    - `material`\* (`string` 📚 `epi-support-materials`, BW)
-    - `originalFn` (`string` 📚 `epi-support-functions`, M)
-    - `currentFn` (`string` 📚 `epi-support-functions`, O)
-    - `originalType` (`string` 📚 `epi-support-types`, N)
-    - `currentType` (`string` 📚 `epi-support-types`, P)
-    - `objectType` (`string` 📚 `epi-support-object-types`, R)
-    - `indoor` (`boolean`, Q)
-    - `supportSize` (`PhysicalSize`, BY)
-    - `hasField` (`boolean`, CF)
-    - `fieldSize` (`PhysicalSize`, CG)
-    - `hasMirror` (`boolean`, CC)
-    - `mirrorSize` (`PhysicalSize`, BZ)
-    - `hasFrame` (`boolean`, CD)
-    - `frame` (`string`, CE)
-    - `counts` (`DecoratedCount[]`, 📚 `epi-support-count-types` DF): e.g. rows, columns, etc.
-    - `features` (📚 `epi-support-features`, S): e.g. ruling, etc.
-    - `hasDamnatio` (`boolean`, CB)
-    - `note` (`string`, 5000)
   - [PhysicalStatesPart](https://github.com/vedph/cadmus-general/blob/master/docs/physical-states.md)
   - [NotePart](https://github.com/vedph/cadmus-general/blob/master/docs/note.md):`txt`: this is the first draft of the text as copied on the spot.
-  - [NotePart](https://github.com/vedph/cadmus-general/blob/master/docs/note.md):`dat`: note about date. The tag of the note can be used to classify the free text note as discussing a terminus ante, a terminus post, or their combination (=interval). When (and if) some reasonable datation can be inferred, it will then be specified using `HistoricalDatePart`.
+  - [HistoricalDatePart](https://github.com/vedph/cadmus-general/blob/master/docs/historical-date.md)
 
 - **details** (dettagli):
-  - 🌟❗ `EpiWritingPart` (🔑 `it.vedph.epigraphy.writing`), refactored:
-    - `system`\* (📚 `epi-writing-systems`, usually [ISO 15924](https://unicode.org/iso15924/iso15924-codes.html))
-    - `script`\* (📚 `epi-writing-scripts`, DJ)
-    - `casing` (`string`, 📚 `epi-writing-casings`): prevalent casing if applicable.
-    - `features` (DI+DK, 📚 `epi-writing-features`)
-    - `note` (`string`, 5000)
-  - 🌟 `EpiTechniquePart` (🔑 `it.vedph.epigraphy.technique`):
-    - `techniques`\* (`string[]`, 📚 `epi-technique-types`)
-    - `tools`\* (`string[]`, 📚 `epi-technique-tools`)
-    - `note` (`string`, 5000)
-  - [HistoricalDatePart](https://github.com/vedph/cadmus-general/blob/master/docs/historical-date.md)
+  - [EpiWritingPart](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-writing.md)
+  - [EpiTechniquePart](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-technique.md)
   - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`lng` (📚 `categories_lng`) for a hierarchical taxonomy with this structure (which allows extending the list and picking more than a single language for multilingual texts):
     - languages: Y entries
     - ISO639: Z entries
@@ -247,173 +220,177 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 - P `tipologia attuale` (same as N) 🎯 `EpiSupportPart`.`currentType` ⚙️ [ColCurrentType](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColCurrentTypeEntryRegionParser.cs)
 - Q `interno/esterno` (string: interno, esterno) 🎯 `EpiSupportPart`.`indoor` ⚙️ [ColIndoor](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColIndoorEntryRegionParser.cs)
 - R `supporto` (string 📚 `epi-support-object-types`: arredo ecclesiastico, balaustra, colonna, cornice, davanzale, finestra, gradino, lapide (graffito su), muro, panchina, pavimentazione stradale, pavimento, pilastro, porta, pozzo, stipite, suppellettile, volta) 🎯 `EpiSupportPart`.`objectType` ⚙️ [ColSupport](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportEntryRegionParser.cs)
-- (S) `funzione dell'epigrafe/graffito`: 🎯 `CategoriesPart`:`fn` (📚 `categories_fn`) ⚙️ [ColFn](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColFnEntryRegionParser.cs). All the cells have ☯️ type:
-  - T `testo`
-  - U `monogramma`
-  - V `lettera singola`
-  - W `lettere non interpretabili`
+- S 🌟 in situ (string: in situ, extra situm, n/d).
+- (T) `origine`: 🎯 `CategoriesPart`:`fn` (📚 `categories_fn`) ⚙️ [ColFn](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColFnEntryRegionParser.cs).
+  - U 🌟 `provenianza` (sic) ??
+- (V) `funzione dell'epigrafe/graffito`:
+  - W `graffito\epigrafe`: not used, all items are graffiti.
+  - X `testo` ☯️
+  - Y `monogramma` ☯️
+  - Z `lettera singola` ☯️
+  - AA `lettere non interpretabili` ☯️
 
 ### Language
 
-- (X) `alfabeto`: 🎯 `CategoriesPart`.`lng` (📚 `categories_lng`):
-  - Y `lingua` (📚 string: ARM, CHI, ENG, DUT, FRE, GER, GRC, GRE, ITA, JPN, LAT, N\D)
-  - Z `lingua (ISO-639-3)` (📚 string: ARA, DEU, ELL, ENG, FRA, GRC, ITA, JPN, LAT, VEC, N\D)??vec is not ISO639
-  - AA `codice glottologico` (📚 string: ANCI1242, ARME1259, ITAL1282, LATI1261, LITE1248, MEDI1251, MODE1248, NUCL1643, STAN1290, STAN1293, STAN1295, VENE1258, N\D: see [Glottolog](https://glottolog.org/) codes)
+- (AB) `alfabeto`: 🎯 `CategoriesPart`.`lng` (📚 `categories_lng`): drop AC AE:
+  - AC `lingua` (📚 string: ARM, CHI, ENG, DUT, FRE, GER, GRC, GRE, ITA, JPN, LAT, N\D)
+  - AD `lingua (ISO-639-3)` (📚 string: ARA, DEU, ELL, ENG, FRA, GRC, ITA, JPN, LAT, VEC, N\D)??vec is not ISO639
+  - AE `codice glottologico` (📚 string: ANCI1242, ARME1259, ITAL1282, LATI1261, LITE1248, MEDI1251, MODE1248, NUCL1643, STAN1290, STAN1293, STAN1295, VENE1258, N\D: see [Glottolog](https://glottolog.org/) codes)
 
-These 3 columns are unified into a single [BCP47](https://observablehq.com/@galopin/bcp-47-language-subtag-registry) code, which is a widely used standard and also allows for customized tags.
+>These 3 columns could be unified into a single [BCP47](https://observablehq.com/@galopin/bcp-47-language-subtag-registry) code, which is a widely used standard and also allows for customized tags.
 
 ### Content
 
-- (AB) `contenuto` 🎯 `CategoriesPart`.`cnt` (📚 `categories_cnt`) ⚙️ [ColContent](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColContentEntryRegionParser.cs). All the cells have ☯️ type:
-  - AC `amore`
-  - AD `augurale`
-  - AE `autentica di reliquie`
-  - AF `bollo laterizio`
-  - AG `calendario`
-  - AH `celebrativa`
-  - AI `citazione`
-  - AJ `commemorativa`
-  - AK `consacrazione`
-  - AL `dedicatoria`
-  - AM `devozionale`
-  - AN `didascalica`
-  - AO `documentaria`
-  - AP `esegetica`
-  - AQ `esortativa`
-  - AR `ex voto`
-  - AS `firma`
-  - AT `funeraria`
-  - AU `imprecazione`
-  - AV `infamante`
-  - AW `iniziale\i nome persona`
-  - AX `insulto`
-  - AY `invocativa`
-  - AZ `marchio edile`
-  - BA `nome`
-  - BB `nome di luogo`
-  - BC `parlante`
-  - BD `politica`
-  - BE `poesia`
-  - BF `prosa`
-  - BG `prostituzione`
-  - BH `preghiera`
-  - BI `religiosa`
-  - BJ `saluto`
-  - BK `segnaletica`
-  - BL `sigla`
-  - BM `sport`
-  - BN `funzione non definibile` (this can be combined with others in the case it applies to just a letter or other isolated sign in the context of a text)
-- BO `numeri` (☯️ string) 🎯 `CategoriesPart`.`cnt` (📚 `categories_cnt`) ⚙️ [ColContent](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColContentEntryRegionParser.cs):
-  - BP `cifra` (📚 string: araba, armena, cirillica, glagolitica, romana, n\d)
+- (AF) `contenuto` 🎯 `CategoriesPart`.`cnt` (📚 `categories_cnt`) ⚙️ [ColContent](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColContentEntryRegionParser.cs). All the cells have ☯️ type:
+  - AG `amore`
+  - AH `augurale`
+  - AI `autentica di reliquie`
+  - AJ `bollo laterizio`
+  - AK `calendario`
+  - AL `celebrativa`
+  - AM `citazione`
+  - AN `commemorativa`
+  - AO `consacrazione`
+  - AP `dedicatoria`
+  - AQ `devozionale`
+  - AR `didascalica`
+  - AS `documentaria`
+  - AT `esegetica`
+  - AU `esortativa`
+  - AV `ex voto`
+  - AW `firma`
+  - AX `funeraria`
+  - AY `imprecazione`
+  - AZ `infamante`
+  - BA `iniziale\i nome persona`
+  - BB `insulto`
+  - BC `invocativa`
+  - BD `marchio edile`
+  - BE `nome`
+  - BF `nome di luogo`
+  - BG `parlante`
+  - BH `politica`
+  - BI `poesia`
+  - BJ `prosa`
+  - BK `prostituzione`
+  - BL `preghiera`
+  - BM `religiosa`
+  - BN `saluto`
+  - BO `segnaletica`
+  - BP `sigla`
+  - BQ `sport`
+  - BR `funzione non definibile` (this can be combined with others in the case it applies to just a letter or other isolated sign in the context of a text)
+- BS `numeri` (☯️ string) 🎯 `CategoriesPart`.`cnt` (📚 `categories_cnt`) ⚙️ [ColContent](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColContentEntryRegionParser.cs):
+  - BT `cifra` (📚 string: araba, armena, cirillica, glagolitica, romana, n\d)
 
 ### Date
 
-- BQ `cronologia` (☯️ string) 🎯 `HistoricalDatePart` ⚙️ [ColDatation](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColDatationEntryRegionParser.cs):
-  - BR `data` (string: possible formats are `R SECOLO` where `R` is an uppercase Roman number, or `YYYY` for a year)
-  - BS `datazione` (☯️ string)
-  - BT `secolo` (same format as BR)
-  - BU `termine post quem` (same format as BR)
-  - BV `termine ante quem` (same format as BR): note that we can have both terminus ante and terminus post for an interval. In this case BS is the same as BU+BV.
+- BU `cronologia` (☯️ string) 🎯 `HistoricalDatePart` ⚙️ [ColDatation](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColDatationEntryRegionParser.cs):
+  - BV `data` (string: possible formats are `R SECOLO` where `R` is an uppercase Roman number, or `YYYY` for a year)
+  - BW `datazione` (☯️ string)
+  - BX `secolo` (same format as BR)
+  - BY `termine post quem` (same format as BR)
+  - BZ `termine ante quem` (same format as BR): note that we can have both terminus ante and terminus post for an interval. In this case BS is the same as BU+BV.
 
 TODO: ensure that reading date from BR and termini from BU,BV is enough.
 
 ### Material Support
 
-- BW `materia` (string 📚 `epi-support-materials`: cemento, ceramica, laterizio, legno, materiale litico, metallo, vetro) 🎯 `EpiSupportPart`.`material` ⚙️ [ColMaterial](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColMaterialEntryRegionParser.cs).
-- (BX) `misure` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs):
-  - BY `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
-  - BZ `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
-- CA `stato di conservazione` (📚 `physical-states`: string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego) 🎯 `PhysicalStatesPart` ⚙️ [ColStates](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColStatesEntryRegionParser.cs).
-  - CB `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
-- CC `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
-  - CD `cornice` (☯️ string) 🎯 `EpiSupportPart`.`hasFrame` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
-  - CE `tipo di cornice` (string) `EpiSupportPart`.`frame` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
-- (CF) `campo` 🎯 `EpiSupportPart`.`hasField` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs):
-  - CG `misure` (same format as BY) 🎯 `EpiSupportPart``fieldSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
+- CA `materia` (string 📚 `epi-support-materials`: cemento, ceramica, laterizio, legno, materiale litico, metallo, vetro) 🎯 `EpiSupportPart`.`material` ⚙️ [ColMaterial](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColMaterialEntryRegionParser.cs).
+- (CB) `misure` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs):
+  - CC `misure supporto` (string: width and height in cm in the form `NXN`; decimals use dot) 🎯 `EpiSupportPart`.`supportSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
+  - CD `misure specchio` (same format as BY) 🎯 `EpiSupportPart`.`mirrorSize` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+- CE `stato di conservazione` (📚 `physical-states`: string: disperso, frammento, frammento contiguo, frammento isolato, integro, mutilo, reimpiego) 🎯 `PhysicalStatesPart` ⚙️ [ColStates](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColStatesEntryRegionParser.cs).
+  - CF `damnatio` (☯️ string) 🎯 `EpiSupportPart`.`hasDamnatio` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+- CG `specchio` (☯️ string) 🎯 `EpiSupportPart`.`hasMirror` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+  - CH `cornice` (☯️ string) 🎯 `EpiSupportPart`.`hasFrame` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+  - CI `tipo di cornice` (string) `EpiSupportPart`.`frame` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs).
+- (CJ) `campo` 🎯 `EpiSupportPart`.`hasField` ⚙️ [ColSupportFields](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSupportFieldsEntryRegionParser.cs):
+  - CK `misure` (same format as BY) 🎯 `EpiSupportPart``fieldSize` ⚙️ [ColSize](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColSizeEntryRegionParser.cs).
 
 ### Techniques and Tools
 
 All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
 
-- (CH) `tecnica di esecuzione` (📚 `epi-technique-types`): except where specified, cells have ☯️ type ⚙️ [ColTech](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColTechEntryRegionParser.cs):
-  - CI `solco` (string)
-  - CJ `a rilievo`
-  - CK `disegno`
-  - CL `graffio`
-  - CM `incisione`
-  - CN `intaglio`
-  - CO `punzonatura`
-- (CP) `strumento di esecuzione` (📚 `epi-technique-tools`): cells have ☯️ type ⚙️ [ColTech](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColTechEntryRegionParser.cs):
-  - CQ `bocciarda`
-  - CR `carbocino` (sic): this is a typo. To be sure, we will allow both "carbocino" and "carboncino".
-  - CS `fumo di candela`
-  - CT `gradina`
-  - CU `grafite`
-  - CV `inchiostro`
-  - CW `matita di piombo`
-  - CX `scalpello`
-  - CY `sega`
-  - CZ `sgorbia`
-  - DA `strumento accuminato`
-  - DB `vernice`
-  - DC `lama (affilatura)`
-  - (DD) `impaginazione del testo` ⚙️ [ColLayout](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColLayoutEntryRegionParser.cs):
-    - DE `rigatura` (☯️ string) 🎯 `EpiSupportPart`.`features` (📚 `epi-support-features`).
-    - DF `numero righe` (integer) 🎯 `EpiSupportPart`.`counts`.`rows` (📚 `epi-support-count-types`).
-    - DG `note` (string) 🎯 `EpiSupportPart`.`note`.
-    - DH `presenza di preparazione del supporto` (☯️ string) 🎯 `EpiSupportPart`.`features` (📚 `epi-support-features`).
+- (CL) `tecnica di esecuzione` (📚 `epi-technique-types`): except where specified, cells have ☯️ type ⚙️ [ColTech](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColTechEntryRegionParser.cs):
+  - CM `solco` (string)
+  - CN `a rilievo`
+  - CO `disegno`
+  - CP `graffio`
+  - CQ `incisione`
+  - CR `intaglio`
+  - CS `punzonatura`
+- (CT) `strumento di esecuzione` (📚 `epi-technique-tools`): cells have ☯️ type ⚙️ [ColTech](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColTechEntryRegionParser.cs):
+  - CU `bocciarda`
+  - CV `carbocino` (sic): this is a typo. To be sure, we will allow both "carbocino" and "carboncino".
+  - CW `fumo di candela`
+  - CX `gradina`
+  - CY `grafite`
+  - CZ `inchiostro`
+  - DA `matita di piombo`
+  - DB `scalpello`
+  - DC `sega`
+  - DD `sgorbia`
+  - DE `strumento accuminato`
+  - DF `vernice`
+  - DG `lama (affilatura)`
+  - (DH) `impaginazione del testo` ⚙️ [ColLayout](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColLayoutEntryRegionParser.cs):
+    - DI `rigatura` (☯️ string) 🎯 `EpiSupportPart`.`features` (📚 `epi-support-features`).
+    - DJ `numero righe` (integer) 🎯 `EpiSupportPart`.`counts`.`rows` (📚 `epi-support-count-types`).
+    - DK `note` (string) 🎯 `EpiSupportPart`.`note`.
+    - DL `presenza di preparazione del supporto` (☯️ string) 🎯 `EpiSupportPart`.`features` (📚 `epi-support-features`).
 
 ### Writing
 
-- DI `scrittura` (📚 `epi-writing-casings`: maiuscola, maiuscola e minuscola, minuscola, n\d) 🎯 `EpiWritingPart`.`casing` ⚙️ [ColWriting](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColWritingEntryRegionParser.cs):
-  - DJ `tipologia grafica caratteri latini` (📚 `epi-writing-scripts`: cancelleresca, capitale epigrafica, capitale libraria, capitale romanica, carolina, corsiva nuova, curiale, gotica, insulare, italica, mercantesca, merovingica, minuscola diplomatica, onciale, semionciale, umanistica, visigotica, altro, n\d) 🎯 `EpiWritingPart`.`script`
-  - DK `segni grafici particolari` 🎯 `EpiWritingPart`.`features` (📚 `epi-writing-features`). All cells have ☯️ type:
-    - DL `abbreviazioni`
-    - DM `nessi e legamenti`
-    - DN `lettere incluse`
-    - DO `lettere sovrapposte`
-    - DP `punteggiatura`
-    - DQ `segni di interpunzione`
+- DM `scrittura` (📚 `epi-writing-casings`: maiuscola, maiuscola e minuscola, minuscola, n\d) 🎯 `EpiWritingPart`.`casing` ⚙️ [ColWriting](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColWritingEntryRegionParser.cs):
+  - DN `tipologia grafica caratteri latini` (📚 `epi-writing-scripts`: cancelleresca, capitale epigrafica, capitale libraria, capitale romanica, carolina, corsiva nuova, curiale, gotica, insulare, italica, mercantesca, merovingica, minuscola diplomatica, onciale, semionciale, umanistica, visigotica, altro, n\d) 🎯 `EpiWritingPart`.`script`
+  - DO `segni grafici particolari` 🎯 `EpiWritingPart`.`features` (📚 `epi-writing-features`). All cells have ☯️ type:
+    - DP `abbreviazioni`
+    - DQ `nessi e legamenti`
+    - DR `lettere incluse`
+    - DS `lettere sovrapposte`
+    - DT `punteggiatura`
+    - DU `segni di interpunzione`
 
 ### Figurative
 
-- DR `figurativo` (📚 `categories_fig`) 🎯 `CategoriesPart`:`fig` ⚙️ [ColFigurative](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColFigurativeEntryRegionParser.cs). All cells have ☯️ type:
-  - DS `disegno non interpretabile`
-  - DT `abbigliamento`
-  - DU `animale`
-  - DV `architettura`
-  - DW `arma`
-  - DX `armatura`
-  - DY `bandiera`
-  - DZ `busto`
-  - EA `croce`
-  - EB `cuore`
-  - EC `erotico`
-  - ED `figura umana`
-  - EE `geometrico`
-  - EF `gioco`
-  - EG `imbarcazione`
-  - EH `lingua`
-  - EI `paesaggio`
-  - EJ `pianta`
-  - EK `simbolo zodiacale`
-  - EL `stemma`
-  - EM `volto`
+- DV `figurativo` (📚 `categories_fig`) 🎯 `CategoriesPart`:`fig` ⚙️ [ColFigurative](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColFigurativeEntryRegionParser.cs). All cells have ☯️ type:
+  - DW `disegno non interpretabile`
+  - DX `abbigliamento`
+  - DY `animale`
+  - DZ `architettura`
+  - EA `arma`
+  - EB `armatura`
+  - EC `bandiera`
+  - ED `busto`
+  - EE `croce`
+  - EF `cuore`
+  - EG `erotico`
+  - EH `figura umana`
+  - EI `geometrico`
+  - EJ `gioco`
+  - EK `imbarcazione`
+  - EL `lingua`
+  - EM `paesaggio`
+  - EN `pianta`
+  - EO `simbolo zodiacale`
+  - EP `stemma`
+  - EQ `volto`
 
 ### Other Metadata
 
-- (EN) `ricognizione`: 🎯 `PhysicalStatesPart` ⚙️ [ColStates](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColStatesEntryRegionParser.cs):
-  - EO `data prima ricognizione` (string with format `DD/MM/YYYY`)
-  - EP `data ultima ricognizione` (string with format `DD/MM/YYYY`)
+- (ER) `ricognizione`: 🎯 `PhysicalStatesPart` ⚙️ [ColStates](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColStatesEntryRegionParser.cs):
+  - ES `data prima ricognizione` (string with format `DD/MM/YYYY`)
+  - ET `data ultima ricognizione` (string with format `DD/MM/YYYY`)
 
 ### Unstructured Data
 
-These data are temporarily stored in metadata, all prefixed by `_`. These should then be used as a source to fill the appropriate part.
+These data except for `edizione` are temporarily stored in metadata, all prefixed by `_`. These should then be used as a source to fill the appropriate part.
 
-- (EQ) `edizione e commento` ⚙️ [ColEdition](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColEditionEntryRegionParser.cs)
-  - ER `edizione` 🎯 `MetadataPart`.`_edition`
-  - ES `commento` 🎯 `MetadataPart`.`_comment`
-  - ET `bibliografia` 🎯 `MetadataPart`.`_biblio`
+- (EU) `edizione e commento` ⚙️ [ColEdition](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColEditionEntryRegionParser.cs)
+  - EV `edizione` 🎯 `NotePart:txt`
+  - EW `commento` 🎯 `MetadataPart`.`_comment`
+  - EX `bibliografia` 🎯 `MetadataPart`.`_biblio`
 
 ## History
 
