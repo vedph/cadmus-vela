@@ -44,7 +44,7 @@ The item parts are:
 - **details** (dettagli):
   - [EpiWritingPart](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-writing.md)
   - [EpiTechniquePart](https://github.com/vedph/cadmus-epigraphy/blob/master/docs/epi-technique.md)
-  - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`lng` (📚 `categories_lng`) for a hierarchical taxonomy with this structure (which allows extending the list and picking more than a single language for multilingual texts):
+  - [CategoriesPart](https://github.com/vedph/cadmus-general/blob/master/docs/categories.md):`lng` (📚 `categories_lng`) for a hierarchical taxonomy with this structure (which would also allow extending the list and picking more than a single language for multilingual texts):
     - languages: Y entries
     - ISO639: Z entries
     - glottolog: AA entries
@@ -232,7 +232,7 @@ The ID after 🎯 represents the target for the column, and the one after ⚙️
 
 ### Language
 
-- (AB) `alfabeto`: 🎯 `CategoriesPart`.`lng` (📚 `categories_lng`): drop AC AE:
+- (AB) `alfabeto`: 🎯 `CategoriesPart`.`lng` (📚 `categories_lng`) ⚙️ [ColLanguage](https://github.com/vedph/cadmus-vela-tool/blob/master/Cadmus.Vela.Import/ColLanguageEntryRegionParser.cs): drop AD AE:
   - AC `lingua` (📚 string: ARM, CHI, ENG, DUT, FRE, GER, GRC, GRE, ITA, JPN, LAT, N\D)
   - AD `lingua (ISO-639-3)` (📚 string: ARA, DEU, ELL, ENG, FRA, GRC, ITA, JPN, LAT, VEC, N\D)??vec is not ISO639
   - AE `codice glottologico` (📚 string: ANCI1242, ARME1259, ITAL1282, LATI1261, LITE1248, MEDI1251, MODE1248, NUCL1643, STAN1290, STAN1293, STAN1295, VENE1258, N\D: see [Glottolog](https://glottolog.org/) codes)
@@ -373,7 +373,7 @@ All columns here map to 🎯 `EpiTechniquePart` except when specified otherwise.
   - EL `lingua`
   - EM `paesaggio`
   - EN `pianta`
-  - EO `simbolo zodiacale`
+  - EO `simbolo zodiaco`
   - EP `stemma`
   - EQ `volto`
 
