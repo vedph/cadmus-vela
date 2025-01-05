@@ -173,10 +173,40 @@ The single item facet is structured as follows, reflecting the general ordering 
 - commento:
   - commento: `CommentPart`
   - note: `NotePart`
-- rierimenti:
+- riferimenti:
   - bibliografia `BibliographyPart`
   - riferimenti `DocReferencesPart`
   - ID esterni `ExternalIdsPart`
+
+```mermaid
+graph LR;
+  item --> sintesi
+  item --> dettagli
+  item --> testo
+  item --> commento
+  item --> riferimenti
+  sintesi --> metadata
+  sintesi --> district-location
+  sintesi --> epi-support
+  sintesi --> categories_fn
+  sintesi --> categories_lng
+  sintesi --> categories_cnt
+  sintesi --> historical-date
+  sintesi --> physical-states
+  dettagli --> epi-technique
+  dettagli --> epi-writing
+  dettagli --> categories_fig
+  testo --> note_txt
+  testo --> token-text
+  testo --> comments-layer
+  testo --> chronology-layer
+  testo --> ligatures-layer
+  commento --> comment
+  commento --> note
+  riferimenti --> bibliography
+  riferimenti --> doc-references
+  riferimenti --> external-ids
+```
 
 ---
 
