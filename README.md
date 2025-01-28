@@ -423,6 +423,10 @@ These data except for `edizione` are temporarily stored in metadata, all prefixe
 
 ## History
 
+### 3.0.3
+
+- 2025-01-28: updated packages.
+
 ### 3.0.2
 
 - 2024-11-30: updated packages.
