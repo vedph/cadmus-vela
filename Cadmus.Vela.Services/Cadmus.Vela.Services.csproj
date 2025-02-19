@@ -14,9 +14,9 @@
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 		<Copyright>by Daniele Fusi</Copyright>
 		<PackageTags>Cadmus;epigraphy</PackageTags>
-		<Version>3.0.3</Version>
-		<FileVersion>3.0.3</FileVersion>
-		<AssemblyVersion>3.0.3</AssemblyVersion>
+		<Version>3.0.4</Version>
+		<FileVersion>3.0.4</FileVersion>
+		<AssemblyVersion>3.0.4</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -25,14 +25,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Cadmus.Core" Version="8.0.4" />
-		<PackageReference Include="Cadmus.General.Parts" Version="7.0.2" />
-		<PackageReference Include="Cadmus.Mongo" Version="8.0.4" />
-		<PackageReference Include="Cadmus.Philology.Parts" Version="9.0.2" />
-		<PackageReference Include="Cadmus.Seed.Epigraphy.Parts" Version="5.0.3" />
-		<PackageReference Include="Cadmus.Seed.General.Parts" Version="7.0.2" />
-		<PackageReference Include="Cadmus.Seed.Geo.Parts" Version="4.0.2" />
-		<PackageReference Include="Cadmus.Seed.Philology.Parts" Version="9.0.2" />
+		<PackageReference Include="Cadmus.Core" Version="8.0.6" />
+		<PackageReference Include="Cadmus.General.Parts" Version="7.0.3" />
+		<PackageReference Include="Cadmus.Mongo" Version="8.0.6" />
+		<PackageReference Include="Cadmus.Philology.Parts" Version="9.0.3" />
+		<PackageReference Include="Cadmus.Seed.Epigraphy.Parts" Version="5.0.4" />
+		<PackageReference Include="Cadmus.Seed.General.Parts" Version="7.0.3" />
+		<PackageReference Include="Cadmus.Seed.Geo.Parts" Version="4.0.3" />
+		<PackageReference Include="Cadmus.Seed.Philology.Parts" Version="9.0.3" />
 		<PackageReference Include="Fusi.Microsoft.Extensions.Configuration.InMemoryJson" Version="4.0.0" />
 	</ItemGroup>
 
